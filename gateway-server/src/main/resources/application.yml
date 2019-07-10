@@ -1,0 +1,33 @@
+
+server:
+  port: 9000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: gateway-service
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    mode: LEGACYHTML5
+  datasource:
+    url: jdbc:mysql:///j82
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123
+
+
+
+
+mybatis:
+  type-aliases-package: java.util
+
+
+zuul:
+  routes:
+    goods-service: /gateway/goods/**
+    order-service: /gateway/order/**
+  ignored-patterns: /*-service/**
+  sensitive-headers:
