@@ -13,9 +13,9 @@ spring:
     cache: false
     mode: LEGACYHTML5
   datasource:
-    url: jdbc:mysql:///j82
+    url: jdbc:mysql://47.52.128.159:3306/myinsuredb
     driver-class-name: com.mysql.jdbc.Driver
-    username: root
+    username: myinsuredb
     password: 123
 
 
@@ -29,5 +29,6 @@ zuul:
   routes:
     goods-service: /gateway/goods/**
     order-service: /gateway/order/**
+    buy-insurance-service: /gateway/buy/**
   ignored-patterns: /*-service/**
   sensitive-headers:
