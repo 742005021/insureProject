@@ -1,0 +1,12 @@
+server:
+  port: 9001
+spring:
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    mode: LEGACYHTML5
+  datasource:
+    url: jdbc:mysql://47.52.128.159:3306/myinsuredb
+    username: myinsuredb
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
