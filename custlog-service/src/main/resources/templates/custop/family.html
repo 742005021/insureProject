@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>常用联系人</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/center.css">
+</head>
+<body>
+<div class="wrapper">
+    <!--------------------------------------header_user begin------------------------------------->
+    <div th:include="custop/header :: header"></div>
+    <!----------------------------------------header_nav end-------------------------------------->
+    <!--container-->
+    <div class="container">
+        <div class="main_width fix mycenter_box mycenter_contact">
+            <div th:include="custop/left :: left"></div>
+
+            <!--常用联系人-->
+            <div class="mycenter_right fix">
+                <!--常用联系人列表-->
+                <div class="contact_list">
+                    <a href="#" class="add_btn" id="addfamily">添&nbsp;加</a>
+                    <div class="tBox loading"></div>
+                    <div class="tBox no_contact listNull" >暂无常用联系人</div>
+                    <div class="tBox list_box">
+                        <div class="loading"></div>
+                        <ul class="tit">
+                            <li class="fix">
+                                <p class="name">姓名</p>
+                                <p class="type">证件类型</p>
+                                <p class="number">证件号码</p>
+                                <p class="birth">出生日期</p>
+                                <p class="sex">性别</p>
+                                <p class="opreat">操作</p>
+                            </li>
+                        </ul>
+                        <ul class="con">
+                            <li class="fix">
+                                <p class="name">王大锤</p>
+                                <p class="type">身份证</p>
+                                <p class="number">512426199104204133</p>
+                                <p class="birth">1991-04-20</p>
+                                <p class="sex">男</p>
+                                <p class="operate">
+                                    <a href="javascript:" class="edit">编辑</a>
+                                    <a href="javascript:" class="del">删除</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <div class="pagination_page" id="contactPage">
+                            <span class="current prev">上一页</span>
+                            <span class="current">1</span>
+                            <span class="current next">下一页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--添加常用联系人-->
+            <div style="display: none;" class="mycenter_right fix">
+                <div class="contact_add">
+                    <h2 class="tit">添加/修改常用人</h2>
+                    <!--姓名-->
+                    <div class="i_box fix">
+                        <label for="familyName">姓&emsp;&emsp;名<i>*</i></label>
+                        <input type="text" class="f_input" id="familyName">
+                        <span class="error">请输入姓名</span>
+                    </div>
+                    <!--证件类型-->
+                    <div class="i_box fix">
+                        <label for="idType">证件类型<i>*</i></label>
+                        <div class="select_box select_type" id="idType">
+                            <i></i>
+                            <dl class="select">
+                                <dt>身份证</dt>
+                                <dd class="select_list">
+                                    <ul>
+                                        <li>身份证</li>
+                                        <li>护照</li>
+                                        <li>军官证</li>
+                                        <li>未成年无证件</li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <!--证件号码-->
+                    <div class="i_box fix">
+                        <label for="idNumber">证件号码<i>*</i></label>
+                        <input type="text" class="f_input" id="idNumber">
+                        <span class="error">请填写证件号码</span>
+                    </div>
+                    <!--出生日期-->
+                    <div class="i_box fix">
+                        <label for="birthBox">出生日期<i>*</i></label>
+                        <div class="address_box" id="birthBox">
+                            <!--年-->
+                            <div class="select_box s select_type year">
+                                <i></i>
+                                <dl class="select">
+                                    <dt></dt>
+                                    <dd class="select_list">
+                                        <ul>
+                                            <li>2016</li>
+                                            <li>2015</li>
+                                            <li>2014</li>
+                                            <li>2013</li>
+                                            <li>2012</li>
+                                            <li>2011</li>
+                                            <li>2010</li>
+                                            <li>2009</li>
+                                            <li>2008</li>
+                                            <li>2007</li>
+                                            <li>2006</li>
+                                            <li>2005</li>
+                                            <li>2004</li>
+                                            <li>2003</li>
+                                            <li>2002</li>
+                                            <li>2001</li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <span class="fl">年</span>
+                            <!--月-->
+                            <div class="select_box s select_type year">
+                                <i></i>
+                                <dl class="select">
+                                    <dt></dt>
+                                    <dd class="select_list">
+                                        <ul>
+                                            <li>01</li>
+                                            <li>02</li>
+                                            <li>03</li>
+                                            <li>04</li>
+                                            <li>05</li>
+                                            <li>06</li>
+                                            <li>07</li>
+                                            <li>08</li>
+                                            <li>09</li>
+                                            <li>10</li>
+                                            <li>11</li>
+                                            <li>12</li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <span class="fl">月</span>
+                            <!--日-->
+                            <div class="select_box s select_type year">
+                                <i></i>
+                                <dl class="select">
+                                    <dt></dt>
+                                    <dd class="select_list">
+                                        <ul>
+                                            <li>01</li>
+                                            <li>02</li>
+                                            <li>03</li>
+                                            <li>04</li>
+                                            <li>05</li>
+                                            <li>06</li>
+                                            <li>07</li>
+                                            <li>08</li>
+                                            <li>09</li>
+                                            <li>10</li>
+                                            <li>11</li>
+                                            <li>12</li>
+                                            <li>13</li>
+                                            <li>14</li>
+                                            <li>15</li>
+                                            <li>16</li>
+                                            <li>17</li>
+                                            <li>18</li>
+                                            <li>19</li>
+                                            <li>20</li>
+                                            <li>21</li>
+                                            <li>22</li>
+                                            <li>23</li>
+                                            <li>24</li>
+                                            <li>25</li>
+                                            <li>26</li>
+                                            <li>27</li>
+                                            <li>28</li>
+                                            <li>29</li>
+                                            <li>30</li>
+                                            <li>31</li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <span class="fl">日</span>
+                        </div>
+                        <span class="error">请选择出生日期</span>
+                    </div>
+                    <!--性别-->
+                    <div class="i_box fix">
+                        <label for="sexBox">性&emsp;&emsp;别<i>*</i></label>
+                        <div class="fl" id="sexBox">
+                            <span class="sex sexM sex_active">男</span>
+                            <span class="sex sexF">女</span>
+                        </div>
+                    </div>
+                    <!--手机号-->
+                    <div class="i_box fix">
+                        <label for="mobile">手&ensp;机&ensp;号</label>
+                        <input type="text" class="f_input" id="mobile" maxlength="11">
+                        <span class="error">请填写手机号</span>
+                    </div>
+                    <!--地址-->
+                    <div class="i_box fix">
+                        <label for="addressBox">地&emsp;&emsp;址</label>
+                        <div class="address_box" id="addressBox">
+                            <!--省-->
+                            <div class="select_box s select_type province" id="province">
+                                <i></i>
+                                <dl class="select">
+                                    <dt>请选择</dt>
+                                    <dd class="select_list">
+                                        <ul>
+                                            <li>请选择省：</li>
+                                            <li>北京</li>
+                                            <li>天津</li>
+                                            <li>河北</li>
+                                            <li>山西</li>
+                                            <li>内蒙古</li>
+                                            <li>辽宁</li>
+                                            <li>吉林</li>
+                                            <li>黑龙江</li>
+                                            <li>上海</li>
+                                            <li>江苏</li>
+                                            <li>浙江</li>
+                                            <li>安徽</li>
+                                            <li>福建</li>
+                                            <li>江西</li>
+                                            <li>山东</li>
+                                            <li>河南</li>
+                                            <li>湖北</li>
+                                            <li>湖南</li>
+                                            <li>广东</li>
+                                            <li>广西</li>
+                                            <li>海南</li>
+                                            <li>重庆</li>
+                                            <li>四川</li>
+                                            <li>贵州</li>
+                                            <li>云南</li>
+                                            <li>西藏</li>
+                                            <li>陕西</li>
+                                            <li>甘肃</li>
+                                            <li>青海</li>
+                                            <li>宁夏</li>
+                                            <li>新疆</li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <span class="fl">省</span>
+                            <!--市-->
+                            <div class="select_box s select_type city" id="city">
+                                <i></i>
+                                <dl class="select">
+                                    <dt>请选择</dt>
+                                    <dd class="select_list">
+                                        <ul>
+                                            <li>请选择市</li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <span class="fl">市</span>
+                            <!--区-->
+                            <div class="select_box s select_type country" id="country">
+                                <i></i>
+                                <dl class="select">
+                                    <dt>请选择</dt>
+                                    <dd class="select_list">
+                                        <ul>
+                                            <li>请选择区</li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <span class="fl">区</span>
+                        </div>
+                        <span class="error">请选择地址</span>
+                    </div>
+                    <!--详细地址-->
+                    <div class="i_box fix">
+                        <label for="address">详细地址</label>
+                        <input type="text" class="f_input" id="address">
+                        <span class="error">请填写详细地址</span>
+                    </div>
+                    <!--邮编-->
+                    <div class="i_box fix">
+                        <label for="postCode">邮&emsp;&emsp;编</label>
+                        <input type="text" class="f_input" id="postCode">
+                        <span class="error">请填写邮编</span>
+                    </div>
+                    <!--电子邮箱-->
+                    <div class="i_box fix">
+                        <label for="email">电子邮箱</label>
+                        <input type="text" class="f_input" id="email">
+                        <span class="error">请填写电子邮箱</span>
+                    </div>
+                    <div class="btns_box">
+                        <a href="javascript:" class="submit_btn" id="submitBtn">保&emsp;存</a>
+                        <a href="javascript:" class="back_btn" id="backBtn">返&emsp;回</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        </div>
+    </div>
+
+    <!--footer begin-->
+<div th:include="custop/footer :: footer"></div>
+</div>
+<script src="../js/jquery-1.12.3.min.js"></script>
+<script>
+    $(function(){
+       $("#policy").removeClass("active");
+       $("#family").addClass("active");
+
+    });
+</script>
+</body>
+</html>
