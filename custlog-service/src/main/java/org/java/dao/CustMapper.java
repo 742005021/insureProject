@@ -18,4 +18,6 @@ public interface CustMapper {
     @Insert("insert cust_account values(uuid(),#{m.uname},#{m.pwd},#{m.phone})")
     int addCustAccount(@Param("m") Map<String,Object> map);
 
+    @Select("select cust_id from cust_account where username=#{uname}")
+    String check(@Param("uname") String uname);
 }

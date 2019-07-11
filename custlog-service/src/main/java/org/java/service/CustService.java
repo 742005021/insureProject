@@ -9,5 +9,6 @@ public interface CustService {
 
 
     int addCustAccount( Map<String,Object> map);
+    String check( String uname);
 
 }

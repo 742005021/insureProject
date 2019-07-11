@@ -4,7 +4,10 @@ import org.java.service.CustService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -29,7 +32,34 @@ public class CustController {
 
         return "/index";
     }
+    @RequestMapping("/logout")
+    public String logout(HttpSession ses){
+        ses.removeAttribute("cust");
+        return "/login";
+    }
+
+    @RequestMapping("check/{uname}")
+    @ResponseBody
+    public String check(@PathVariable("uname") String uname){
+
+        String cust_id=service.check(uname);
+        if (cust_id==null){
+            return "true";
+        }
 
 
+        return "false";
+    }
+
+    @RequestMapping("register")
+    public String register(@RequestParam Map<String,Object> map){
+        int n=service.addCustAccount(map);
+        if (n==1){
+            return "login";
+        }else{
+            return "register";
+        }
+
+    }
 
 }

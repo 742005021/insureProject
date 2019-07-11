@@ -20,4 +20,9 @@ public class CustServiceImpl implements CustService {
     public int addCustAccount(Map<String, Object> map) {
         return mapper.addCustAccount(map);
     }
+
+    @Override
+    public String check(String uname) {
+        return mapper.check(uname);
+    }
 }
