@@ -26,10 +26,7 @@ public class CustController {
             model.addAttribute("msg", "用户名或密码错误");
             return "/login";
         }
-
         ses.setAttribute("cust", map);
-
-
         return "/index";
     }
     @RequestMapping("/logout")
