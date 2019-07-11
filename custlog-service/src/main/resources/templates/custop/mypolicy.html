@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>安全中心</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/center.css">
+
+    <style>
+        .list_left{
+            margin-left: 15%;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <!--------------------------------------header_user begin------------------------------------->
+
+    <div  th:include="custop/header :: header"></div>
+
+    <!---------------------------------------header_user end-------------------------------------->
+    <!---------------------------------------header_nav begin------------------------------------->
+
+    <!----------------------------------------header_nav end-------------------------------------->
+    <!--container-->
+    <div class="container">
+        <!--2016/5/25修改-->
+       <div th:include="custop/left :: left"></div>
+        <div class="main_width fix mycenter_box">
+
+            <div class="mycenter_right">
+                <!--tab title-->
+                <div class="mypolicy_tab" id="mypolicyTab">
+                    <ul class="tab_box">
+                        <li class="active"><a href="javascript:">保障中</a></li>
+                        <li><a href="javascript:">未完成订单</a></li>
+                        <li><a href="javascript:">待续保</a></li>
+                        <li><a href="javascript:">全部</a></li>
+                    </ul>
+                </div>
+                <!--main-->
+                <!--保障中-->
+                <div class="mypolicy_con protection">
+                    <div class="tBox loading"></div>
+                    <div class="tBox no_order listNull">
+                        <span>
+                            居然是空的！
+                            <a href="#" target="_blank">去看看有哪些优惠</a>
+                        </span>
+                    </div>
+                    <div class="tBox err_order listNull"></div>
+                    <div class="tBox list_order">
+                        <!--title-->
+                        <ul class="mypolicy_title fix">
+                            <li class="myProduct">保险产品</li>
+                            <li class="myName">被保险人</li>
+                            <li class="myPrice">实付款（元）</li>
+                            <li class="myStutas">保单状态</li>
+                            <li class="myOpreat">操作</li>
+                        </ul>
+                        <!--list-->
+                        <div class="mypolicy_lists"></div>
+                        <div class="pagination_page" id="protectionPage"></div>
+                    </div>
+                </div>
+                <!--未完成订单-->
+                <div class="mypolicy_con waitpay">
+                    <div class="tBox loading"></div>
+                    <div class="tBox no_order listNull">
+                        <span>您当前没有未支付订单</span>
+                    </div>
+                    <div class="tBox err_order listNull"></div>
+                    <div class="tBox list_order">
+                        <!--title-->
+                        <ul class="mypolicy_title fix">
+                            <li class="myProduct">保险产品</li>
+                            <li class="myName">被保险人</li>
+                            <li class="myPrice">实付款（元）</li>
+                            <li class="myStutas">保单状态</li>
+                            <li class="myOpreat">操作</li>
+                        </ul>
+                        <!--list-->
+                        <div class="mypolicy_lists">
+                            <div class="list">
+                                <div class="tit">
+                                    <a href="#" target="_blank">查看详情 ></a>
+                                    <span>投保时间：2016-05-13</span>
+                                    <span>保单号：<em>56925036217</em></span>
+                                </div>
+                                <ul class="con fix">
+                                    <li class="myProduct">
+                                        <h2><a href="#" target="_blank" class="t">【大特保—平安】女性子宫颈癌险（1元特惠）</a></h2>
+                                        <p>起: 2016年05月14日</p>
+                                        <p>止: 2017年05月13日</p>
+                                    </li>
+                                    <li class="myName">
+                                        <p>王大锤</p>
+                                    </li>
+                                    <li class="myPrice">
+                                        <p><i>￥</i>1.00</p>
+                                    </li>
+                                    <li class="myStutas">
+                                        <p>超时自动取消</p>
+                                    </li>
+                                    <li class="myOpreat">
+                                        <a href="#">删除</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pagination_page" id="waitpayPage">
+                            <span class="current prev">上一页</span>
+                            <span class="current">1</span>
+                            <span class="current next">下一页</span>
+                        </div>
+                    </div>
+                </div>
+                <!--待续保-->
+                <div class="mypolicy_con">
+                    <div class="tBox loading"></div>
+                    <div class="tBox no_order listNull">
+                        <span>您当前没有待续保订单</span>
+                    </div>
+                    <div class="tBox err_order listNull"></div>
+                    <div class="tBox list_order">
+                        <!--title-->
+                        <ul class="mypolicy_title fix">
+                            <li class="myProduct">保险产品</li>
+                            <li class="myName">被保险人</li>
+                            <li class="myPrice">实付款（元）</li>
+                            <li class="myStutas">保单状态</li>
+                            <li class="myOpreat">操作</li>
+                        </ul>
+                        <!--list-->
+                        <div class="mypolicy_lists">
+                            <div class="list">
+                                <div class="tit">
+                                    <a href="#" target="_blank">查看详情 ></a>
+                                    <span>投保时间：2016-05-13</span>
+                                    <span>保单号：<em>56925036217</em></span>
+                                </div>
+                                <ul class="con fix">
+                                    <li class="myProduct">
+                                        <h2><a href="#" target="_blank" class="t">【大特保—平安】女性子宫颈癌险（1元特惠）</a></h2>
+                                        <p>起: 2016年05月14日</p>
+                                        <p>止: 2017年05月13日</p>
+                                    </li>
+                                    <li class="myName">
+                                        <p>王大锤</p>
+                                    </li>
+                                    <li class="myPrice">
+                                        <p><i>￥</i>1.00</p>
+                                    </li>
+                                    <li class="myStutas">
+                                        <p>待续保</p>
+                                    </li>
+                                    <li class="myOpreat">
+                                        <a href="#">删除</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pagination_page" id="continuePage"></div>
+                    </div>
+                </div>
+                <!--全部-->
+                <div class="mypolicy_con">
+                    <div class="tBox loading"></div>
+                    <div class="tBox no_order listNull">
+                        <span>您当前没有任何订单</span>
+                    </div>
+                    <div class="tBox err_order listNull"></div>
+                    <div class="tBox list_order">
+                        <!--title-->
+                        <ul class="mypolicy_title fix">
+                            <li class="myProduct">保险产品</li>
+                            <li class="myName">被保险人</li>
+                            <li class="myPrice">实付款（元）</li>
+                            <li class="myStutas">保单状态</li>
+                            <li class="myOpreat">操作</li>
+                        </ul>
+                        <!--list-->
+                        <div class="mypolicy_lists">
+                            <div class="list">
+                                <div class="tit">
+                                    <a href="#" target="_blank">查看详情 ></a>
+                                    <span>投保时间：2016-05-13</span>
+                                    <span>保单号：<em>56925036217</em></span>
+                                </div>
+                                <ul class="con fix">
+                                    <li class="myProduct">
+                                        <h2><a href="#" target="_blank" class="t">【大特保—平安】女性子宫颈癌险（1元特惠）</a></h2>
+                                        <p>起: 2016年05月14日</p>
+                                        <p>止: 2017年05月13日</p>
+                                    </li>
+                                    <li class="myName">
+                                        <p>王大锤</p>
+                                    </li>
+                                    <li class="myPrice">
+                                        <p><i>￥</i>1.00</p>
+                                    </li>
+                                    <li class="myStutas">
+                                        <p>待续保</p>
+                                    </li>
+                                    <li class="myOpreat">
+                                        <a href="#">删除</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pagination_page" id="allorderPage">
+                            <span class="current prev">上一页</span>
+                            <span class="current">1</span>
+                            <span class="current next">下一页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--footer-->
+        <div  th:include="custop/footer :: footer"></div>
+
+
+    </div>
+</div>
+<script src="../js/jquery-1.12.3.min.js"></script>
+<script>
+    $(function(){
+        $("#mypolicyTab").find("ul").find("li").click(function () {
+            index=$(this).index();
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".mycenter_right").find("div.mypolicy_con").eq(index).show().siblings("div.mypolicy_con").hide();
+        });
+
+    });
+</script>
+</body>
+</html>
