@@ -1,0 +1,44 @@
+server:
+  port: 8899
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: buy-insurance-service
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    mode: LEGACYHTML5
+  datasource:
+    url: jdbc:mysql://47.52.128.159:3306/myinsuredb #?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    username: myinsuredb
+    password: 123
+
+mybatis:
+  type-aliases-package: java.util
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+#zuul:
+#  routes:
+#    goods-service: /gateway/goods/**
+#    order-service: /gateway/order/**
+#  ignored-patterns: /*-service/**
+#  sensitive-headers:
