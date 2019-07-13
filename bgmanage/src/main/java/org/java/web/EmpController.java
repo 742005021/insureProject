@@ -4,10 +4,7 @@ import org.java.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Dispatch;
@@ -19,8 +16,11 @@ public class EmpController {
     @Autowired
     private EmpService empService;
 
-    @PostMapping("login")
+    @RequestMapping("login")
     public String login(String username, String password, HttpSession ses, Model model){
+        if(username==null){
+            return "/index";
+        }
 
         Map<String,Object> map=empService.empLogin(username, password);
         if (map==null){
@@ -33,7 +33,12 @@ public class EmpController {
 
     @RequestMapping("index/{pagename}")
     public String toPage(@PathVariable("pagename") String pagename){
-        System.out.println(pagename);
         return "/"+pagename;
+    }
+
+    @GetMapping("exit")
+    public String exit(HttpSession ses){
+        ses.removeAttribute("emp_account");
+        return "redirect:/login";
     }
 }
