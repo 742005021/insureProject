@@ -28,12 +28,8 @@ public class EmpController {
             return "/index";
         }
         ses.setAttribute("emp_account",map);
-        return "/processDefinition/deploy";
-    }
-
-    @RequestMapping("index/{pagename}")
-    public String toPage(@PathVariable("pagename") String pagename){
-        return "/"+pagename;
+        return "redirect:index/main";
+//        return "/processDefinition/deploy";
     }
 
     @GetMapping("exit")

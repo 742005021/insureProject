@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>理赔申请</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <style>
+        #body .full{
+            width:100%;
+        }
+    </style>
+</head>
+<body id="body">
+
+    <div class="container" style="padding:0px;">
+
+        <form class="form-horizontal" action="/report/insert" method="post">
+            <div class="form-group form-inline" >
+                <label for="insured_name" class="col-sm-1 control-label">被保人姓名</label>
+                <p class="col-sm-2">
+                    <input type="text" class="form-control full" id="insured_name" name="insured_name">
+                </p>
+
+                <label for="insured_sex" class="col-sm-1 control-label">性别</label>
+                <p class="col-sm-2">
+                    <input type="text" class="form-control full" id="insured_sex" name="insured_sex">
+                </p>
+
+                <label for="insured_age" class="col-sm-1 control-label">年龄</label>
+                <p class="col-sm-2">
+                    <input type="number" value="18" min="0" max="120" class="form-control full" id="insured_age" name="insured_name">
+                </p>
+
+                <label for="insured_crad_id" class="col-sm-1 control-label">身份证号码</label>
+                <p class="col-sm-2">
+                    <input type="text" class="form-control full" id="insured_crad_id" name="insured_crad_id">
+                </p>
+            </div>
+
+            <div class="form-group form-inline" >
+                <label for="cr_enterprise" class="col-sm-1 control-label">单位名称</label>
+                <p class="col-sm-5">
+                    <input type="text" class="form-control full" id="cr_enterprise" name="cr_enterprise">
+                </p>
+
+                <label for="insured_profession" class="col-sm-1 control-label">职业</label>
+                <p class="col-sm-5">
+                    <input type="text" class="form-control full" id="insured_profession" name="insured_profession">
+                </p>
+
+            </div>
+
+            <div class="form-group form-inline">
+                <label for="accident_date" class="col-sm-1 control-label">事故日期</label>
+                <p class="col-sm-2">
+                    <input type="text" class="form-control full" id="accident_date" name="accident_date">
+                </p>
+
+                <label for="accident_cause" class="col-sm-1 control-label">原因</label>
+                <p class="col-sm-2">
+                    <input type="text" class="form-control full" id="accident_cause" name="accident_cause">
+                </p>
+
+                <label for="accident_address" class="col-sm-1 control-label">地点</label>
+                <p class="col-sm-2">
+                    <input type="text" class="form-control full" id="accident_address" name="accident_address">
+                </p>
+
+                <label for="situation" class="col-sm-1 control-label">现状</label>
+                <p class="col-sm-2">
+                    <input type="text" class="form-control full" id="situation" name="situation">
+                </p>
+            </div>
+
+            <div class="form-group form-inline">
+                <label for="things" class="col-sm-1 control-label">事故经过（详细填写）</label>
+                <p class="col-sm-11">
+                    <textarea class="form-control full" id="things" name="things" rows="3"></textarea>
+                    <!--<input type="text" class="form-control full" id="things" name="things">-->
+                </p>
+            </div>
+
+            <div class="form-group form-inline">
+                <label for="is_death" class="col-sm-1 control-label">是否身故</label>
+                <p class="col-sm-2">
+                    <select class="form-control full" id="is_death">
+                        <option value="true" name="is_death" >是</option>
+                        <option value="false" name="is_death" selected>否</option>
+                    </select>
+                </p>
+
+                <label for="autopsy" class="col-sm-1 control-label">是否已检验死因</label>
+                <p class="col-sm-2">
+                    <select class="form-control full" name="autopsy" id="autopsy" disabled>
+                        <option value="true">是（请附证明材料）</option>
+                        <option value="true" selected>否</option>
+                    </select>
+                </p>
+
+                <label for="deathcertificate" class="col-sm-2 control-label">死亡证明文件</label>
+                <p class="col-sm-4">
+                    <input type="file" id="deathcertificate" name="deathcertificate" class="form-control full" disabled/>
+                </p>
+            </div>
+
+            <div class="form-group form-inline">
+                <label for="cr_name" class="col-sm-1 control-label">申请人姓名</label>
+                <p class="col-sm-3">
+                    <input type="text" id="cr_name" name="cr_name" class="form-control full"/>
+                </p>
+
+                <label for="cr_relationship" class="col-sm-1 control-label">与被保人关系</label>
+                <p class="col-sm-3">
+                    <input type="text" id="cr_relationship" name="cr_relationship" class="form-control full" />
+                </p>
+
+                <label for="cr_phone" class="col-sm-1 control-label">联系电话</label>
+                <p class="col-sm-3">
+                    <input type="text" id="cr_phone" name="cr_phone" class="form-control full"/>
+                </p>
+            </div>
+
+            <div class="form-group form-inline">
+                <label for="cr_policy_id" class="col-sm-1 control-label">保单号</label>
+                <p class="col-sm-5">
+                    <input type="text" id="cr_policy_id" name="cr_policy_id" class="form-control full"/>
+                </p>
+
+                <label for="payment" class="col-sm-1 control-label">领保方式</label>
+                <p class="col-sm-5">
+                    <select class="form-control full" name="payment" id="payment">
+                        <option value="1" selected>1.银行转账</option>
+                        <option value="2">2.委托（单位/个人）</option>
+                        <option value="3">3.自领</option>
+                    </select>
+                </p>
+            </div>
+
+            <div class="form-group form-inline">
+                <label for="bank_name" class="col-sm-1 control-label">开户银行</label>
+                <p class="col-sm-5">
+                    <input type="text" id="bank_name" name="bank_name" class="form-control full"/>
+                </p>
+
+                <!--<label for="account_name" class="col-sm-1 control-label">户名（限申请者本人）</label>-->
+                <!--<p class="col-sm-3">-->
+                    <!--<input type="text" id="account_name" name="account_name" class="form-control full" />-->
+                <!--</p>-->
+
+                <label for="bank_no" class="col-sm-1 control-label">账号</label>
+                <p class="col-sm-5">
+                    <input type="text" id="bank_no" name="bank_no" class="form-control full"/>
+                </p>
+            </div>
+
+            <div class="form-group form-inline">
+                <label for="notice_address" class="col-sm-1 control-label">理赔通知送达地址</label>
+                <p class="col-sm-5">
+                    <input type="text" id="notice_address" name="notice_address" class="form-control full"/>
+                </p>
+
+                <label for="post_code" class="col-sm-1 control-label">邮编</label>
+                <p class="col-sm-5">
+                    <input type="text" id="post_code" name="post_code" class="form-control full"/>
+                </p>
+            </div>
+
+            <div class="form-group form-inline">
+                <p class="col-sm-offset-1 col-sm-11">
+                    <input class="btn btn-info btn-block" type="submit" value="提交">
+                </p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
