@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bgmanage/bgmanage.iml" filepath="$PROJECT_DIR$/bgmanage/bgmanage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/buy-insure/buy-insure.iml" filepath="$PROJECT_DIR$/buy-insure/buy-insure.iml" />
       <module fileurl="file://$PROJECT_DIR$/custlog-service/custlog-service.iml" filepath="$PROJECT_DIR$/custlog-service/custlog-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/gateway-server/gateway-server.iml" filepath="$PROJECT_DIR$/gateway-server/gateway-server.iml" />

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bgmanage" />
+        <module name="buy-insure" />
         <module name="custlog-service" />
         <module name="eureka-server" />
         <module name="gateway-server" />
@@ -14,6 +15,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="bgmanage" target="1.8" />
+      <module name="buy-insure" target="1.8" />
       <module name="custlog-service" target="1.8" />
       <module name="eureka-server" target="1.8" />
       <module name="gateway-server" target="1.8" />

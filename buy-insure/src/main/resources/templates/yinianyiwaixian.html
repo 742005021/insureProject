@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>健康告知</title>
+    <link rel="stylesheet" th:href="@{'/css/common.css'}">
+    <link rel="stylesheet" th:href="@{'/css/book.css'}">
+    <link rel="stylesheet" th:href="@{'/layui/css/layui.css'}">
+</head>
+<body>
+<!--<input type="hidden" th:value="${item_id}" id="item_id"/>-->
+<div class="wrapper">
+    <!-----------------------------一年意外险---------header_user begin------------------------------------->
+    <div class="header_user">
+        <div class="main_width">
+            <span class="tel">客服电话：400-663-6600（周一至周六 9:00-18:00）</span>
+            <span class="fr">
+                <span class="my_insurance"><a href="#">我的保险<em>1</em></a></span>
+                <span class="Backlog"><a href="#">未完成订单<em>1</em></a></span>
+                <span class="message"><a href="#">消息<em>1</em></a></span>
+                <span class="register"><a href="#">注册</a></span>
+                <span class="fg"><a href="#">|</a></span>
+                <span><a href="#">登录</a></span>
+            </span>
+        </div>
+    </div>
+    <!---------------------------------------header_user end-------------------------------------->
+    <!---------------------------------------header_nav begin------------------------------------->
+    <div class="header_nav">
+        <div class="main_width">
+            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
+            <a href="#" class="my_policy fr">我的保单</a>
+            <div class="menuBox">
+                <ul class="menu">
+                    <li class="active"><a href="#">首页</a></li>
+                    <li class="special"><a href="#">保险产品</a></li>
+                    <li><a href="#">理财中心</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!----------------------------------------header_nav end-------------------------------------->
+    <div class="container health_notify">
+        <h1>一年期意外险</h1>
+        <!--告知说明-->
+        <div class="notify_box">
+            <!--健康告知-->
+            <h2>健康告知</h2>
+            <!-- table -->
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">保障计划</li>
+                    <li>保障详情解读</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!-- 表格1 -->
+                        <div class="layui-form">
+                            <table class="layui-table">
+                                <colgroup>
+                                    <col width="400">
+                                    <col width="400">
+                                    <col width="800">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>保障类型</th>
+                                    <th>保障范围</th>
+                                    <th>保险金额</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td rowspan="2">一般意外</td>
+                                    <td>意外身故、伤残</td>
+                                    <td>5万-50万</td>
+                                </tr>
+                                <tr>
+                                    <td>意外医疗</td>
+                                    <td>0-10万</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">津贴及车费</td>
+                                    <td>住院误工津贴</td>
+                                    <td>0-100元/天</td>
+                                </tr>
+                                <tr>
+                                    <td>救护车费用报销</td>
+                                    <td>0-2000</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4">交通意外</td>
+                                    <td>飞机意外身故、伤残</td>
+                                    <td>0-800万</td>
+                                </tr>
+                                <tr>
+                                    <td>火车意外身故、伤残</td>
+                                    <td>0-100万</td>
+                                </tr>
+                                <tr>
+                                    <td>轮船意外身故、伤残</td>
+                                    <td>0-100万</td>
+                                </tr>
+                                <tr>
+                                    <td>汽车意外身故、伤残</td>
+                                    <td>0-30万</td>
+                                </tr>
+                                <tr>
+                                    <td>医疗服务（赠送）</td>
+                                    <td>意外住院垫付/担保服务</td>
+                                    <td>赠送</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <!-- 表格2 -->
+                        <div class="layui-form">
+                            <table class="layui-table">
+                                <colgroup>
+                                    <col width="400">
+                                    <col width="400">
+                                    <col width="800">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>保障类型</th>
+                                    <th>保障范围</th>
+                                    <th>保险金额</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td rowspan="2">一般意外</td>
+                                    <td>意外身故、伤残</td>
+                                    <td>在保险期间内，被保险人不幸遭受意外事故导致身故或伤残，我们按条款给付意外身故/伤残保险金。</td>
+                                </tr>
+                                <tr>
+                                    <td>意外医疗</td>
+                                    <td>因意外伤害事故需门诊或住院治疗，发生的医疗费用，我们将就其事故发生之日起180日内实际支出的按照当地社会医疗保险主管部门规定可报销的、必要的、合理的医疗费用超过人民币100元的部分给付医疗保险金。</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">津贴及车费</td>
+                                    <td>住院误工津贴</td>
+                                    <td>因意外伤害事 故入院治疗，我们按照保险单载明的住院误工津贴日额给付，累计给付天数以90天为限。</td>
+                                </tr>
+                                <tr>
+                                    <td>救护车费用报销</td>
+                                    <td>因意外伤害事故实际支付的救护车车费，我们将给付救护车车费保险金，以2000元为限。</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4">交通意外</td>
+                                    <td>飞机意外身故、伤残</td>
+                                    <td>被保险人以乘客身份乘坐民航客机期间不幸遭受意外伤害事故导致身故或伤残的，我们将赔偿意外身故保险金或意外残疾保险金。和意外身故、伤残累计赔付。</td>
+                                </tr>
+                                <tr>
+                                    <td>火车意外身故、伤残</td>
+                                    <td>被保险人以乘客身份乘坐商业营运的火车（含高铁、地铁）期间不幸遭受意外伤害事故导致身故或伤残的，我们将赔偿意外身故保险金或意外残疾保险金。和意外身故、伤残累计赔付。</td>
+                                </tr>
+                                <tr>
+                                    <td>轮船意外身故、伤残</td>
+                                    <td>被保险人以乘客身份乘坐商业营运的轮船期间不幸遭受意外伤害事故导致身故或伤残的，我们将赔偿意外身故保险金或意外残疾保险金。和意外身故、伤残累计赔付。</td>
+                                </tr>
+                                <tr>
+                                    <td>汽车意外身故、伤残</td>
+                                    <td>被保险人以乘客身份乘坐商业营运的汽车（含公交、出租车）期间不幸遭受意外伤害事故导致身故或残疾的，我们将按照条款给付保险金。和意外身故、伤残累计赔付。</td>
+                                </tr>
+                                <tr>
+                                    <td>医疗服务（赠送）</td>
+                                    <td>意外住院垫付/担保服务</td>
+                                    <td>当被保险人发生保险条款约定的保险事故时，救援公司可协助安排：
+                                        1、协助安排住院：救援公司可协助被保险人推荐当地尽可能符合治疗要求的、经救援公司审查认证或与救援公司有合作关系的医疗机构，供被保险人选择就医，并进行办理住院手续的指导。
+                                        2、住院医疗费用担保/垫付：被保险人发生保险条款约定的保险事故时，暂未有足够费用支付医院救治费用，可为被保险人提供住院期间医疗费用的担保/垫付服务。
+                                        垫付结束后，由救援公司代被保险人向平安申请理赔。
+                                        <br/><span style="color: #FFB800;">*担保垫付金额需在保险方案规定的保障额度内。</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/><br/>保险责任请参考<span th:onclick="|searchTerms(${item_id})|" style="color: #0000FF;cursor: pointer;">《一年期意外保险适用条款》</span>，并敬请特别留意条款中的“责任免除”“释义”部分。
+            <p></p>
+            <!--职业告知-->
+            <h2>特别提醒</h2>
+            <p style="color: #FFB800;">
+                *相应服务的费用额度和范围以产品保险条款和保险方案为准，超出保险责任范围内的需自费。<br/>
+                *救援公司电话协调并妥善安排相关服务，不保证派遣专员至现场进行协助。
+            </p>
+            <a th:href="@{/searchTable}" class="job">查看职业类别</a>
+            <p class="special">请确认被保险人是否存在上述问题：</p>
+            <div class="health_box">
+                <a th:href="@{|/determine/${item_id}|}" class="n">确认投保</a>
+            </div>
+        </div>
+    </div>
+    <!--footer begin-->
+    <div class="copyright">
+        <div class="main_width footer">
+            <div class="footer_nav">
+                <p>
+                    <a href="#">关于京东金融</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东小金库</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东钱包</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东白条</a>
+                    <span class="divider">|</span>
+                    <a href="#">联系我们</a>
+                    <span class="divider">|</span>
+                    <a href="#">免责声明</a>
+                </p>
+                <p>Copyright © 2004-2016 京东JD.com 版权所有<span class="divider">|</span>投资有风险，购买需谨慎</p>
+            </div>
+            <div class="footer_contact">
+                <div class="f_contact_time">
+                    联系我们<span>（09:00-22:00）</span>
+                </div>
+                <div class="f_contact_content">
+                    <div class="f_cc_left">
+                        <span class="f_cc_item">个人业务：400-098-8511</span>
+                        <span class="f_cc_item">企业业务：400-088-8816</span>
+                    </div>
+                    <div class="f_cc_mid">
+                        <a href="#" class="f_cc_link item_JIMI">咨询JIMI</a>
+                        <a href="#" class="f_cc_link item_kefu">在线客服</a>
+                    </div>
+                    <div class="f_cc_right">
+                        <a href="#" class="f_cc_link item_mail">客服邮箱</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer end-->
+    <script type="text/javascript" th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
+    <script type="text/javascript" th:src="@{'/layui/layui.js'}"></script>
+    <script type="text/javascript" th:src="@{'/myScript/static_table.js'}"></script>
+    <script type="text/javascript" th:src="@{'/myScript/yinianyiwaixian.js'}"></script>
+</div>
+</body>
+</html>

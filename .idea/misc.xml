@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/gateway-server/pom.xml" />
         <option value="$PROJECT_DIR$/custlog-service/pom.xml" />
         <option value="$PROJECT_DIR$/bgmanage/pom.xml" />
+        <option value="$PROJECT_DIR$/buy-insure/pom.xml" />
       </list>
     </option>
   </component>

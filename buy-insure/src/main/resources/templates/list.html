@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>分类清单</title>
+    <link rel="stylesheet" th:href="@{'/css/common.css'}">
+    <link rel="stylesheet" th:href="@{'/css/list.css'}">
+</head>
+<body>
+<div class="wrapper">
+    <!--------------------------------------header_user begin------------------------------------->
+    <div class="header_user">
+        <div class="main_width">
+            <span class="tel">客服电话：400-663-6600（周一至周六 9:00-18:00）</span>
+            <span class="fr">
+                <span class="my_insurance"><a href="#">我的保险</a></span>
+                <span class="Backlog"><a href="#">未完成订单</a></span>
+                <span class="message"><a href="#">消息</a></span>
+                <span class="register"><a href="#">注册</a></span>
+                <span class="fg"><a href="#">|</a></span>
+                <span><a href="#">登录</a></span>
+            </span>
+        </div>
+    </div>
+    <!---------------------------------------header_user end-------------------------------------->
+    <!---------------------------------------header_nav begin------------------------------------->
+    <div class="header_nav">
+        <div class="main_width">
+            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
+            <a href="#" class="my_policy fr">我的保单</a>
+            <div class="menuBox">
+                <ul class="menu">
+                    <li><a href="#">首页</a></li>
+                    <li class="special active"><a href="#">保险产品</a></li>
+                    <li><a href="#">理财中心</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!----------------------------------------header_nav end-------------------------------------->
+    <!--container begin-->
+    <div class="container">
+        <div class="main_width list_new">
+            <h2 class="list_title" id="titleHealthy">
+                <i></i>
+                意外险
+            </h2>
+            <!-- 加载保险项 -->
+            <div class="list_con fix" id="item">
+
+            </div>
+        </div>
+    </div>
+    <!---container end--->
+    <!--footer begin-->
+    <div class="copyright">
+        <div class="main_width footer">
+            <div class="footer_nav">
+                <p>
+                    <a href="#">关于京东金融</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东小金库</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东钱包</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东白条</a>
+                    <span class="divider">|</span>
+                    <a href="#">联系我们</a>
+                    <span class="divider">|</span>
+                    <a href="#">免责声明</a>
+                </p>
+                <p>Copyright © 2004-2016 京东JD.com 版权所有<span class="divider">|</span>投资有风险，购买需谨慎</p>
+            </div>
+            <div class="footer_contact">
+                <div class="f_contact_time">
+                    联系我们<span>（09:00-22:00）</span>
+                </div>
+                <div class="f_contact_content">
+                    <div class="f_cc_left">
+                        <span class="f_cc_item">个人业务：400-098-8511</span>
+                        <span class="f_cc_item">企业业务：400-088-8816</span>
+                    </div>
+                    <div class="f_cc_mid">
+                        <a href="#" class="f_cc_link item_JIMI">咨询JIMI</a>
+                        <a href="#" class="f_cc_link item_kefu">在线客服</a>
+                    </div>
+                    <div class="f_cc_right">
+                        <a href="#" class="f_cc_link item_mail">客服邮箱</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer end-->
+    <div class="sideBar">
+        <a href="#" class="slider_block app"><i></i></a>
+        <a href="#" class="slider_block jimi"><i></i></a>
+        <a href="#" class="slider_block feedback"><i></i></a>
+        <a href="javascript:" class="slider_block backtop" id="backtop"><i></i></a>
+    </div>
+</div>
+<script th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
+<script th:src="@{'/js/list.js'}"></script>
+<script type="text/javascript">
+    $(function(){
+        $.ajax({
+            url: "/loadInsureItem",
+            dataType: "json",
+            type: "post",
+            success: function (result) {
+                var html = "";
+                    $.each(result, function (index, k) {
+                        html += "<div class='" + k.item_style +"'>" +
+                                    "<h2>" +
+                                        "<a href='#' > 【" + k.item_name +"】</a>" +
+                                        "<p class='n'>" + k.item_info +"</p>" +
+                                    "</h2><br/><br/><br/><br/><br/>" +
+                                    "<p class='price'>" +
+                                        "<em>￥</em>" +
+                                            k.min_money +
+                                        "<em>元起</em>" +
+                                    "</p>" +
+                                    "<a class='btn'>查看详情</a>" +
+                                    "<a href='/buy/searchItem/"+ k.item_id + "/" + k.item_target+"' class='a_link'></a>" +
+                                "</div>";
+                    });
+                    $("#item").html(html);
+            }
+        });
+
+    });
+
+
+</script>
+</body>
+</html>

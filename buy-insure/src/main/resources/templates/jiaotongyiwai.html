@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>健康告知</title>
+    <link rel="stylesheet" th:href="@{'/css/common.css'}">
+    <link rel="stylesheet" th:href="@{'/css/book.css'}">
+    <link rel="stylesheet" th:href="@{'/layui/css/layui.css'}">
+</head>
+<body>
+<div class="wrapper">
+    <!--------------------------------------header_user begin------------------------------------->
+    <div class="header_user">
+        <div class="main_width">
+            <span class="tel">客服电话：400-663-6600（周一至周六 9:00-18:00）</span>
+            <span class="fr">
+                <span class="my_insurance"><a href="#">我的保险<em>1</em></a></span>
+                <span class="Backlog"><a href="#">未完成订单<em>1</em></a></span>
+                <span class="message"><a href="#">消息<em>1</em></a></span>
+                <span class="register"><a href="#">注册</a></span>
+                <span class="fg"><a href="#">|</a></span>
+                <span><a href="#">登录</a></span>
+            </span>
+        </div>
+    </div>
+    <!---------------------------------------header_user end-------------------------------------->
+    <!---------------------------------------header_nav begin------------------------------------->
+    <div class="header_nav">
+        <div class="main_width">
+            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
+            <a href="#" class="my_policy fr">我的保单</a>
+            <div class="menuBox">
+                <ul class="menu">
+                    <li class="active"><a href="#">首页</a></li>
+                    <li class="special"><a href="#">保险产品</a></li>
+                    <li><a href="#">理财中心</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!----------------------------------------header_nav end-------------------------------------->
+    <div class="container health_notify">
+        <h1>平安道路交通意外保险</h1>
+        <!--告知说明-->
+        <div class="notify_box">
+            <!--健康告知-->
+            <h2>健康告知</h2>
+            <!-- table -->
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">保障计划</li>
+                    <li>保障详情解读</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!-- 表格1 -->
+                        
+                    </div>
+                    <div class="layui-tab-item">
+                        <!-- 表格2 -->
+
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <!--职业告知-->
+            <h2>职业告知</h2>
+            <p>
+                本保险仅承保1-4类职业，不在此职业类别中不能购买此保险，否则不能理赔，查看1-4类职业类别表
+            </p>
+            <a href="#" class="job">查看职业类别</a>
+            <p class="special">请确认被保险人是否存在上述问题：</p>
+            <div class="health_box">
+                <a href="#" class="n">没问题</a>
+                <a href="#" class="y active">有部分情况</a>
+            </div>
+        </div>
+    </div>
+    <!--footer begin-->
+    <div class="copyright">
+        <div class="main_width footer">
+            <div class="footer_nav">
+                <p>
+                    <a href="#">关于京东金融</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东小金库</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东钱包</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东白条</a>
+                    <span class="divider">|</span>
+                    <a href="#">联系我们</a>
+                    <span class="divider">|</span>
+                    <a href="#">免责声明</a>
+                </p>
+                <p>Copyright © 2004-2016 京东JD.com 版权所有<span class="divider">|</span>投资有风险，购买需谨慎</p>
+            </div>
+            <div class="footer_contact">
+                <div class="f_contact_time">
+                    联系我们<span>（09:00-22:00）</span>
+                </div>
+                <div class="f_contact_content">
+                    <div class="f_cc_left">
+                        <span class="f_cc_item">个人业务：400-098-8511</span>
+                        <span class="f_cc_item">企业业务：400-088-8816</span>
+                    </div>
+                    <div class="f_cc_mid">
+                        <a href="#" class="f_cc_link item_JIMI">咨询JIMI</a>
+                        <a href="#" class="f_cc_link item_kefu">在线客服</a>
+                    </div>
+                    <div class="f_cc_right">
+                        <a href="#" class="f_cc_link item_mail">客服邮箱</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer end-->
+    <script type="text/javascript" th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
+    <script type="text/javascript" th:src="@{'/layui/layui.js'}"></script>
+    <script type="text/javascript" th:src="@{'/myScript/static_table.js'}"></script>
+</div>
+</body>
+</html>
