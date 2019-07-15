@@ -1,83 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>我的积分</title>
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/center.css">
+    <Link rel="stylesheet" type="text/css"
+          href="../layui/css/layui.css" media="all" />
+  
 </head>
 <body>
 <div class="wrapper">
     <!--------------------------------------header_user begin------------------------------------->
-    <div class="header_user">
-        <div class="main_width">
-            <span class="tel">客服电话：400-663-6600（周一至周六 9:00-18:00）</span>
-            <span class="fr">
-                <span class="my_insurance"><a href="#">我的保险</a></span>
-                <span class="Backlog"><a href="#">未完成订单</a></span>
-                <span class="message"><a href="#">消息</a></span>
-                <span class="register"><a href="#">注册</a></span>
-                <span class="fg"><a href="#">|</a></span>
-                <span><a href="#">登录</a></span>
-            </span>
-        </div>
-    </div>
-    <!---------------------------------------header_user end-------------------------------------->
-    <!---------------------------------------header_nav begin------------------------------------->
-    <div class="header_nav">
-        <div class="main_width">
-            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
-            <a href="#" class="my_policy fr">我的保单</a>
-            <div class="menuBox">
-                <ul class="menu">
-                    <li class="active"><a href="#">首页</a></li>
-                    <li class="special"><a href="../list2.html">保险产品</a></li>
-                    <li><a href="#">理财中心</a></li>
-                    <li><a href="#">关于我们</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div th:include="custop/header :: header"></div>
     <!----------------------------------------header_nav end-------------------------------------->
     <!--container-->
     <div class="container">
         <div class="main_width fix mycenter_box">
-            <div class="list_left" id="list_left">
-                <ul>
-                    <li class="head">
-                        <img src="../images/center/side-head.png" alt="">
-                        <a href="#" class="tit">我的积分</a>
-                        <a href="#" class="integralAllNum count"><em>100</em></a>
-                    </li>
-                    <li>
-                        <h3 class="order list_til">我的订单</h3>
-                        <div>
-                            <ul>
-                                <li><a href="#">我的保险</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <h3 class="per list_til">个人信息</h3>
-                        <div>
-                            <ul>
-                                <li><a href="#">常用联系人</a></li>
-                                <li><a href="#">账户及密码</a></li>
-                                <li><a href="#">消息中心</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <h3 class="wallet list_til">我的钱包</h3>
-                        <div>
-                            <ul>
-                                <li><a href="#">优惠券</a></li>
-                                <li class="active"><a href="#">我的积分</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <div th:include="custop/left :: left"></div>
             <!--我的积分-->
             <div class="mycenter_right">
                 <!--积分兑换-->
@@ -85,7 +25,7 @@
                     <h3 class="title">
                         <a href="#" class="how">如何获取积分？</a>
                         <span class="count integralAllNum">
-                            可用积分<em>100</em>
+                            可用积分<em th:text="${session.cust.score}">100</em>
                         </span>
                         <i></i>积分兑换
                     </h3>
@@ -93,32 +33,32 @@
                         <div class="iscroll_no">没有可兑换的优惠券</div>
                         <div class="iscroll_box">
                             <ul class="fix">
-                                <li class="type1">
+                                <li class="type1" id="type1">
                                     <div class="ibox">
                                         <h3>5元通用优惠券</h3>
                                         <p class="note">直减5元，有效期90天</p>
                                         <div class="btns">
-                                            <span class="fen">2500积分</span>
+                                            <span class="fen">500</span>
                                             <p class="dui"><i></i>去兑换</p>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="type1">
+                                <li class="type1" id="type2">
                                     <div class="ibox">
                                         <h3>20元通用优惠券</h3>
                                         <p class="note">满100元可用，有效期90天</p>
                                         <div class="btns">
-                                            <span class="fen">9000积分</span>
+                                            <span class="fen">2000积分</span>
                                             <p class="dui"><i></i>去兑换</p>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="type1">
+                                <li class="type1" id="type3">
                                     <div class="ibox">
                                         <h3>60元通用优惠券</h3>
                                         <p class="note">满300元可用，有效期90天</p>
                                         <div class="btns">
-                                            <span class="fen">25000积分</span>
+                                            <span class="fen">7500积分</span>
                                             <p class="dui"><i></i>去兑换</p>
                                         </div>
                                     </div>
@@ -132,10 +72,10 @@
                     <h3 class="title"><i></i>积分明细</h3>
                     <div class="list_box">
                         <div class="tBox loading"></div>
-                        <!--<div class="tBox listNull">-->
-                            <!--<span>还没有积分使用</span>-->
-                        <!--</div>-->
-                        <div class="tBox list_con">
+                        <div class="tBox listNull" th:if="${count==0}">
+                            <span>还没有积分使用</span>
+                        </div>
+                        <div class="tBox list_con" th:if="${count>0}">
                             <table width="100%" cellpadding="0" cellspacing="0" class="listTable">
                                 <thead>
                                     <tr>
@@ -145,10 +85,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2016-05-13 09:41:36</td>
-                                        <td>+100</td>
-                                        <td class="info">注册成功</td>
+                                    <tr th:each="s,st:${list}">
+                                        <td>[[${s.changetime}]]</td>
+                                        <td>[[${s.changevalue}]]</td>
+                                        <td class="info">[[${s.remark}]]</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -184,51 +124,113 @@
         </div>
     </div>
     <!--footer begin-->
-    <div class="copyright">
-        <div class="main_width footer">
-            <div class="footer_nav">
-                <p>
-                    <a href="#">关于京东金融</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东小金库</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东钱包</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东白条</a>
-                    <span class="divider">|</span>
-                    <a href="#">联系我们</a>
-                    <span class="divider">|</span>
-                    <a href="#">免责声明</a>
-                </p>
-                <p>Copyright © 2004-2016 京东JD.com 版权所有<span class="divider">|</span>投资有风险，购买需谨慎</p>
-            </div>
-            <div class="footer_contact">
-                <div class="f_contact_time">
-                    联系我们<span>（09:00-22:00）</span>
-                </div>
-                <div class="f_contact_content">
-                    <div class="f_cc_left">
-                        <span class="f_cc_item">个人业务：400-098-8511</span>
-                        <span class="f_cc_item">企业业务：400-088-8816</span>
-                    </div>
-                    <div class="f_cc_mid">
-                        <a href="#" class="f_cc_link item_JIMI">咨询JIMI</a>
-                        <a href="#" class="f_cc_link item_kefu">在线客服</a>
-                    </div>
-                    <div class="f_cc_right">
-                        <a href="#" class="f_cc_link item_mail">客服邮箱</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--footer end-->
-    <div class="sideBar">
-        <a href="#" class="slider_block app"><i></i></a>
-        <a href="#" class="slider_block jimi"><i></i></a>
-        <a href="#" class="slider_block feedback"><i></i></a>
-        <a href="javascript:" class="slider_block backtop" id="backtop"><i></i></a>
-    </div>
+    <div th:include="custop/footer :: footer"></div>
 </div>
+<script src="../js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript"
+        src="../layui/layui.js" ></script>
+<script >
+    $("#policy").removeClass("active");
+    $("#score").addClass("active");
+</script>
+<script th:inline="javascript">
+    var score = [[${session.cust.score}]];
+    //alert(score);
+
+    layui.use('layer',function () {
+    $("#type1").click(function () {
+        if (score<500){
+            layer.open({
+                title: '提示'
+                ,content: '您的积分不足'
+                ,btn:['确定','取消']
+                ,btnAlign:'c'
+                ,shade: [0.6, '#ccc']
+                ,anim:1
+            })
+        }else if(score>=500){
+            layer.open({
+                title: '提示'
+                ,content: '您确定要兑换5元优惠券吗?'
+                ,btn:['确定','取消']
+                ,btnAlign:'c'
+                ,shade: [0.8, '#ccc']
+                ,anim:1
+                ,yes:function () {
+                   var score=-500;
+                   var remark='兑换5元优惠券';
+
+                   location="/buyCoupon/"+score+"/"+remark;
+
+                }
+            })
+        }
+    })
+
+        $("#type2").click(function () {
+            if (score<2000){
+                layer.open({
+                    title: '提示'
+                    ,content: '您的积分不足'
+                    ,btn:['确定','取消']
+                    ,btnAlign:'c'
+                    ,shade: [0.6, '#ccc']
+                    ,anim:1
+                })
+            }else if(score>=2000){
+                layer.open({
+                    title: '提示'
+                    ,content: '您确定要兑换20元通用优惠券吗?'
+                    ,btn:['确定','取消']
+                    ,btnAlign:'c'
+                    ,shade: [0.8, '#ccc']
+                    ,anim:1
+                    ,yes:function () {
+                        var score=-2000;
+                        var remark='兑换20元通用优惠券';
+
+                        location="/buyCoupon/"+score+"/"+remark;
+
+                    }
+                })
+            }
+        })
+
+
+        $("#type3").click(function () {
+            if (score<7500){
+                layer.open({
+                    title: '提示'
+                    ,content: '您的积分不足'
+                    ,btn:['确定','取消']
+                    ,btnAlign:'c'
+                    ,shade: [0.6, '#ccc']
+                    ,anim:1
+                })
+            }else if(score>=7500){
+                layer.open({
+                    title: '提示'
+                    ,content: '您确定要兑换60元优惠券吗?'
+                    ,btn:['确定','取消']
+                    ,btnAlign:'c'
+                    ,shade: [0.8, '#ccc']
+                    ,anim:1
+                    ,yes:function () {
+                        var score=-7500;
+                        var remark='兑换60元优惠券';
+
+                        location="/buyCoupon/"+score+"/"+remark;
+
+                    }
+                })
+            }
+        })
+
+
+
+
+
+    })
+</script>
 </body>
 </html>

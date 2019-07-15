@@ -22,10 +22,14 @@ public class CustController {
     public String login(String username, String password, HttpSession ses, Model model){
 
         Map<String,Object> map=service.custLogin(username, password);
+
         if (map==null){
             model.addAttribute("msg", "用户名或密码错误");
             return "/login";
         }
+        String custid= (String) map.get("cust_id");
+        int score=service.getCustScore(custid);
+        map.put("score", score);
         ses.setAttribute("cust", map);
         return "/index";
     }
@@ -56,6 +60,20 @@ public class CustController {
         }else{
             return "register";
         }
+
+    }
+
+    @RequestMapping("editpwd/{pwd}")
+    @ResponseBody
+    public String editpwd(@PathVariable("pwd")String pwd,HttpSession ses){
+        Map<String,Object> cust= (Map<String, Object>) ses.getAttribute("cust");
+        String cust_id= (String) cust.get("cust_id");
+      int n=  service.editPwd(pwd, cust_id);
+        if (n==1){
+            return "true";
+        }else {return "false";}
+
+
 
     }
 

@@ -11,6 +11,8 @@
 <div class="wrapper">
 
     <!--------------------------------------header_user begin------------------------------------->
+    <a name="top"></a>
+
     <div class="header_user">
         <div th:if="${session.cust==null}">
         <div class="main_width">
@@ -761,7 +763,7 @@
         <a href="#" class="slider_block app"><i></i></a>
         <a href="#" class="slider_block jimi"><i></i></a>
         <a href="#" class="slider_block feedback"><i></i></a>
-        <a href="javascript:" class="slider_block backtop" id="backtop"><i></i></a>
+        <a href="#top"  class="slider_block backtop" id="backtop"><i></i></a>
     </div>
 </div>
 <script src="js/jquery-1.12.3.min.js"></script>

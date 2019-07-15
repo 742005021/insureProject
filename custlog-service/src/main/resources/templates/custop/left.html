@@ -11,13 +11,13 @@
         <li class="head">
             <img src="../images/center/side-head.png" alt="">
             <a href="#" class="tit">我的积分</a>
-            <a href="#" class="integralAllNum count"><em>100</em></a>
+            <span class="integralAllNum count"><em th:text="${session.cust.score}">100</em></span>
         </li>
         <li>
             <h3 class="order list_til">我的订单</h3>
             <div>
                 <ul>
-                    <li class="active" id="policy"><a href="tomypolicy">我的保险</a></li>
+                    <li class="active" id="policy"><a href="/tomypolicy">我的保险</a></li>
                 </ul>
             </div>
         </li>
@@ -25,9 +25,9 @@
             <h3 class="per list_til">个人信息</h3>
             <div>
                 <ul>
-                    <li id="family"><a href="tofamily" >常用联系人</a></li>
-                    <li id="safe"><a href="tosafety" >账户及密码</a></li>
-                    <li id="msg"> <a href="tomessage" >消息中心</a></li>
+                    <li id="family"><a th:href="@{|/showAllLm/${session.cust.cust_id}|}">常用联系人</a></li>
+                    <li id="safe"><a href="/tosafety" >账户及密码</a></li>
+                    <li id="msg"> <a href="/tomessage" >消息中心</a></li>
                 </ul>
             </div>
         </li>
@@ -35,8 +35,8 @@
             <h3 class="wallet list_til">我的钱包</h3>
             <div>
                 <ul>
-                    <li  id="coupon"><a href="tocoupon">优惠券</a></li>
-                    <li id="score"><a href="toscore" >我的积分</a></li>
+                    <li  id="coupon"><a href="/showCoupon">优惠券</a></li>
+                    <li id="score"><a href="/showScore" >我的积分</a></li>
                 </ul>
             </div>
         </li>

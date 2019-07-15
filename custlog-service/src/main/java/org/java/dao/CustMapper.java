@@ -1,9 +1,6 @@
 package org.java.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -20,4 +17,16 @@ public interface CustMapper {
 
     @Select("select cust_id from cust_account where username=#{uname}")
     String check(@Param("uname") String uname);
+
+    @Update("update cust_account set password=#{pwd} where cust_id=#{custid}")
+    int editPwd(@Param("pwd")String pwd,@Param("custid")String custid);
+
+    @Insert("insert into custinfo(cust_id) values ((select cust_id from cust_account where username=#{m.uname} and password=#{m.pwd})) ")
+    int addCustInfoId(@Param("m") Map<String,Object> map);
+
+    @Select("select cust_score from custinfo where cust_id=#{custid}")
+    int getCustScore(@Param("custid") String custid);
+
+    @Update("update custinfo set cust_score =#{score} where cust_id=#{custid}")
+    int updateScore(@Param("custid")String custid,@Param("score") int score);
 }

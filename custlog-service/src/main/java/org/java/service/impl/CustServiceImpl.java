@@ -18,11 +18,32 @@ public class CustServiceImpl implements CustService {
 
     @Override
     public int addCustAccount(Map<String, Object> map) {
-        return mapper.addCustAccount(map);
+      int n=  mapper.addCustAccount(map);
+      if (n==1){
+          mapper.addCustInfoId(map);
+      }
+      return n;
     }
 
     @Override
     public String check(String uname) {
         return mapper.check(uname);
     }
+
+    @Override
+    public int editPwd(String pwd, String custid) {
+
+        return mapper.editPwd(pwd, custid);
+    }
+
+    @Override
+    public int getCustScore(String custid) {
+        return mapper.getCustScore(custid);
+    }
+
+    @Override
+    public int updateScore(String custid, int score) {
+        return mapper.updateScore(custid, score);
+    }
+
 }
