@@ -2,10 +2,73 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>保险后台管理系统</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" />
+    <script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 </head>
 <body>
-    <h1>这里后台主页</h1>
-    <h2 th:text="${session.emp_account}"></h2>
+    <input type="hidden" value="" id="webSocketUser"/>
+    <div class="layui-layout layui-layout-admin"  >
+        <div class="layui-header layui-bg-black">
+            <div class="layui-logo" >
+                保险后台管理系统
+            </div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <ul class="layui-nav layui-layout-right" >
+                <li class="layui-nav-item"><a href="#" th:text="${session.emp_account?.emp_username}"></a></li>
+                <li class="layui-nav-item"><a href="/exit">退出</a></li>
+            </ul>
+
+        </div>
+        <div class="layui-side layui-bg-black ">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item">
+                    <a href="javascript:;">
+                       <i class="layui-icon layui-icon-dialogue" style="font-size: 20px; color: white;"> 邮件管理</i>
+                    </a>
+                    <dl class="layui-nav-child">
+                            <dd>
+                                <a href="#" data-url="LF/email/writeEmail.jsp" data-title="写邮件"
+                                   data-id="88" class="site-demo-active" data-type="tabAdd">写邮件</a>
+                            </dd>
+                            <dd>
+                                <a href="#" data-url="LF/email/haveSentMail.jsp" data-title="已发邮件"
+                                   data-id="87" class="site-demo-active" data-type="tabAdd">已发邮件</a>
+                            </dd>
+                            <dd>
+                                <a href="#" data-url="LF/email/Inbox.jsp" data-title="收件箱"
+                                   data-id="86" class="site-demo-active" data-type="tabAdd">收件箱</a>
+                            </dd>
+                            <dd>
+                                <a href="#" data-url="LF/email/haveDeleted.jsp" data-title="已删邮件"
+                                   data-id="85" class="site-demo-active" data-type="tabAdd">已删邮件</a>
+                            </dd>
+                            <dd>
+                                <a href="#" data-url="LF/email/draft.jsp" data-title="草稿箱"
+                                   data-id="84" class="site-demo-active" data-type="tabAdd">草稿箱</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-center">欢迎使用</div>
+        <div class="layui-tab" lay-filter="demo" lay-allowclose="true"
+             style="margin-left: 200px;">
+            <ul class="layui-tab-title">
+            </ul>
+            <ul class="rightmenu" style="display: none; position: absolute;">
+                <li data-type="closethis" class="layui-bg-black ">关闭当前</li>
+                <li data-type="closeall" class="layui-bg-black ">关闭所有</li>
+            </ul>
+            <div class="layui-tab-content"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/js/main.js"></script>
 </body>
 </html>
