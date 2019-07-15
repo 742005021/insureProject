@@ -18,8 +18,9 @@ public class Case_ReportController {
     private Case_ReportService service;
 
     @PostMapping("insert")
-    public String insert(@RequestParam Map<String,Object> map){
-        System.out.println(map);
-        return "redirect:/index/main";
+    public String insert(@RequestParam Map<String,Object> map,Model model){
+        int n=service.insert(map);
+        model.addAttribute("msg",n==1?"申请已提交!":"提交失败!");
+        return "massage";
     }
 }

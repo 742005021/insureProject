@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>案情委托</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style>
+        #body .full{
+            width:100%;
+        }
+    </style>
+</head>
+<body id="body">
+
+    <h1>案件委托</h1>
+    <form class="form-horizontal" action="/Case_Entrus/submit" method="post">
+        <div class="form-group form-inline" >
+            <label for="is_sitesurvey" class="col-sm-2 control-label">是否现场勘查</label>
+            <p class="col-sm-2">
+                <select class="form-control full" id="is_sitesurvey" name="is_sitesurvey">
+                    <option value="true" >是</option>
+                    <option value="false" selected>否</option>
+                </select>
+            </p>
+
+            <label for="sitesurvey_emp" class="col-sm-2 control-label">勘查员工</label>
+            <p class="col-sm-2">
+                <select class="form-control full" id="sitesurvey_emp" name="sitesurvey_emp" disabled>
+                    <span th:each="e,st:${emps}">
+                        <option th:value="${e.emp_id}" name="is_death">[[${e.emp_name}]]</option>
+                    </span>
+                </select>
+            </p>
+        </div>
+
+        <div class="form-group form-inline" >
+            <label for="is_peoplesurvey" class="col-sm-2 control-label">是否人员勘查</label>
+            <p class="col-sm-2">
+                <select class="form-control full" id="is_peoplesurvey" name="is_peoplesurvey">
+                    <option value="true">是</option>
+                    <option value="false"selected>否</option>
+                </select>
+            </p>
+
+            <label for="peoplesurvey_emp" class="col-sm-2 control-label">勘查员工</label>
+            <p class="col-sm-2">
+                <select class="form-control full" id="peoplesurvey_emp" name="peoplesurvey_emp" disabled>
+                    <span th:each="e,st:${emps}">
+                        <option th:value="${e.emp_id}" name="is_death">[[${e.emp_name}]]</option>
+                    </span>
+                </select>
+            </p>
+        </div>
+
+        <div class="form-group form-inline" >
+            <label for="is_eventsurvey" class="col-sm-2 control-label">是否事故勘查</label>
+            <p class="col-sm-2">
+                <select class="form-control full" id="is_eventsurvey" name="is_eventsurvey">
+                    <option value="true">是</option>
+                    <option value="false" selected>否</option>
+                </select>
+            </p>
+
+            <label for="eventsurvey_emp" class="col-sm-2 control-label">勘查员工</label>
+            <p class="col-sm-2">
+                <select class="form-control full" id="eventsurvey_emp" name="eventsurvey_emp" disabled>
+                    <span th:each="e,st:${emps}">
+                        <option th:value="${e.emp_id}" name="is_death">[[${e.emp_name}]]</option>
+                    </span>
+                </select>
+            </p>
+        </div>
+
+        <input type="submit" class="btn btn-info" value="提交"/>
+    </form>
+
+    <script type="text/javascript">
+        $(function(){
+            //修改是否现场勘查
+            $("#is_sitesurvey").change(function(){
+                $('#sitesurvey_emp').attr("disabled",$(this).val()=="false");
+            })
+            //修改是否人员勘查
+            $("#is_peoplesurvey").change(function () {
+                $('#peoplesurvey_emp').attr("disabled",$(this).val()=="false");
+            })
+            //修改是否事故勘查
+            $("#is_eventsurvey").change(function () {
+                $('#eventsurvey_emp').attr("disabled",$(this).val()=="false");
+            })
+
+        })
+    </script>
+</body>
+</html>

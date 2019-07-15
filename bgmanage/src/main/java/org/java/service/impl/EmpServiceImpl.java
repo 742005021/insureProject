@@ -1,12 +1,11 @@
 package org.java.service.impl;
 
-import com.sun.media.jfxmedia.logging.Logger;
 import org.java.dao.EmpMapper;
 import org.java.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -25,5 +24,10 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public String empCheck(String uname) {
         return empMapper.empCheck(uname);
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllSurvey_Emp() {
+        return empMapper.getAllSurvey_Emp();
     }
 }

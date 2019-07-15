@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-public interface Case_ReportService {
+public interface Case_EntrusService {
 
-    public int insert(Map<String,Object> map);
+    int submit(Map<String,Object> map);
 }

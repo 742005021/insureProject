@@ -2,6 +2,7 @@ package org.java.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ public interface Peoplesurvey_TaskMapper {
             "#{m.task_id},#{m.explains},#{m.emp_id},#{m.accident_type},#{m.disability_level},"+
             "#{m.file},#{m.is_true},#{m.massage} )"
     )
-    public int insert(Map<String,Object> map);
+    public int insert(@Param("m") Map<String,Object> map);
 
     @Select("SELECT * FROM peoplesurvey_task")
     public Map<String,Object> getAll();

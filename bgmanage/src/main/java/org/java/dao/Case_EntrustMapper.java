@@ -2,6 +2,7 @@ package org.java.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ public interface Case_EntrustMapper {
             "#{m.cr_phone},#{m.cr_relationship},#{m.cr_policy_id},#{m.cr_time},#{m.notice_address},"+
             "#{m.post_code},#{m.payment},#{m.bank_name},#{m.bank_no},#{m.statu} )"
     )
-    public int insert(Map<String,Object> map);
+    public int insert(@Param("m")Map<String,Object> map);
 
     @Select("SELECT * FROM case_entrust")
     public Map<String,Object> getAll();
