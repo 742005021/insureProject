@@ -8,8 +8,9 @@
     <link rel="stylesheet" th:href="@{'/layui/css/layui.css'}">
 </head>
 <body>
+<!--<input type="hidden" th:value="${item_id}" id="item_id"/>-->
 <div class="wrapper">
-    <!--------------------------------------header_user begin------------------------------------->
+    <!-----------------------------一年意外险---------header_user begin------------------------------------->
     <div class="header_user">
         <div class="main_width">
             <span class="tel">客服电话：400-663-6600（周一至周六 9:00-18:00）</span>
@@ -45,7 +46,7 @@
         <!--告知说明-->
         <div class="notify_box">
             <!--健康告知-->
-            <h2>健康告知</h2>
+            <h2>保障计划</h2>
             <!-- table -->
             <div class="layui-tab">
                 <ul class="layui-tab-title">
@@ -55,25 +56,193 @@
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
                         <!-- 表格1 -->
-                        
+                        <div class="layui-form">
+                            <table class="layui-table">
+                                <colgroup>
+                                    <col width="400">
+                                    <col width="400">
+                                    <col width="800">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>保障类型</th>
+                                    <th>保障范围</th>
+                                    <th>保险金额</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td rowspan="2">意外保障</td>
+                                    <td>意外伤害身故和残疾</td>
+                                    <td>5-50万</td>
+                                </tr>
+                                <tr>
+                                    <td>意外伤害医疗</td>
+                                    <td>1-5万</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4">交通意外</td>
+                                    <td>飞机意外伤害身故和残疾</td>
+                                    <td>50-800万</td>
+                                </tr>
+                                <tr>
+                                    <td>火车意外伤害身故和残疾</td>
+                                    <td>10-100万</td>
+                                </tr>
+                                <tr>
+                                    <td>轮船意外伤害身故和残疾</td>
+                                    <td>10-100万</td>
+                                </tr>
+                                <tr>
+                                    <td>汽车意外伤害身故和残疾</td>
+                                    <td>5-30万</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="5">附加保障</td>
+                                    <td>高风险运动意外身故和残疾</td>
+                                    <td>5-30万</td>
+                                </tr>
+                                <tr>
+                                    <td>高风险运动意外医疗</td>
+                                    <td>1-5万</td>
+                                </tr>
+                                <tr>
+                                    <td>意外住院津贴</td>
+                                    <td>10-100元/天</td>
+                                </tr>
+                                <tr>
+                                    <td>猝死</td>
+                                    <td>5-50万</td>
+                                </tr>
+                                <tr>
+                                    <td>救护车费用</td>
+                                    <td>2000元</td>
+                                </tr>
+                                <tr>
+                                    <td>专享服务</td>
+                                    <td>意外住院垫付/担保服务</td>
+                                    <td>专享</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="layui-tab-item">
                         <!-- 表格2 -->
-
+                        <div class="layui-form">
+                            <table class="layui-table">
+                                <colgroup>
+                                    <col width="400">
+                                    <col width="400">
+                                    <col width="800">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>保障类型</th>
+                                    <th>保障范围</th>
+                                    <th>保障详情解读</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td rowspan="2">意外保障</td>
+                                    <td>意外伤害身故和残疾</td>
+                                    <td>
+                                        在保险期间，被保险人因遭受意外伤害事故导致身故或残疾，我们将赔偿意外身故保险金或意外残疾保险金。
+                                        <br/>
+                                        注：综合意外身故/伤残与公共交通意外身故/残疾保额累计赔付。</td>
+                                </tr>
+                                <tr>
+                                    <td>意外伤害医疗</td>
+                                    <td>在保险期间，被保险人因遭受意外伤害事故需门诊或住院治疗，发生的医疗费用，我们将就其事故发
+                                        生之日起180日内实际支出的按照当地社会医疗保险主管部门规定可<span style="color: #FFB800;">报销的、必要的、合理的医疗费
+                                        用超过人民币100元的部分</span>给付医疗保险金。</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4">交通意外</td>
+                                    <td>飞机意外伤害身故和残疾</td>
+                                    <td>在保险期间内，被保险人以乘客身份乘坐民航客机期间因意外伤害事故身故/残疾，我们将按“飞机意外伤害保险金额”给付保险金。</td>
+                                </tr>
+                                <tr>
+                                    <td>火车意外伤害身故和残疾</td>
+                                    <td>在保险期间内，被保险人以乘客身份乘坐商业运营的火车、高铁、地铁、轻轨期间因意外伤害事故身故/残疾，我们将按“火车意外伤害保险金额”给付保险金。
+                                        <br/>
+                                        <span style="color: #FFB800;">注：未成年人除航空意外以外的身故保险金额最高不超过20万元</span></td>
+                                </tr>
+                                <tr>
+                                    <td>轮船意外伤害身故和残疾</td>
+                                    <td>
+                                        在保险期间内，被保险人以乘客身份乘坐商业运营的轮船期间因意外伤害事故身故/残疾，我们将按“轮船意外伤害保险金额”给付保险金。
+                                        <br/>
+                                        <span style="color: #FFB800;">注：未成年人除航空意外以外的身故保险金额最高不超过20万元</span></td>
+                                </tr>
+                                <tr>
+                                    <td>汽车意外伤害身故和残疾</td>
+                                    <td>在保险期间内，被保险人以乘客身份乘坐商业运营的汽车期间因意外伤害事故身故/残疾，我们将按“汽车意外伤害保险金额”给付保险金。
+                                        <br/>
+                                        <span style="color: #FFB800;">注：未成年人除航空意外以外的身故保险金额最高不超过20万元</span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="5">附加保障</td>
+                                    <td>高风险运动意外身故和残疾</td>
+                                    <td>在保险期间内，被保险人因参加高风险活动导致意外身故、伤残，我们将赔偿高风险运动意外身故或残疾保险金。</td>
+                                </tr>
+                                <tr>
+                                    <td>高风险运动意外医疗</td>
+                                    <td>在保险期间内，被保险人因参加高风险活动导致意外伤害事故需门诊或住院治疗，发生的医疗费用，
+                                        我们将就其事故发生之日起180日内实际支出的按照当地社会医疗保险主管部门规定<span style="color: #FFB800;">可报销的、必要
+                                            的、合理的医疗费用超过人民币100元的部分</span>给付高风险运动意外医疗保险金。</td>
+                                </tr>
+                                <tr>
+                                    <td>意外住院津贴</td>
+                                    <td>在保险期间内，被保险人因遭受意外伤害事故住院治疗，我们按照保险单载明的住院误工津贴日额给付，累计给付天数以180天为限。</td>
+                                </tr>
+                                <tr>
+                                    <td>猝死</td>
+                                    <td>在保险期间内，若被保险人不幸猝死,我们将按照约定赔付猝死保险金。</td>
+                                </tr>
+                                <tr>
+                                    <td>救护车费用</td>
+                                    <td>在保险期间内，被保险人因发生意外伤害事故实际支付的救护车车费，我们将按照约定给付救护车车费保险金，累计金额不超过2000元。</td>
+                                </tr>
+                                <tr>
+                                    <td>专享服务</td>
+                                    <td>意外住院垫付/担保服务</td>
+                                    <td>当被保险人发生保险条款约定的保险事故时，救援公司可协助安排：<br/>
+                                        1、协助安排住院：救援公司可协助被保险人推荐当地尽可能符合治疗要求的、经救援公司审查认证或与救援公司有合作关系的医疗机构，供被保险人选择就医，并进行办理住院手续的指导。<br/>
+                                        2、住院医疗费用担保/垫付：被保险人发生保险条款约定的保险事故时，暂未有足够费用支付医院救治费用，可为被保险人提供住院期间医疗费用的担保/垫付服务。
+                                        垫付结束后，由救援公司代被保险人向平安申请理赔。<br/>
+                                        <span style="color: #FFB800;">*担保垫付金额需在保险方案规定的保障额度内。</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+            <br/><br/>保险责任请参考<span th:onclick="|searchTerms(${item_id})|" style="color: #0000FF;cursor: pointer;">《短期综合意外险适用条款》</span>，并敬请特别留意条款中的“责任免除”“释义”部分。
             <p></p>
             <!--职业告知-->
-            <h2>职业告知</h2>
+            <h2>特别提醒</h2>
             <p>
-                本保险仅承保1-4类职业，不在此职业类别中不能购买此保险，否则不能理赔，查看1-4类职业类别表
+                1、<span style="color: #FFB800;">被保险人仅限1-3类职业人员，若被保险人从事4类及4类以上职业或拒保职业的工作发生意外事故，不属于保险责任范围。</span>查看职业分类表，职业类别不明请咨询40088-95512转2。
+                <br/>
+                2、团体投保更优惠，一张保单可保500人！您可提前将准备好的被保险人信息填入名单模板中，请下载名单模板，填写后直接上传，投保更方便快捷！
+                <br/>
+                3、按中国保监会规定，除航空意外死亡及重大自然灾害意外死亡外，任何不满10周岁的被保险人，其死亡保险金额不得超过人民币20万元；已满10周岁但未满18周岁的被保险人，其死亡保险金额不得超过人民币50万元。本公司对于超出中国保监会规定的限额的保险金额不承担保险责任。
+                <br/>
+                4、保险起期可自由选择，投保<span style="color: #FFB800;">次日</span>即可生效。
+                <br/>
+                5、7*24小时全国理赔报案电话：<span style="color: #FFB800;">95511</span>。境内紧急救援电话：<span style="color: #FFB800;">95511转9</span>。若您投保了紧急医疗垫付服务，出险后请第一时间拨打援助电话，以便尽快为您提供相应服务。若未通知救援公司自行处理，若未拨打救援热线报案而自行处理，将可能影响理赔。
+                <br/>
+                <span style="color: #FFB800;">*相应服务的费用额度和范围以产品保险条款和保险方案为准，超出保险责任范围内的需自费。
+                <br/>
+                    *救援公司电话协调并妥善安排相关服务，不保证派遣专员至现场进行协助。</span>
             </p>
-            <a href="#" class="job">查看职业类别</a>
+            <a th:href="@{/searchTable}" class="job">查看职业类别</a>
             <p class="special">请确认被保险人是否存在上述问题：</p>
             <div class="health_box">
-                <a href="#" class="n">没问题</a>
-                <a href="#" class="y active">有部分情况</a>
+                <a th:href="@{|/determine/${item_id}|}" class="n">确认投保</a>
             </div>
         </div>
     </div>
@@ -120,6 +289,7 @@
     <script type="text/javascript" th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
     <script type="text/javascript" th:src="@{'/layui/layui.js'}"></script>
     <script type="text/javascript" th:src="@{'/myScript/static_table.js'}"></script>
+    <script type="text/javascript" th:src="@{'/myScript/searchTerms.js'}"></script>
 </div>
 </body>
 </html>

@@ -116,4 +116,16 @@ public class LoadResourcesController {
         fileChannel.close();
         fileInputStream.close();
     }
+
+    /**
+     * 一年意外险确认
+     * @param item_id
+     * @return
+     */
+    @RequestMapping("/determine/{item_id}")
+    public String yiNianDetermine(@PathVariable("item_id") Integer item_id){
+
+        return "";
+    }
+
 }
