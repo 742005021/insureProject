@@ -5,7 +5,6 @@ import org.java.service.LoadResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Blob;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,21 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
     @Override
     public Object searchTerms(Integer id) {
         return mapper.searchTerms(id);
+    }
+
+    @Override
+    public Map<String, Object> searchInsureInfo(Integer item_id) {
+        return mapper.searchInsureInfo(item_id);
+    }
+
+    @Override
+    public List<Map<String, Object>> loadJobs() {
+        return mapper.loadJobs();
+    }
+
+    @Override
+    public List<Map<String, Object>> loadProfession(Integer job_id) {
+        return mapper.loadProfession(job_id);
     }
 
 }

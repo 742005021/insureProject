@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>一年意外保险</title>
+    <link rel="stylesheet" th:href="@{'/css/common.css'}">
+    <link rel="stylesheet" th:href="@{'/css/book.css'}">
+    <link rel="stylesheet" th:href="@{'/layui/css/layui.css'}">
+    <style>
+        td {
+            font-size: 16px;
+        }
+
+        .mySelect {
+            width: 150px;
+            height: 25px;
+
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="base_money" th:value="${map.base_money}"/>
+<div class="wrapper">
+    <div class="header_nav">
+        <div class="main_width">
+            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
+            <a href="#" class="my_policy fr">我的保单</a>
+            <div class="menuBox">
+                <ul class="menu">
+                    <li class="active"><a href="#">首页</a></li>
+                    <li class="special"><a href="#">保险产品</a></li>
+                    <li><a href="#">理财中心</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <center>
+        <div class="container health_notify" style="width: 1200px;">
+            <h1>一年期意外险</h1>
+            <hr/>
+            <div class="layui-card" style="width: 1200px;">
+                <div class="layui-card-body">
+                    <table width="70%">
+                        <tr>
+                            <td align="right">
+                                保险起期:
+                            </td>
+                            <td align="left">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="hidden" th:value="${year}" id="year"/>
+                                <input type="hidden" th:value="${month}" id="month"/>
+                                [[${year}]]年
+                                [[${month}]]月
+                                <select id="day" class="mySelect">
+                                    <option th:each="i:${#numbers.sequence(day,endDay)}">[[${i}]]</option>
+                                </select>日&nbsp;&nbsp;<span style="color: #353434">有效期12个月</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <br/><br/>
+                                人数:
+                            </td>
+                            <td align="left">
+                                <br/><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <select id="max_people" class="mySelect">
+                                    <option th:each="i:${#numbers.sequence(1,map.max_people)}" th:value="${i}">
+                                        [[${i}]]人
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <br/><br/>
+                                从事职业:
+                            </td>
+                            <td align="left">
+                                <br/><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                行业:<select id="hangye" class="mySelect"></select>&nbsp;&nbsp;
+                                职业:<select id="zhiye" class="mySelect">
+                                <option value="-1">请选择职业</option>
+                            </select>&nbsp;&nbsp;<span id="info"></span>
+                                <input type="hidden" id="profession_level"/>
+                                <input type="hidden" id="profession_id"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="right">
+                                <br/>
+                                <input id="submitBtn" type="button" value="投保" style="width: 100px; height: 40px; color: #ffffff;background-color: #ff6633; border-radius: 10px; border-color: #ff6633;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--表格-->
+        <div class="layui-form" style="width: 1200px;">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="400">
+                    <col width="400">
+                    <col width="800">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="2">一般意外</td>
+                    <td>意外身故、伤残</td>
+                    <td>
+                        <select id="yiwai">
+                            <option value="1">5万元</option>
+                            <option value="2">10万元</option>
+                            <option value="4">20万元</option>
+                            <option value="6">30万元</option>
+                            <option value="8">40万元</option>
+                            <option value="10">50万元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>意外医疗</td>
+                    <td>
+                        <select id="yiliao">
+                            <option value="-1">不投保</option>
+                            <option value="0.03">2000元</option>
+                            <option value="0.05">5000元</option>
+                            <option value="0.07">1万元</option>
+                            <option value="0.13">2万元</option>
+                            <option value="0.3">5万元</option>
+                            <option value="0.59">10万元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">津贴及车费</td>
+                    <td>住院误工津贴</td>
+                    <td>
+                        <select id="zhuyuan">
+                            <option value="-1">不投保</option>
+                            <option value="0.2">20元/天</option>
+                            <option value="0.3">50元/天</option>
+                            <option value="0.6">100元/天</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>救护车费用报销</td>
+                    <td>
+                        <select id="jiuhuiche">
+                            <option value="-1">不投保</option>
+                            <option value="0.2">2000元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4">交通意外</td>
+                    <td>飞机意外身故、伤残</td>
+                    <td>
+                        <select id="feiji">
+                            <option value="-1">不投保</option>
+                            <option value="0.02">50万元</option>
+                            <option value="0.04">100万元</option>
+                            <option value="0.08">200万元</option>
+                            <option value="0.12">300万元</option>
+                            <option value="0.2">500万元</option>
+                            <option value="0.32">800万元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>火车意外身故、伤残</td>
+                    <td>
+                        <select id="huoche">
+                            <option value="-1">不投保</option>
+                            <option value="1.6">10万</option>
+                            <option value="3.2">20万</option>
+                            <option value="4.8">30万</option>
+                            <option value="8">50万</option>
+                            <option value="16">100万</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>轮船意外身故、伤残</td>
+                    <td>
+                        <select id="lunchuan">
+                            <option value="-1">不投保</option>
+                            <option value="0.01">10万</option>
+                            <option value="4.8">20万</option>
+                            <option value="0.02">30万</option>
+                            <option value="0.03">50万</option>
+                            <option value="0.07">100万</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>汽车意外身故、伤残</td>
+                    <td>
+                        <select id="qiche">
+                            <option value="-1">不投保</option>
+                            <option value="0.01">5万元</option>
+                            <option value="4">10万元</option>
+                            <option value="0.02">20万元</option>
+                            <option value="0.03">30万元</option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </center>
+    <div style="width: 210px;background-color: #ff6633;height: 100px;margin-left: 1055px; color: #ffffff; font-size: 19px; border-radius: 10px;">
+        <br/>
+        <center>
+            <span style="font-size: 12px;">0.12</span>
+            <hr/>
+            <span>42.8</span>
+        </center>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="copyright">
+        <div class="main_width footer">
+            <div class="footer_nav">
+                <p>
+                    <a href="#">关于京东金融</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东小金库</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东钱包</a>
+                    <span class="divider">|</span>
+                    <a href="#">关于京东白条</a>
+                    <span class="divider">|</span>
+                    <a href="#">联系我们</a>
+                    <span class="divider">|</span>
+                    <a href="#">免责声明</a>
+                </p>
+                <p>Copyright © 2004-2016 京东JD.com 版权所有<span class="divider">|</span>投资有风险，购买需谨慎</p>
+            </div>
+            <div class="footer_contact">
+                <div class="f_contact_time">
+                    联系我们<span>（09:00-22:00）</span>
+                </div>
+                <div class="f_contact_content">
+                    <div class="f_cc_left">
+                        <span class="f_cc_item">个人业务：400-098-8511</span>
+                        <span class="f_cc_item">企业业务：400-088-8816</span>
+                    </div>
+                    <div class="f_cc_mid">
+                        <a href="#" class="f_cc_link item_JIMI">咨询JIMI</a>
+                        <a href="#" class="f_cc_link item_kefu">在线客服</a>
+                    </div>
+                    <div class="f_cc_right">
+                        <a href="#" class="f_cc_link item_mail">客服邮箱</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
+<script type="text/javascript" th:src="@{'/layui/layui.js'}"></script>
+<script type="text/javascript" th:src="@{'/myScript/static_table.js'}"></script>
+<script type="text/javascript">
+    layui.use('form', function () {
+        var form = layui.form;
+        var year = 365;
+        //二类职业倍数
+        var two = 1.25;
+        //三类职业
+        var three = 1.5;
+        //四类职业
+        var four = 3.166666666666667;
+        //五类职业
+        var fives = 6.416666666666667;
+
+        $("#submitBtn").click(function () {
+            $("#")
+        });
+
+        $.ajax({
+            url: "/loadJobs",
+            type: "post",
+            dataType: "json",
+            success: function (result) {
+                $("<option value='-1'>请选择行业</option>").appendTo("#hangye");
+                $.each(result, function (index, k) {
+                    $("<option value='" + k.job_id + "'>" + k.job_name + "</option>").appendTo("#hangye");
+                })
+            }
+        });
+
+        $("#hangye").change(function () {
+            var val = $(this).val();
+            if (val == -1) {
+                $('#zhiye').html("");
+                $("<option value='-1'>请选择职业</option>").appendTo("#zhiye");
+                return;
+            }
+            $.ajax({
+                url: "/loadProfession",
+                type: "post",
+                data: {
+                    "job_id": val
+                },
+                dataType: "json",
+                success: function (result) {
+                    $('#zhiye').html("");
+                    $("<option value='-1'>请选择职业</option>").appendTo("#zhiye");
+                    $.each(result, function (index, k) {
+                        $("<option value='" + k.profession_level + ";" + k.profession_id + "'>" + k.profession_name + "</option>").appendTo("#zhiye");
+                    });
+                }
+            });
+        });
+        $("#zhiye").change(function () {
+            var val = $(this).val();
+            var data = val.split(";");
+            if (data[0] == 1) {
+                $("#info").html("一类职业");
+            } else if (data[0] == 2) {
+                $("#info").html("二类职业");
+            } else if (data[0] == 3) {
+                $("#info").html("三类职业");
+            } else if (data[0] == 4) {
+                $("#info").html("四类职业");
+            } else if (val == 5) {
+                $("#info").html("五类职业");
+            }
+            $("#profession_level").val(data[0]);
+            $("#profession_id").val(data[1]);
+        });
+    });
+</script>
+</body>
+</html>
