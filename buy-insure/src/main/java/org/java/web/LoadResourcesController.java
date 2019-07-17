@@ -1,5 +1,7 @@
 package org.java.web;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.commons.io.FileUtils;
 import org.java.dao.TestMapper;
@@ -24,10 +26,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Blob;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class LoadResourcesController {
@@ -157,6 +156,25 @@ public class LoadResourcesController {
     @ResponseBody
     public List<Map<String, Object>> loadProfession(Integer job_id){
         return service.loadProfession(job_id);
+    }
+
+    @RequestMapping("/toBook")
+    public String toBook(String json, HttpServletRequest req) throws IOException {
+        JsonNode node = new ObjectMapper().readTree(json);
+        Map<String, Object> map = new HashMap<>();
+        map.put("ren", node.get("ren"));
+        map.put("jieguo", node.get("jieguo"));
+        map.put("max_people", node.get("max_people"));
+        map.put("yiwai", node.get("yiwai"));
+        map.put("yiliao", node.get("yiliao"));
+        map.put("zhuyuan", node.get("zhuyuan"));
+        map.put("jiuhuiche", node.get("jiuhuiche"));
+        map.put("feiji", node.get("feiji"));
+        map.put("huoche", node.get("huoche"));
+        map.put("lunchuan", node.get("lunchuan"));
+        map.put("qiche", node.get("qiche"));
+        req.setAttribute("map", map);
+        return "/book";
     }
 
 }
