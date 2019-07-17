@@ -2,15 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <title>Title</title>
 </head>
 <body>
-        <h3>部署流程定义</h3>
-        <hr>
         <form th:action="@{'/deployment'}" method="post" enctype="multipart/form-data">
-            BPMN文件:<input type="file"  name="bpmn"/><Br>
-            png文件:<input type="file"  name="png"/><Br>
-                    <input type="submit" value="提交"/>
+            <table  align="center" cellspacing="0" height="200px">
+                <tr>
+                    <th colspan="2" align="center">
+                        <span style="font-size:20px;">流程定义部署</span>
+                    </th>
+                </tr>
+                <tr>
+                    <th>请选择BPMN文件:</th>
+                    <th><input type="file" name="bpmn"/></th>
+                </tr>
+                <tr>
+                    <th>请选择PNG文件:</th>
+                    <th><input type="file" name="png"/></th>
+                </tr>
+                <tr>
+                    <th colspan="2" align="center"><button type="submit" class="btn btn-default">提交</button></th>
+                </tr>
+            </table>
         </form>
 </body>
 </html>

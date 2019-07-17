@@ -12,4 +12,9 @@ public class PageController {
         return "/"+pagename;
     }
 
+    @RequestMapping("processDefinition/{pagename}")
+    public String toPrcessDefinition(@PathVariable("pagename") String pagename){
+        return "/processDefinition/"+pagename;
+    }
+
 }

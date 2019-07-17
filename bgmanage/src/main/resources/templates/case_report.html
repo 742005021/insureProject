@@ -5,10 +5,10 @@
     <title>理赔申请</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <style>
-        #body .full{
-            width:100%;
-        }
-    </style>
+    #body .full{
+        width:100%;
+    }
+</style>
 </head>
 <body id="body">
 
@@ -28,7 +28,7 @@
 
                 <label for="insured_age" class="col-sm-1 control-label">年龄</label>
                 <p class="col-sm-2">
-                    <input type="number" value="18" min="0" max="120" class="form-control full" id="insured_age" name="insured_name">
+                    <input type="number" value="18" min="0" max="120" class="form-control full" id="insured_age" name="insured_age">
                 </p>
 
                 <label for="insured_crad_id" class="col-sm-1 control-label">身份证号码</label>
@@ -93,7 +93,7 @@
                 <p class="col-sm-2">
                     <select class="form-control full" name="autopsy" id="autopsy" disabled>
                         <option value="true">是（请附证明材料）</option>
-                        <option value="true" selected>否</option>
+                        <option value="false" selected>否</option>
                     </select>
                 </p>
 

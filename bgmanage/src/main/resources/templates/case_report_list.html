@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <h1>[[${report_statu}]]</h1>
+    <table class="table table-bordered">
+        <tr>
+            <th>申请人</th>
+            <th>联系电话</th>
+            <th>受保人</th>
+            <th>保单号</th>
+            <th>申请时间</th>
+            <th>状态</th>
+            <th>详情</th>
+            <th>操作</th>
+        </tr>
+
+        <tr th:each="r,st:${list}">
+            <td>[[${r.cr_name}]]</td>
+            <td>[[${r.cr_phone}]]</td>
+            <td>[[${r.insured_name}]]</td>
+            <td>[[${r.cr_policy_id}]]</td>
+            <td>[[${r.cr_time}]]</td>
+            <td>[[${r.statu}]]</td>
+            <td>详情</td>
+            <td><a th:href="@{|/toCase_Entrus/${r.cr_id}|}">委托任务</a></td>
+        </tr>
+    </table>
+</body>
+</html>

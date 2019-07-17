@@ -1,15 +1,14 @@
 package org.java.service;
 
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
-
+import java.util.List;
 import java.util.Map;
 
-@Service
 public interface EmpService {
 
     Map<String,Object> empLogin(String username, String password);
 
     String empCheck(String uname);
 
+    //获取所有勘查员姓名和id
+    List<Map<String,Object>> getAllSurvey_Emp();
 }
