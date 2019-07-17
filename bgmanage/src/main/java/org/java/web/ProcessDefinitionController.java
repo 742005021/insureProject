@@ -42,7 +42,7 @@ public class ProcessDefinitionController {
         //部署
         repositoryService.createDeployment().addInputStream(bpmnName,bpmnIn ).addInputStream(pngName,pngIn ).deploy();
         System.out.println("部署成功！");
-        return "redirect:processDefinition/showProcessDefinition";
+        return "redirect:/showProcessDefinition";
     }
 
     /**
