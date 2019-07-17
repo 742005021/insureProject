@@ -50,7 +50,7 @@
                     <!--</td>-->
 
                 <td>
-                        <a href="${pageContext.request.contextPath }/delProcecssDefinition/${p.deploymentId}.do" onclick="return confirm('你确要删除吗?')">删除</a>
+                        <a th:href="@{|/delProcess/${m.id}|}" onclick="return confirm('你确要删除吗?')">删除</a>
                 </td>
             </tr>
         </table>
