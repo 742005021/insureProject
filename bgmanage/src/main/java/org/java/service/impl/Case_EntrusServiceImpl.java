@@ -44,7 +44,7 @@ public class Case_EntrusServiceImpl implements Case_EntrusService {
         }
         n=case_entrustMapper.insert(map);
         if(n==1){
-            case_reportMapper.update_Statu(map.get("report_id").toString(),4);
+            case_reportMapper.update_Statu(map.get("report_id").toString(),3);
         }
         return n;
     }

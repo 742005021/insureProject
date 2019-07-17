@@ -15,7 +15,7 @@ public interface Case_ReportMapper {
             "#{m.cr_enterprise},#{m.insured_profession},#{m.accident_date},#{m.accident_cause},#{m.accident_address},"+
             "#{m.situation},#{m.things},#{m.autopsy},#{m.deathcertificate},#{m.cr_name},"+
             "#{m.cr_phone},#{m.cr_relationship},#{m.cr_policy_id},now(),#{m.notice_address},"+
-            "#{m.post_code},#{m.payment},#{m.bank_name},#{m.bank_no},#{m.statu}," +
+            "#{m.post_code},#{m.payment},#{m.bank_name},#{m.bank_no},0," +
             "#{m.process_instance_id} )"
     )
     public int insert(@Param("m") Map<String,Object> map);

@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style>
+        #body .full{
+            width:100%;
+        }
+    </style>
 </head>
-<body>
-    <h1>[[${report_statu}]]</h1>
+<body id="body">
+    <form class="form-horizontal" action="/report/list" method="post" id="form">
+        <div class="form-group form-inline">
+            <p class="col-sm-2">
+                <select class="form-control full" name="statu" id="statu">
+                    <option value="0">待审核</option>
+                    <option value="3">审核中</option>
+                    <option value="1">已立案</option>
+                    <option value="2">立案失败</option>
+                </select>
+            </p>
+        </div>
+    <form>
+
     <table class="table table-bordered">
         <tr>
             <th>申请人</th>
@@ -20,15 +38,21 @@
         </tr>
 
         <tr th:each="r,st:${list}">
-            <td>[[${r.cr_name}]]</td>
-            <td>[[${r.cr_phone}]]</td>
-            <td>[[${r.insured_name}]]</td>
-            <td>[[${r.cr_policy_id}]]</td>
-            <td>[[${r.cr_time}]]</td>
-            <td>[[${r.statu}]]</td>
-            <td>详情</td>
+            <td th:text="${r.cr_name}"></td>
+            <td th:text="${r.cr_phone}"></td>
+            <td th:text="${r.insured_name}"></td>
+            <td th:text="${r.cr_policy_id}"></td>
+            <td th:text="${r.cr_time}"></td>
+            <td th:text="${r.statu}"></td>
+            <td><a th:href="@{|/report_detailed/${r.cr_id}|}">详情</a></td>
             <td><a th:href="@{|/toCase_Entrus/${r.cr_id}|}">委托任务</a></td>
         </tr>
     </table>
+
+    <script type="text/javascript">
+        $("#statu").change(function () {
+            $("#form").submit();
+        })
+    </script>
 </body>
 </html>

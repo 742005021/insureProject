@@ -29,7 +29,7 @@ public class Case_ReportService implements org.java.service.Case_ReportService {
         ProcessInstance instance = runtimeService.startProcessInstanceByKey("claim",cr_id);
 
         map.put("cr_id",cr_id);
-        map.put("process_instance_id",instance.getProcessInstanceId() );
+        map.put("process_instance_id",instance.getProcessInstanceId());
 
         return mapper.insert(map);
     }
