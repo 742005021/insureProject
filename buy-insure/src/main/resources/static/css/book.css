@@ -101,7 +101,7 @@
 .book_box{
     width:926px;
     height:auto;
-    overflow: hidden;
+    /*overflow: hidden;*/
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
