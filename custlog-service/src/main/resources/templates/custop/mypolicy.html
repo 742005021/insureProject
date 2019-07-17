@@ -10,6 +10,10 @@
         .list_left{
             margin-left: 15%;
         }
+        .list li{
+            vertical-align: center;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -26,7 +30,7 @@
     <div class="container">
         <!--2016/5/25修改-->
        <div th:include="custop/left :: left"></div>
-        <div class="main_width fix mycenter_box">
+        <div class="main_width fix mycenter_box" style="margin-right:50px">
 
             <div class="mycenter_right">
                 <!--tab title-->
@@ -34,43 +38,22 @@
                     <ul class="tab_box">
                         <li class="active"><a href="javascript:">保障中</a></li>
                         <li><a href="javascript:">未完成订单</a></li>
-                        <li><a href="javascript:">待续保</a></li>
+
                         <li><a href="javascript:">全部</a></li>
                     </ul>
                 </div>
                 <!--main-->
                 <!--保障中-->
-                <div class="mypolicy_con protection">
-                    <div class="tBox loading"></div>
-                    <div class="tBox no_order listNull">
+                <div class="mypolicy_con protection" >
+                    <!--<div class="tBox loading"></div>-->
+                    <div class="tBox no_order listNull" th:if="${map.count1==0}" >
                         <span>
                             居然是空的！
                             <a href="#" target="_blank">去看看有哪些优惠</a>
                         </span>
                     </div>
                     <div class="tBox err_order listNull"></div>
-                    <div class="tBox list_order">
-                        <!--title-->
-                        <ul class="mypolicy_title fix">
-                            <li class="myProduct">保险产品</li>
-                            <li class="myName">被保险人</li>
-                            <li class="myPrice">实付款（元）</li>
-                            <li class="myStutas">保单状态</li>
-                            <li class="myOpreat">操作</li>
-                        </ul>
-                        <!--list-->
-                        <div class="mypolicy_lists"></div>
-                        <div class="pagination_page" id="protectionPage"></div>
-                    </div>
-                </div>
-                <!--未完成订单-->
-                <div class="mypolicy_con waitpay">
-                    <div class="tBox loading"></div>
-                    <div class="tBox no_order listNull">
-                        <span>您当前没有未支付订单</span>
-                    </div>
-                    <div class="tBox err_order listNull"></div>
-                    <div class="tBox list_order">
+                    <div class="tBox list_order" th:if="${map.count1>0}">
                         <!--title-->
                         <ul class="mypolicy_title fix">
                             <li class="myProduct">保险产品</li>
@@ -82,28 +65,85 @@
                         <!--list-->
                         <div class="mypolicy_lists">
                             <div class="list">
+                            <ul class="con fix" th:each="p,st:${map.list1}">
+                                <li class="myProduct">
+                                    <h2><a th:href="@{|http://localhost:8899/buy/searchItem/${p.item_id}/${p.item_target}|}" class="t">[大特保]-[[${p.item_name}]]</a></h2>
+                                    <p>起: [[${#dates.format(p.stime,'yyyy年MM月dd日 HH:mm:ss E')}]]</p>
+                                    <p>止: [[${#dates.format(p.etime,'yyyy年MM月dd日 HH:mm:ss E')}]]</p>
+                                </li>
+                                <li class="myName">
+                                    <p>[[${p.insuredname}]]</p>
+                                </li>
+                                <li class="myPrice">
+                                    <p><i>￥</i>[[${p.price}]]</p>
+                                </li>
+                                <li class="myStutas">
+                                    <p th:if="${p.order_statu==7}">已取消</p>
+                                    <p th:if="${p.order_statu==6}">保障中</p>
+                                    <p th:if="${p.order_statu==5}">审核不通过</p>
+                                    <p th:if="${p.order_statu==4}">待审核</p>
+                                    <p th:if="${p.order_statu==3}">待支付</p>
+                                    <p th:if="${p.order_statu==2}">待完善</p>
+                                    <p th:if="${p.order_statu==1}">待报价</p>
+                                </li>
+                                <li class="myOpreat">
+                                    <a th:href="@{|http://localhost:8899/buy/searchItem/${p.item_id}/${p.item_target}|}">查看详情</a>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
+                        <div class="pagination_page" id="protectionPage"></div>
+                    </div>
+                </div>
+                <!--未完成订单-->
+                <div class="mypolicy_con waitpay">
+                    <div class="tBox loading"></div>
+                    <div class="tBox no_order listNull" th:if="${map.count2==0}">
+                        <span>您当前没有未支付订单</span>
+                    </div>
+                    <div class="tBox err_order listNull"></div>
+                    <div class="tBox list_order" th:if="${map.count2>0}">
+                        <!--title-->
+                        <ul class="mypolicy_title fix">
+                            <li class="myProduct">保险产品</li>
+                            <li class="myName">被保险人</li>
+                            <li class="myPrice">待付款（元）</li>
+                            <li class="myStutas">保单状态</li>
+                            <li class="myOpreat">操作</li>
+                        </ul>
+                        <!--list-->
+                        <div class="mypolicy_lists">
+                            <div class="list">
                                 <div class="tit">
                                     <a href="#" target="_blank">查看详情 ></a>
                                     <span>投保时间：2016-05-13</span>
                                     <span>保单号：<em>56925036217</em></span>
                                 </div>
-                                <ul class="con fix">
+                                <ul class="con fix" th:each="p,st:${map.list2}">
                                     <li class="myProduct">
-                                        <h2><a href="#" target="_blank" class="t">【大特保—平安】女性子宫颈癌险（1元特惠）</a></h2>
-                                        <p>起: 2016年05月14日</p>
-                                        <p>止: 2017年05月13日</p>
+                                        <h2><a th:href="@{|http://localhost:8899/buy/searchItem/${p.item_id}/${p.item_target}|}" class="t">[大特保]-[[${p.item_name}]]</a></h2>
+                                        <p>起: [[${#dates.format(p.stime,'yyyy年MM月dd日 HH:mm:ss E')}]]</p>
+                                        <p>止: [[${#dates.format(p.etime,'yyyy年MM月dd日 HH:mm:ss E')}]]</p>
                                     </li>
                                     <li class="myName">
-                                        <p>王大锤</p>
+                                        <p>[[${p.insuredname}]]</p>
                                     </li>
                                     <li class="myPrice">
-                                        <p><i>￥</i>1.00</p>
+                                        <p><i>￥</i>[[${p.price}]]</p>
                                     </li>
                                     <li class="myStutas">
-                                        <p>超时自动取消</p>
+                                        <p th:if="${p.order_statu==7}">已取消</p>
+                                        <p th:if="${p.order_statu==6}">保障中</p>
+                                        <p th:if="${p.order_statu==5}">审核不通过</p>
+                                        <p th:if="${p.order_statu==4}">待审核</p>
+                                        <p th:if="${p.order_statu==3}">待支付</p>
+                                        <p th:if="${p.order_statu==2}">待完善</p>
+                                        <p th:if="${p.order_statu==1}">待报价</p>
                                     </li>
                                     <li class="myOpreat">
                                         <a href="#">删除</a>
+                                        <a href="#">支付</a>
+
                                     </li>
                                 </ul>
                             </div>
@@ -115,62 +155,16 @@
                         </div>
                     </div>
                 </div>
-                <!--待续保-->
-                <div class="mypolicy_con">
-                    <div class="tBox loading"></div>
-                    <div class="tBox no_order listNull">
-                        <span>您当前没有待续保订单</span>
-                    </div>
-                    <div class="tBox err_order listNull"></div>
-                    <div class="tBox list_order">
-                        <!--title-->
-                        <ul class="mypolicy_title fix">
-                            <li class="myProduct">保险产品</li>
-                            <li class="myName">被保险人</li>
-                            <li class="myPrice">实付款（元）</li>
-                            <li class="myStutas">保单状态</li>
-                            <li class="myOpreat">操作</li>
-                        </ul>
-                        <!--list-->
-                        <div class="mypolicy_lists">
-                            <div class="list">
-                                <div class="tit">
-                                    <a href="#" target="_blank">查看详情 ></a>
-                                    <span>投保时间：2016-05-13</span>
-                                    <span>保单号：<em>56925036217</em></span>
-                                </div>
-                                <ul class="con fix">
-                                    <li class="myProduct">
-                                        <h2><a href="#" target="_blank" class="t">【大特保—平安】女性子宫颈癌险（1元特惠）</a></h2>
-                                        <p>起: 2016年05月14日</p>
-                                        <p>止: 2017年05月13日</p>
-                                    </li>
-                                    <li class="myName">
-                                        <p>王大锤</p>
-                                    </li>
-                                    <li class="myPrice">
-                                        <p><i>￥</i>1.00</p>
-                                    </li>
-                                    <li class="myStutas">
-                                        <p>待续保</p>
-                                    </li>
-                                    <li class="myOpreat">
-                                        <a href="#">删除</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="pagination_page" id="continuePage"></div>
-                    </div>
-                </div>
+
+
                 <!--全部-->
                 <div class="mypolicy_con">
                     <div class="tBox loading"></div>
-                    <div class="tBox no_order listNull">
+                    <div class="tBox no_order listNull" th:if="${map.count3==0}">
                         <span>您当前没有任何订单</span>
                     </div>
                     <div class="tBox err_order listNull"></div>
-                    <div class="tBox list_order">
+                    <div class="tBox list_order" th:if="${map.count3>0}">
                         <!--title-->
                         <ul class="mypolicy_title fix">
                             <li class="myProduct">保险产品</li>
@@ -182,30 +176,34 @@
                         <!--list-->
                         <div class="mypolicy_lists">
                             <div class="list">
-                                <div class="tit">
-                                    <a href="#" target="_blank">查看详情 ></a>
-                                    <span>投保时间：2016-05-13</span>
-                                    <span>保单号：<em>56925036217</em></span>
-                                </div>
-                                <ul class="con fix">
+                                <ul class="con fix" th:each="p,st:${map.list3}">
                                     <li class="myProduct">
-                                        <h2><a href="#" target="_blank" class="t">【大特保—平安】女性子宫颈癌险（1元特惠）</a></h2>
-                                        <p>起: 2016年05月14日</p>
-                                        <p>止: 2017年05月13日</p>
+                                        <h2><a th:href="@{|http://localhost:8899/buy/searchItem/${p.item_id}/${p.item_target}|}" class="t">[大特保]-[[${p.item_name}]]</a></h2>
+                                        <p>起: [[${#dates.format(p.stime,'yyyy年MM月dd日 HH:mm:ss E')}]]</p>
+                                        <p>止: [[${#dates.format(p.etime,'yyyy年MM月dd日 HH:mm:ss E')}]]</p>
                                     </li>
                                     <li class="myName">
-                                        <p>王大锤</p>
+                                        <p>[[${p.insuredname}]]</p>
                                     </li>
                                     <li class="myPrice">
-                                        <p><i>￥</i>1.00</p>
+                                        <p><i>￥</i>[[${p.price}]]</p>
                                     </li>
                                     <li class="myStutas">
-                                        <p>待续保</p>
+                                        <p th:if="${p.order_statu==7}">已取消</p>
+                                        <p th:if="${p.order_statu==6}">保障中</p>
+                                        <p th:if="${p.order_statu==5}">审核不通过</p>
+                                        <p th:if="${p.order_statu==4}">待审核</p>
+                                        <p th:if="${p.order_statu==3}">待支付</p>
+                                        <p th:if="${p.order_statu==2}">待完善</p>
+                                        <p th:if="${p.order_statu==1}">待报价</p>
                                     </li>
                                     <li class="myOpreat">
                                         <a href="#">删除</a>
+                                        <a href="#">支付</a>
+                                        <a href="#">查看详情</a>
                                     </li>
                                 </ul>
+
                             </div>
                         </div>
                         <div class="pagination_page" id="allorderPage">

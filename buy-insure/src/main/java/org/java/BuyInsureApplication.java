@@ -7,8 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class BuyInsureApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(BuyInsureApplication.class, args);
     }
+
 
 }
