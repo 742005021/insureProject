@@ -7,6 +7,7 @@ import org.java.dao.Case_ReportMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -28,8 +29,18 @@ public class Case_ReportService implements org.java.service.Case_ReportService {
         ProcessInstance instance = runtimeService.startProcessInstanceByKey("claim",cr_id);
 
         map.put("cr_id",cr_id);
-        map.put("process_instance_id",instance.getProcessDefinitionId() );
+        map.put("process_instance_id",instance.getProcessInstanceId() );
 
         return mapper.insert(map);
+    }
+
+    @Override
+    public List<Map<String, Object>> getList_ByStatu(int statu) {
+        return mapper.getList_ByStatu(statu);
+    }
+
+    @Override
+    public Map<String, Object> getReport_ById(String cr_id) {
+        return mapper.getReport_ById(cr_id);
     }
 }

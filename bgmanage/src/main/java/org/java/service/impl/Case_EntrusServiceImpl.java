@@ -1,9 +1,7 @@
 package org.java.service.impl;
 
-import org.java.dao.Case_EntrustMapper;
-import org.java.dao.Eventsurvey_TaskMapper;
-import org.java.dao.Peoplesurvey_TaskMapper;
-import org.java.dao.Sitesurvey_TaskMapper;
+import org.apache.logging.log4j.core.util.UuidUtil;
+import org.java.dao.*;
 import org.java.service.Case_EntrusService;
 import org.java.service.Case_ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +20,32 @@ public class Case_EntrusServiceImpl implements Case_EntrusService {
     private Peoplesurvey_TaskMapper peoplesurvey_taskMapper;
     @Autowired
     private Eventsurvey_TaskMapper eventsurvey_taskMapper;
-
+    @Autowired
+    private Case_ReportMapper case_reportMapper;
     @Override
-    public int submit(Map<String, Object> map) {
-        return 0;
+    public int insert(Map<String, Object> map) {
+        int n=0;
+        String uuid = UuidUtil.getTimeBasedUuid().toString();
+        map.put("entrust_id",uuid);
+        if(Boolean.valueOf(map.get("is_sitesurvey").toString())){
+            int emp_id=Integer.parseInt(map.get("sitesurvey_emp").toString());
+            map.put("sitesurvey_id",uuid);
+            sitesurvey_taskMapper.insert2(uuid,emp_id);
+        }
+        if(Boolean.valueOf(map.get("is_peoplesurvey").toString())){
+            int emp_id=Integer.parseInt(map.get("peoplesurvey_emp").toString());
+            map.put("peoplesurvey_id",uuid);
+            peoplesurvey_taskMapper.insert2(uuid, emp_id);
+        }
+        if(Boolean.valueOf(map.get("is_eventsurvey").toString())){
+            int emp_id=Integer.parseInt(map.get("eventsurvey_emp").toString());
+            map.put("eventsurvey_id",uuid);
+            eventsurvey_taskMapper.insert2(uuid, emp_id);
+        }
+        n=case_entrustMapper.insert(map);
+        if(n==1){
+            case_reportMapper.update_Statu(map.get("report_id").toString(),4);
+        }
+        return n;
     }
 }

@@ -17,6 +17,11 @@ public interface Eventsurvey_TaskMapper {
     )
     public int insert(@Param("m") Map<String,Object> map);
 
+    @Insert("INSERT eventsurvey_task VALUES(" +
+            "#{task_id},null,#{emp_id},null,null," +
+            "null,null,null )")
+    public int insert2(@Param("task_id") String task_id,@Param("emp_id") int emp_id);
+
     @Select("SELECT * FROM eventsurvey_task")
     public Map<String,Object> getAll();
 }

@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface Case_EntrusService {
 
-    int submit(Map<String,Object> map);
+    int insert(Map<String, Object> map);
 }

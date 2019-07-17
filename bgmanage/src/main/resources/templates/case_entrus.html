@@ -14,7 +14,12 @@
 <body id="body">
 
     <h1>案件委托</h1>
+
+    <h3 th:text="${case_report}"></h3>
+
     <form class="form-horizontal" action="/Case_Entrus/submit" method="post">
+        <input type="hidden" name="report_id" th:value="${case_report.cr_id}"/>
+        <input type="hidden" name="policy_id" th:value="${case_report.cr_policy_id}"/>
         <div class="form-group form-inline" >
             <label for="is_sitesurvey" class="col-sm-2 control-label">是否现场勘查</label>
             <p class="col-sm-2">
