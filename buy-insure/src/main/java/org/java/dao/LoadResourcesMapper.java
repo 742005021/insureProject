@@ -15,7 +15,7 @@ public interface LoadResourcesMapper {
     @Select("select * from insuretype")
     List<Map<String, Object>> loadInsureType();
 
-    @Select("select * from insurance_item")
+    @Select("select item_id,item_name,min_money,start_deadline,end_deadline,max_people,suitable_profession,start_age,end_age,item_style,item_info,item_target,base_money from insurance_item")
     List<Map<String, Object>> loadInsureItem();
 
     @Select("select item_file from insurance_item where item_id = #{item_id}")
