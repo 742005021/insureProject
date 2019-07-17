@@ -45,20 +45,20 @@ public class ProcessDefinitionController {
         //部署
         repositoryService.createDeployment().addInputStream(bpmnName,bpmnIn ).addInputStream(pngName,pngIn ).deploy();
         System.out.println("部署成功！");
-        return "redirect:/main";
+        return "redirect:/showProcessDefinition/showProcess";
     }
 
     /**
      * 显示所有的流程定义
      * @return
      */
-//    @GetMapping("showProcessDefinition")
-//    public String showProcessDefinition(Model model){
-//        System.out.println("##############################################################");
-//        ProcessDefinitionQuery  query = repositoryService.createProcessDefinitionQuery();
-//        List<ProcessDefinition> list = query.list();
-//        model.addAttribute("list",list );
-//        return "processDefinition/showProcess";
-//
-//    }
+    @GetMapping("showProcessDefinition")
+    public String showProcessDefinition(Model model){
+        System.out.println("##############################################################");
+        ProcessDefinitionQuery  query = repositoryService.createProcessDefinitionQuery();
+        List<ProcessDefinition> list = query.list();
+        model.addAttribute("list",list );
+        return "/processDefinition/showProcess";
+
+    }
 }
