@@ -6,22 +6,6 @@
     <title>Title</title>
 </head>
 <body>
-        <!--<table width="100%" border="1">-->
-            <!--<Tr>-->
-                <!--<Th>流程定义ID</Th>-->
-                <!--<Th>部署ID</Th>-->
-                <!--<Th>版本</Th>-->
-                <!--<Th>BPMN</Th>-->
-                <!--<Th>PNG</Th>-->
-            <!--</Tr>-->
-            <!--<TR th:each="m,st:${list}" align="center">-->
-                <!--<td th:text="${m.id}"></td>-->
-                <!--<td th:text="${m.deploymentId}"></td>-->
-                <!--<td th:text="${m.version}"></td>-->
-                <!--<td th:text="${m.resourceName}"></td>-->
-                <!--<td  th:text="${m.diagramResourceName}"></td>-->
-            <!--</TR>-->
-        <!--</table>-->
         <table class="table table-bordered" style="margin-top:60px;">
             <tr style="color:red;">
                 <th align="center" colspan="8">流程定义</th>
@@ -30,8 +14,8 @@
                 <th>流程定义的Id</th>
                 <th>流程定义的名称</th>
                 <th>流程定义的key</th>
-                <!--<th>bpmn</th>-->
-                <!--<th>png</th>-->
+                <th>bpmn</th>
+                <th>png</th>
                 <th>部署Id</th>
                 <th>版本</th>
                 <th>删除</th>
@@ -40,15 +24,10 @@
                 <td th:text="${m.id}"></td>
                 <td th:text="${m.deploymentId}"></td>
                 <td th:text="${m.version}"></td>
+                <td th:href="@{|showResoruce/${m.deploymentId}/${m.resourceName }|}">[[${m.resourceName }]]1</td>
+                <td th:href="@{|showResoruce/${m.deploymentId}/${m.diagramResourceName }|}">[[${m.diagramResourceName }]]2</td>
                 <td th:text="${m.resourceName}"></td>
                 <td  th:text="${m.diagramResourceName}"></td>
-                    <!--<td>-->
-                        <!--<a href="${pageContext.request.contextPath }/showResource/${p.deploymentId}/${p.resourceName }.do" target="_blank">${p.resourceName }</a>-->
-                    <!--</td>-->
-                    <!--<td>-->
-                        <!--<a href="${pageContext.request.contextPath }/showResource/${p.deploymentId}/${p.diagramResourceName }.do" target="_blank">${p.diagramResourceName }</a>-->
-                    <!--</td>-->
-
                 <td>
                         <a th:href="@{|/delProcess/${m.deploymentId}|}" onclick="return confirm('你确要删除吗?')">删除</a>
                 </td>
