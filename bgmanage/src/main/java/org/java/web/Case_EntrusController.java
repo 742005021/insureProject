@@ -21,7 +21,7 @@ public class Case_EntrusController {
     private Case_EntrusService case_entrusService;
 
     @GetMapping("toCase_Entrus/{report_id}")
-    public String toCase_(@PathVariable("report_id") String report_id, Model model){
+    public String toCase_Entrus(@PathVariable("report_id") String report_id, Model model){
         model.addAttribute("emps",empService.getAllSurvey_Emp());
         model.addAttribute("case_report",case_reportService.getReport_ById(report_id));
         return "Case_Entrus";

@@ -2,11 +2,12 @@ package org.java.web;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import org.apache.commons.io.FileUtils;
 import org.java.dao.TestMapper;
 import org.java.service.LoadResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
@@ -19,14 +20,17 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.*;
 import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Blob;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoadResourcesController {
@@ -36,6 +40,9 @@ public class LoadResourcesController {
 
     @Autowired
     private TestMapper mapper;
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     @Autowired
     private ServletContext context;
@@ -159,7 +166,13 @@ public class LoadResourcesController {
     }
 
     @RequestMapping("/toBook")
-    public String toBook(String json, HttpServletRequest req) throws IOException {
+    public String toBook(String json, HttpServletRequest req, HttpSession ses) throws IOException {
+        RedisSerializer redisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(redisSerializer);
+
+        String custid= redisTemplate.opsForValue().get("custid");
+        System.err.println(custid);
+
         JsonNode node = new ObjectMapper().readTree(json);
         Map<String, Object> map = new HashMap<>();
         map.put("ren", node.get("ren"));
@@ -174,6 +187,8 @@ public class LoadResourcesController {
         map.put("lunchuan", node.get("lunchuan"));
         map.put("qiche", node.get("qiche"));
         req.setAttribute("map", map);
+
+
         return "/book";
     }
 
