@@ -25,7 +25,8 @@
                 <td th:text="${m.deploymentId}"></td>
                 <td th:text="${m.version}"></td>
                 <td>
-                    <a th:href="@{|/showResoruce/${m.deploymentId}/${m.resourceName }|}">[[${m.resourceName }]]</a>
+                    [[${m.resourceName }]]
+                   <!-- <a th:href="@{|/showResoruce/${m.deploymentId}/${m.resourceName }|}">[[${m.resourceName }]]</a>-->
                 </td>
                 <td>
                     <a th:href="@{|/showResoruce/${m.deploymentId}/${m.diagramResourceName }|}">[[${m.diagramResourceName }]]</a>

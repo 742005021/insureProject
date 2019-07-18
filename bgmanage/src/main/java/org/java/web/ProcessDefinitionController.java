@@ -9,8 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 
@@ -63,5 +66,25 @@ public class ProcessDefinitionController {
         System.out.println(deployId);
         repositoryService.deleteDeployment(deployId,true);
         return "redirect:processDefinition/showProcessDefinition";
+    }
+
+    /**
+     *
+     * @param deploymentId：部署id
+     * @param name:是bpmn或者 png文件名称
+     * @param res
+     * @throws Exception
+     */
+    @GetMapping("showResoruce/{deploymentId}/{name}")
+    public void showResoruce(@PathVariable("deploymentId") String deploymentId, @PathVariable("name") String name, HttpServletResponse res) throws Exception{
+        InputStream in=repositoryService.getResourceAsStream(deploymentId,name);
+        OutputStream out=res.getOutputStream();
+        byte[] b=new byte[8129];
+        int len=0;
+        while ((len=in.read(b,0,8129))!=-1){
+            out.write(b,0,len);
+        }
+        out.close();
+        in.close();
     }
 }
