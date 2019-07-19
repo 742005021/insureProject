@@ -31,12 +31,9 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Autowired
     private HttpSession ses;
+
     @Autowired
     private RedisTemplate<Object,Object> objectTemplate;
-
-    @Autowired
-    private RedisTemplate<Object, Object> objectTemplate;
-
 
     @Override
     public List<Map<String, Object>> loadInsureType() {
