@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{'/css/common.css'}">
     <link rel="stylesheet" th:href="@{'/css/book.css'}">
     <link rel="stylesheet" th:href="@{'/css/easydropdown.css'}">
+    <link rel="stylesheet" th:href="@{'/layui/css/layui.css'}">
 </head>
 <body>
 <div class="wrapper">
@@ -40,161 +41,191 @@
         </div>
     </div>
     <!----------------------------------------header_nav end-------------------------------------->
-    <div class="container main_width">
-        <div class="book_box">
-            <h1>填写保单</h1>
-            <!--投保人信息-->
-            <div class="verificationBox">
-                <h2>投保人
-                    <a href="#" class="resetMess">清空以下输入信息</a>
-                </h2>
-                <form action="#" method="post">
-                    <p>
-                        <label for="recognizeeName">姓&emsp;&emsp;名</label>
-                        <input type="text" class="input" placeholder="请填写真实姓名" id="recognizeeName">
-                    </p>
-                    <p>
-                        <label>证&emsp;&emsp;件</label>
-                        <select name="papers" id="" class="dropdown papers">
-                            <option value="1">身份证</option>
-                            <option value="2">护照</option>
-                            <option value="3">军官证</option>
-                            <option value="4">未成年无证件，请填生日</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label for="">证件号码</label>
-                        <input type="text" class="input" placeholder="仅限成人投保">
-                    </p>
-                    <p>
-                        <label for="">手机号码</label>
-                        <input type="text" class="input" placeholder="用于接收保单信息">
-                    </p>
-                </form>
+    <form th:action="@{'/bookData'}" method="post" id="frm" class="layui-form">
+        <input type="hidden" th:value="${map.order_id}" name="order_id"/>
+        <input type="hidden" th:value="${map.jieguo}" name="money"/>
+        <div class="container main_width">
+            <div class="book_box">
+                <h1>填写保单</h1>
+                <div class="verificationBox">
+                    <h2>投保项</h2>
+                    <div class="layui-form">
+                        <table class="layui-table" style="width: 800px;margin-left: 65px;">
+                            <colgroup>
+                                <col width="200">
+                                <col width="200">
+                                <col width="400">
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td rowspan="2">一般意外</td>
+                                <td>意外身故、伤残</td>
+                                <td>[[${map.yiwai}]]</td>
+                            </tr>
+                            <tr>
+                                <td>意外医疗</td>
+                                <td>[[${map.yiliao}]]</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">津贴及车费</td>
+                                <td>住院误工津贴</td>
+                                <td>[[${map.zhuyuan}]]</td>
+                            </tr>
+                            <tr>
+                                <td>救护车费用报销</td>
+                                <td>[[${map.jiuhuiche}]]</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">交通意外</td>
+                                <td>飞机意外身故、伤残</td>
+                                <td>[[${map.feiji}]]</td>
+                            </tr>
+                            <tr>
+                                <td>火车意外身故、伤残</td>
+                                <td>[[${map.huoche}]]</td>
+                            </tr>
+                            <tr>
+                                <td>轮船意外身故、伤残</td>
+                                <td>[[${map.lunchuan}]]</td>
+                            </tr>
+                            <tr>
+                                <td>汽车意外身故、伤残</td>
+                                <td>[[${map.qiche}]]</td>
+                            </tr>
+                            <tr>
+                                <td>医疗服务（赠送）</td>
+                                <td>意外住院垫付/担保服务</td>
+                                <td>赠送</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--投保人信息-->
+                <div class="verificationBox">
+                    <h2>投保人</h2>
+                    <input type="hidden" name="cust_id"/>
+                    <br/><br/>
+                    <!--lay-verify="required|phone|number"-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓&emsp;&emsp;名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="cust_name" lay-verify="required" autocomplete="off"
+                                   placeholder="真实姓名" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">证&emsp;&emsp;件</label>
+                        <div class="layui-input-inline">
+                            <select name="license" lay-verify="required">
+                                <option value="1">身份证</option>
+                                <option value="2">护照</option>
+                                <option value="3">港澳通行证</option>
+                                <option value="4">军官证</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">证件号码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="cust_licenseno" autocomplete="off" placeholder="输入有效的证件号码"
+                                   class="layui-input" lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电子邮件</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="cust_email" autocomplete="off" placeholder="用于接收保单信息"
+                                   class="layui-input" lay-verify="required|email">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">出生日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="cust_bir" lay-verify="date" placeholder="yyyy-MM-dd"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">常&nbsp;&nbsp;住&nbsp;&nbsp;地</label>
+                        <div class="layui-input-inline">
+                            <textarea placeholder="请输入内容" class="layui-textarea" name="cust_address"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性&emsp;&emsp;别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="男" title="男" checked="" id="cust_nan">
+                            <input type="radio" name="sex" value="女" title="女" id="cust_nv">
+                        </div>
+                    </div>
+                </div>
+                <!--被保人信息-->
+                <th:block th:each="i:${#numbers.sequence(1,map.max_people)}">
+                    <div class="verificationBox">
+                        <h2 class="">被保人</h2>
+                        <br/><br/>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">姓&emsp;&emsp;名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" th:name="'insured_name'+${i}" autocomplete="off" placeholder="真实姓名"
+                                       class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">证&emsp;&emsp;件</label>
+                            <div class="layui-input-inline">
+                                <select th:name="'licnese_id'+${i}" lay-verify="required">
+                                    <option value="1">身份证</option>
+                                    <option value="2">护照</option>
+                                    <option value="3">港澳通行证</option>
+                                    <option value="4">军官证</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">证件号码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" th:name="'license_no'+${i}" autocomplete="off"
+                                       placeholder="输入有效的证件号码"
+                                       class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">出生日期</label>
+                            <div class="layui-input-inline">
+                                <input type="text" th:name="'birthday'+${i}" lay-verify="date" placeholder="yyyy-MM-dd"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性&emsp;&emsp;别</label>
+                            <div class="layui-input-block">
+                                <input type="radio" th:name="'insured_sex'+${i}" value="男" title="男" checked="">
+                                <input type="radio" th:name="'insured_sex'+${i}" value="女" title="女">
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">常&nbsp;&nbsp;住&nbsp;&nbsp;地</label>
+                            <div class="layui-input-inline">
+                                <textarea placeholder="请输入内容" class="layui-textarea" th:name="'address'+${i}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+                <center><button class="layui-btn" lay-submit="" lay-filter="subBtn">立即提交</button></center>
+                <br/><br/>
             </div>
-            <!--被保人信息-->
-            <div class="verificationBox">
-                <h2 class="">被保人
-                    <a href="javascript:" class="resetMess">清空以下输入信息</a>
-                </h2>
-                <form action="#" method="post">
-                    <p>
-                        <label for="recognizeName">姓&emsp;&emsp;名</label>
-                        <input type="text" class="input" placeholder="请填写真实姓名" id="recognizeName">
-                    </p>
-                    <p>
-                        <label for="papers">证&emsp;&emsp;件</label>
-                        <select name="papers" id="papers" class="dropdown">
-                            <option value="1">身份证</option>
-                            <option value="2">护照</option>
-                            <option value="3">军官证</option>
-                            <option value="4">未成年无证件，请填生日</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label for="papers_num">证件号码</label>
-                        <input type="text" id="papers_num" class="input" placeholder="请填写正确的证件号">
-                    </p>
-                    <p class="birth_date">
-                        <label>出生日期</label>
-                        <select name="birth_year" class="dropdown fl" id="birth_year">
-                            <option class="label">-请选择-</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
-                            <option value="2014">2014</option>
-                            <option value="2013">2013</option>
-                            <option value="2012">2012</option>
-                            <option value="2011">2011</option>
-                            <option value="2010">2010</option>
-                            <option value="2009">2009</option>
-                            <option value="2008">2008</option>
-                            <option value="2007">2007</option>
-                            <option value="2006">2006</option>
-                            <option value="2005">2005</option>
-                            <option value="2004">2004</option>
-                            <option value="2003">2003</option>
-                            <option value="2002">2002</option>
-                            <option value="2001">2001</option>
-                            <option value="2000">2000</option>
-                            <option value="1999">1999</option>
-                            <option value="1998">1998</option>
-                            <option value="1997">1997</option>
-                            <option value="1996">1996</option>
-                            <option value="1995">1995</option>
-                            <option value="1994">1994</option>
-                            <option value="1993">1993</option>
-                            <option value="1992">1992</option>
-                        </select>
-                        <span>年</span>
-                        <select name="birth_month" class="dropdown fl" id="birth_month">
-                            <option class="label">-请选择-</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
-                        <span>月</span>
-                        <select name="birth_day" class="dropdown fl" id="birth_day">
-                            <option class="label">-请选择-</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option>
-                        </select>
-                        <span>日</span>
-                    </p>
-                    <p>
-                        <label>性&emsp;&emsp;别</label>
-                        <label>
-                            <input type="radio" checked="checked" value="male" name="sex">男
-                        </label>
-                        <label>
-                            <input type="radio" value="female" name="sex">女
-                        </label>
-                    </p>
-                </form>
-            </div>
+
         </div>
-        <input type="button" class="subBtn" value="继续">
-    </div>
+    </form>
 </div>
 <script th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
 <script th:src="@{'/js/jquery.easydropdown.js'}"></script>
+<script type="text/javascript" th:src="@{'/layui/layui.js'}"></script>
+<script type="text/javascript" th:src="@{'/myScript/book.js'}"></script>
 <script>
     $(function () {
         //手机输入法问题

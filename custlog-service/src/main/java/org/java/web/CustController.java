@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class CustController {
@@ -41,7 +42,7 @@ public class CustController {
         map.put("score", score);
         ses.setAttribute("cust", map);
 
-       redisTemplate.opsForValue().set("custid", custid);
+       redisTemplate.opsForValue().set("custid", custid, 20, TimeUnit.MINUTES);
         return "/index";
     }
     @RequestMapping("/logout")
