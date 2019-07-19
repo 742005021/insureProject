@@ -29,18 +29,21 @@ public class Case_EntrusServiceImpl implements Case_EntrusService {
         map.put("entrust_id",uuid);
         if(Boolean.valueOf(map.get("is_sitesurvey").toString())){
             int emp_id=Integer.parseInt(map.get("sitesurvey_emp").toString());
+            String explains = (String) map.get("s_survey_explains");
             map.put("sitesurvey_id",uuid);
-            sitesurvey_taskMapper.insert2(uuid,emp_id);
+            sitesurvey_taskMapper.insert2(uuid,emp_id,explains);
         }
         if(Boolean.valueOf(map.get("is_peoplesurvey").toString())){
             int emp_id=Integer.parseInt(map.get("peoplesurvey_emp").toString());
+            String explains = (String) map.get("s_survey_explains");
             map.put("peoplesurvey_id",uuid);
-            peoplesurvey_taskMapper.insert2(uuid, emp_id);
+            peoplesurvey_taskMapper.insert2(uuid, emp_id,explains);
         }
         if(Boolean.valueOf(map.get("is_eventsurvey").toString())){
             int emp_id=Integer.parseInt(map.get("eventsurvey_emp").toString());
+            String explains = (String) map.get("s_survey_explains");
             map.put("eventsurvey_id",uuid);
-            eventsurvey_taskMapper.insert2(uuid, emp_id);
+            eventsurvey_taskMapper.insert2(uuid, emp_id,explains);
         }
         n=case_entrustMapper.insert(map);
         if(n==1){

@@ -18,4 +18,14 @@ public class Peoplesurvey_TaskServiceImpl implements Peoplesurvey_TaskService {
     public List<Map<String, Object>> getTasks(Integer emp_id, Integer statu) {
         return peoplesurvey_taskMapper.getTasks(emp_id,statu);
     }
+
+    @Override
+    public Map<String, Object> getTaskById(String task_id) {
+        return peoplesurvey_taskMapper.getTaskById(task_id);
+    }
+
+    @Override
+    public int update(Map<String, Object> map) {
+        return peoplesurvey_taskMapper.update(map);
+    }
 }
