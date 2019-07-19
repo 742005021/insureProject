@@ -34,6 +34,9 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
     @Autowired
     private HttpSession ses;
 
+    @Autowired
+    private RedisTemplate<Object, Object> objectTemplate;
+
 
     @Override
     public List<Map<String, Object>> loadInsureType() {
@@ -81,6 +84,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
             ses.setAttribute("cust", map);
             String custid = (String) map.get("cust_id");
             template.opsForValue().set("custid", custid, 20, TimeUnit.MINUTES);
+            objectTemplate.opsForHash().put("cust", "map", map);
             return "yes";
         }
         return "no";
