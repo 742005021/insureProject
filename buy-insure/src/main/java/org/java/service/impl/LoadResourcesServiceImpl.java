@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
-import sun.security.krb5.internal.APReq;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +31,8 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Autowired
     private HttpSession ses;
+    @Autowired
+    private RedisTemplate<Object,Object> objectTemplate;
 
 
     @Override
@@ -81,6 +81,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
             ses.setAttribute("cust", map);
             String custid = (String) map.get("cust_id");
             template.opsForValue().set("custid", custid, 20, TimeUnit.MINUTES);
+            objectTemplate.opsForHash().put("cust", "map", map);
             return "yes";
         }
         return "no";

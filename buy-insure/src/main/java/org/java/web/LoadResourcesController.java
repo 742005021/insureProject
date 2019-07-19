@@ -1,10 +1,6 @@
 package org.java.web;
 
-import com.alipay.api.AlipayApiException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import org.apache.commons.io.FileUtils;
+import com.alibaba.fastjson.JSON;
 import org.java.dao.TestMapper;
 import org.java.service.LoadResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import com.alibaba.fastjson.JSON;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +23,10 @@ import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Blob;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class LoadResourcesController {
@@ -166,6 +163,7 @@ public class LoadResourcesController {
     @RequestMapping("/toBook")
     public String toBook(String json, HttpServletRequest req, HttpSession ses) {
         Map<String, Object> map = JSON.parseObject(json, Map.class);
+
         map.put("order_id", UUID.randomUUID().toString());
         map.put("yiNianDetermine", ((Map<String, Object>)ses.getAttribute("cust")).get("cust_id"));
         // 生成订单
