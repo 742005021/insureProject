@@ -23,7 +23,7 @@ public class Case_ReportController {
 
     @RequestMapping("report/list")
     public String list(@RequestParam int statu,Model model){
-        model.addAttribute("report_statu",statu);
+        model.addAttribute("statu",statu);
         model.addAttribute("list",case_reportService.getList_ByStatu(statu));
         return "case_report_list";
     }

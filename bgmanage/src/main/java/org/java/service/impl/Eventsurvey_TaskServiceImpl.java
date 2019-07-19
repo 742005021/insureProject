@@ -18,4 +18,14 @@ public class Eventsurvey_TaskServiceImpl implements Eventsurvey_TaskService {
     public List<Map<String, Object>> getTasks(Integer emp_id, Integer statu) {
         return eventsurvey_taskMapper.getTasks(emp_id,statu);
     }
+
+    @Override
+    public Map<String, Object> getTaskById(String task_id) {
+        return eventsurvey_taskMapper.getTaskById(task_id);
+    }
+
+    @Override
+    public int update(Map<String, Object> map) {
+        return eventsurvey_taskMapper.update(map);
+    }
 }

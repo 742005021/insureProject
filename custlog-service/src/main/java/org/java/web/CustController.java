@@ -25,6 +25,9 @@ public class CustController {
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
 
+    @Autowired
+    private  RedisTemplate<Object,Object> objectTemplate;
+
     @RequestMapping("/login")
     public String login(String username, String password, HttpSession ses, Model model){
 
@@ -43,8 +46,24 @@ public class CustController {
         ses.setAttribute("cust", map);
 
        redisTemplate.opsForValue().set("custid", custid, 20, TimeUnit.MINUTES);
+
+
         return "/index";
     }
+
+
+    @RequestMapping("index")
+    public String index(HttpSession ses){
+        RedisSerializer redisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(redisSerializer);
+        Map<String,Object> map = (Map<String, Object>) objectTemplate.opsForHash().get("cust", "map");
+        String custid= (String) map.get("cust_id");
+        int score=service.getCustScore(custid);
+        map.put("score", score);
+        ses.setAttribute("cust", map);
+        return "/index";
+    }
+
     @RequestMapping("/logout")
     public String logout(HttpSession ses){
         ses.removeAttribute("cust");

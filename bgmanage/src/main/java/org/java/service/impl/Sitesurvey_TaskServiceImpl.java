@@ -18,4 +18,14 @@ public class Sitesurvey_TaskServiceImpl implements Sitesurvey_TaskService {
     public List<Map<String, Object>> getTasks(Integer emp_id, Integer statu) {
         return sitesurvey_taskMapper.getTasks(emp_id, statu);
     }
+
+    @Override
+    public Map<String, Object> getTaskById(String task_id) {
+        return sitesurvey_taskMapper.getTaskById(task_id);
+    }
+
+    @Override
+    public int update(Map<String, Object> map) {
+        return sitesurvey_taskMapper.update(map);
+    }
 }

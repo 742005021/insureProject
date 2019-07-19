@@ -4,10 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style>
+        #body .full{
+            width:100%;
+        }
+    </style>
 </head>
-<body>
-<table class="table table-bordered">
-    <h1 th:text="${tasks}"></h1>
-</table>
+
+<body id="body">
+    <form class="form-horizontal" th:action="@{|${path}|}" method="post" id="form">
+        <div class="form-group form-inline">
+            <p class="col-sm-2">
+                <select class="form-control full" name="statu" id="statu">
+                    <option value="0" th:attr="selected=${statu==0?true:false}">未完成</option>
+                    <option value="1" th:attr="selected=${statu==1?true:false}">已完成</option>
+                </select>
+            </p>
+        </div>
+    <form>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>任务编号</th>
+            <th>任务说明</th>
+            <th>任务状态</th>
+            <th>查看申请信息</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="t,st:${tasks}">
+            <td th:text="${t.entrust_id}"></td>
+            <td th:text="${t.explains}"></td>
+            <td th:if="${t.statu == 0}">未完成</td>
+            <td th:if="${t.statu == 1}">已完成</td>
+            <td><a th:href="@{|/report_detailed/${t.report_id}|}">详情</a></td>
+
+            <td th:switch="${type}">
+                <a th:case="1" th:href="@{|/event_task/${t.report_id}/${t.entrust_id}|}">完成勘查</a>
+                <a th:case="2" th:href="@{|/people_task/${t.report_id}/${t.entrust_id}|}">完成勘查</a>
+                <a th:case="3" th:href="@{|/site_task/${t.report_id}/${t.entrust_id}|}">完成勘查</a>
+            </td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        $("#statu").change(function () {
+            $("#form").submit();
+        })
+    </script>
 </body>
 </html>

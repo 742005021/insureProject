@@ -5,6 +5,7 @@
     <title>安全中心</title>
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/center.css">
+    <link href="../css/img_smooth_check.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <div class="wrapper">
@@ -33,6 +34,28 @@
                         <a href="#"  id="editpwd">修&emsp;改</a>
 
                         <p><input type="password" th:value="${session.cust.password}" readonly  id="pwd"></p>
+
+                    </li>
+                    <li class="s_psd" style="border-bottom: none">
+                        <label>验证</label>
+                        <div class="widgets__img_check_box" id="select" style="width:480px;margin:0px;top:2px;">
+                            <div class="widgets__img_display">
+                                <div class="widgets__img_cnt">
+                                    <img src1="a.jpg" class="widgets__img_src" />
+                                    <canvas class="widgets__img_fragment_hollow"></canvas>
+                                    <div class="widgets__img_fragment_cnt">
+                                        <canvas class="widgets__img_fragment widgets__img_fragment_shadow"></canvas>
+                                        <canvas class="widgets__img_fragment widgets__img_fragment_content"></canvas>
+                                    </div>
+                                    <div class="widgets__icon_refresh"></div>
+                                </div>
+                            </div>
+                            <div class="widgets__smooth_cnt" style="margin-left: 160px">
+                                <div class="widgets__smooth_bar"></div>
+                                <div class="widgets__smooth_circle"></div>
+                            </div>
+                        </div>
+
                         <a href="#" id="savepwd" style="font-size: 16px;font-weight: bold">保存</a>
                     </li>
                 </ul>
@@ -44,6 +67,7 @@
 
 </div>
 <script src="../js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="../js/img_smooth_check.js"></script>
 <script>
     $(function(){
         $("#policy").removeClass("active");
@@ -64,6 +88,24 @@
 
 
         })
+
+        var s = WIDGETS.imgSmoothCheck({
+            selector: "#select",
+            data: ["img/t1.png", "img/t2.png", "img/t3.png"],
+            imgHeight: 100,
+            imgWidth: 200,
+            allowableErrorValue: 3,
+            success: function () {
+                alert("成功");
+            },
+            error: function (res) {
+                alert('重新再试');
+            }
+        });
+        $(".refresh").on("click", function () {
+            s.refresh();
+        });
+
 
         $("#savepwd").click(function () {
             var pwd=$('#pwd').val();

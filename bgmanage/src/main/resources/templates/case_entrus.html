@@ -9,15 +9,20 @@
         #body .full{
             width:100%;
         }
+
+        .title{
+             background-color: lavender;
+             text-align: right;
+        }
     </style>
 </head>
 <body id="body">
 
-    <h1>案件委托</h1>
+    <h1 style="text-align: center">案件委托</h1>
 
-    <h3 th:text="${case_report}"></h3>
+    <div th:replace="case_report_detailed :: report_detailed"></div>
 
-    <form class="form-horizontal" action="/Case_Entrus/submit" method="post">
+    <form class="form-horizontal" action="/Case_Entrus/submit" method="post" id="form">
         <input type="hidden" name="report_id" th:value="${case_report.cr_id}"/>
         <input type="hidden" name="policy_id" th:value="${case_report.cr_policy_id}"/>
         <div class="form-group form-inline" >
@@ -29,13 +34,18 @@
                 </select>
             </p>
 
-            <label for="sitesurvey_emp" class="col-sm-2 control-label">勘查员工</label>
+            <label for="sitesurvey_emp" class="col-sm-1 control-label">勘查员工</label>
             <p class="col-sm-2">
                 <select class="form-control full" id="sitesurvey_emp" name="sitesurvey_emp" disabled>
                     <span th:each="e,st:${emps}">
                         <option th:value="${e.emp_id}" name="is_death">[[${e.emp_name}]]</option>
                     </span>
                 </select>
+            </p>
+
+            <label for="s_survey_explains" class="col-sm-1 control-label">任务说明</label>
+            <p class="col-sm-4">
+                <textarea class="form-control full" id="s_survey_explains" name="s_survey_explains" disabled>对现场进行确认</textarea>
             </p>
         </div>
 
@@ -48,13 +58,18 @@
                 </select>
             </p>
 
-            <label for="peoplesurvey_emp" class="col-sm-2 control-label">勘查员工</label>
+            <label for="peoplesurvey_emp" class="col-sm-1 control-label">勘查员工</label>
             <p class="col-sm-2">
                 <select class="form-control full" id="peoplesurvey_emp" name="peoplesurvey_emp" disabled>
                     <span th:each="e,st:${emps}">
                         <option th:value="${e.emp_id}" name="is_death">[[${e.emp_name}]]</option>
                     </span>
                 </select>
+            </p>
+
+            <label for="p_survey_explains" class="col-sm-1 control-label">任务说明</label>
+            <p class="col-sm-4">
+                <textarea class="form-control full" id="p_survey_explains" name="p_survey_explains" disabled>对人员进行确认</textarea>
             </p>
         </div>
 
@@ -67,7 +82,7 @@
                 </select>
             </p>
 
-            <label for="eventsurvey_emp" class="col-sm-2 control-label">勘查员工</label>
+            <label for="eventsurvey_emp" class="col-sm-1 control-label">勘查员工</label>
             <p class="col-sm-2">
                 <select class="form-control full" id="eventsurvey_emp" name="eventsurvey_emp" disabled>
                     <span th:each="e,st:${emps}">
@@ -75,26 +90,50 @@
                     </span>
                 </select>
             </p>
+
+            <label for="e_survey_explains" class="col-sm-1 control-label">任务说明</label>
+            <p class="col-sm-4">
+                <textarea class="form-control full" id="e_survey_explains" name="e_survey_explains" disabled>对事故性质进行确认</textarea>
+            </p>
         </div>
 
-        <input type="submit" class="btn btn-info" value="提交"/>
+        <div class="form-group form-inline" >
+            <p class="col-sm-offset-2 col-sm-3">
+                <input class="btn btn-info btn-block" type="button" onclick="history.back()" value="返回">
+            </p>
+            <p class="col-sm-offset-2 col-sm-3">
+                <input class="btn btn-info btn-block" type="button" id="btn" value="提交">
+            </p>
+        </div>
+
+
     </form>
 
     <script type="text/javascript">
         $(function(){
             //修改是否现场勘查
             $("#is_sitesurvey").change(function(){
-                $('#sitesurvey_emp').attr("disabled",$(this).val()=="false");
+                $('#sitesurvey_emp,#s_survey_explains').attr("disabled",$(this).val()=="false");
             })
             //修改是否人员勘查
             $("#is_peoplesurvey").change(function () {
-                $('#peoplesurvey_emp').attr("disabled",$(this).val()=="false");
+                $('#peoplesurvey_emp,#p_survey_explains').attr("disabled",$(this).val()=="false");
             })
             //修改是否事故勘查
             $("#is_eventsurvey").change(function () {
-                $('#eventsurvey_emp').attr("disabled",$(this).val()=="false");
+                $('#eventsurvey_emp,#e_survey_explains').attr("disabled",$(this).val()=="false");
             })
-
+            //判断是否委托任务
+            $("#btn").click(function(){
+                var a=$("#is_sitesurvey").val();
+                var b=$("#is_peoplesurvey").val();
+                var c=$("#is_eventsurvey").val();
+                if(a==b&&b==c&&a=="false"){
+                    alert("至少需要进行一项勘查");
+                }else{
+                    $("#form").submit();
+                }
+            })
         })
     </script>
 </body>
