@@ -2,6 +2,9 @@ package org.java.web;
 
 import org.java.service.CustService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class CustController {
@@ -18,8 +22,14 @@ public class CustController {
     @Autowired
     private CustService service;
 
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
+
     @RequestMapping("/login")
     public String login(String username, String password, HttpSession ses, Model model){
+
+        RedisSerializer redisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(redisSerializer);
 
         Map<String,Object> map=service.custLogin(username, password);
 
@@ -31,6 +41,8 @@ public class CustController {
         int score=service.getCustScore(custid);
         map.put("score", score);
         ses.setAttribute("cust", map);
+
+       redisTemplate.opsForValue().set("custid", custid, 20, TimeUnit.MINUTES);
         return "/index";
     }
     @RequestMapping("/logout")

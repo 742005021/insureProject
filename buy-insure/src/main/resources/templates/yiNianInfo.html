@@ -5,6 +5,7 @@
     <title>一年意外保险(报价)</title>
     <link rel="stylesheet" th:href="@{'/css/common.css'}">
     <link rel="stylesheet" th:href="@{'/css/book.css'}">
+    <link rel="stylesheet" th:href="@{'/css/login.css'}">
     <link rel="stylesheet" th:href="@{'/layui/css/layui.css'}">
     <style>
         td {
@@ -20,6 +21,7 @@
 </head>
 <body>
 <input type="hidden" id="base_money" th:value="${map.base_money}"/>
+<input type="hidden" id="item_id" th:value="${item_id}"/>
 <div class="wrapper">
     <div class="header_nav">
         <div class="main_width">
@@ -267,7 +269,23 @@
 <form th:action="@{'/toBook'}" method="post" style="display: none" id="frm">
     <input type="text" name="json"/>
 </form>
-
+<!-- 登录弹层 -->
+<script type="text/html" id="login">
+    <br/> <br/>
+    <div style="margin-left: 170px;">
+        <form name="loginForm" id="loginForm">
+            <h2>登录大特保网</h2>
+            <div class="user_box">
+                <span class="icon"></span>
+                <input type="text" class="userName" name="username" placeholder="用户名">
+            </div>
+            <div class="pwd_box">
+                <span class="icon"></span>
+                <input type="password" class="userPwd" name="password" placeholder="密码">
+            </div>
+        </form>
+    </div>
+</script>
 <script type="text/javascript" th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
 <script type="text/javascript" th:src="@{'/layui/layui.js'}"></script>
 <script type="text/javascript" th:src="@{'/myScript/static_table.js'}"></script>
@@ -331,45 +349,103 @@
         });
 
         $("#submitBtn").click(function () {
-            var ren = $("#ren").text();
-            var jieguo = $("#jieguo").text();
-            if(ren == 0 || jieguo == 0){
-                layer.msg('请选择投保项!', {
-                    time: 20000, //20s后自动关闭
-                    btn: ['好的']
-                });
-                return;
-            }
-            var yiwai = $("#yiwai option:selected").text();
-            var yiliao = $("#yiliao option:selected").text();
-            var zhuyuan = $("#zhuyuan option:selected").text();
-            var jiuhuiche = $("#jiuhuiche option:selected").text();
-            var feiji = $("#feiji option:selected").text();
-            var huoche = $("#huoche option:selected").text();
-            var lunchuan = $("#lunchuan option:selected").text();
-            var qiche = $("#qiche option:selected").text();
-            var max_people = $("#max_people").val();
 
-            var obj = {
-                "ren" : ren,
-                "jieguo" : jieguo,
-                "max_people" : max_people,
-                "yiwai" : yiwai,
-                "yiliao" : yiliao,
-                "zhuyuan" : zhuyuan,
-                "jiuhuiche" : jiuhuiche,
-                "feiji" : feiji,
-                "huoche" : huoche,
-                "lunchuan" : lunchuan,
-                "qiche" : qiche
-            };
-            $("[name=json]").val(JSON.stringify(obj));
-            $("#frm").submit();
+            $.ajax({
+                url: "/searchCacheUserData",
+                type: "post",
+                success: function (result) {
+                    if (result == "no") {
+                        layer.open({
+                            type: 1
+                            , title: false //不显示标题栏
+                            , closeBtn: true
+                            , area: ['670px', '300px']
+                            , shade: 0.8
+                            , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                            , btn: ['登录', '关闭']
+                            , btnAlign: 'c'
+                            , moveType: 1 //拖拽模式，0或者1
+                            , content: $("#login").html()
+                            , yes: function (index, layero) {
+                                var uname = $("[name=username]").val();
+                                var pwd = $("[name=password]").val();
+                                $.ajax({
+                                    url: "/secondLogin",
+                                    data: {
+                                        "uname": uname,
+                                        "pwd": pwd
+                                    },
+                                    type: "post",
+                                    success: function (result) {
+                                        if(result == "yes"){
+                                            layer.msg('登录成功!', {
+                                                time: 20000, //20s后自动关闭
+                                                btn: ['好的'],
+                                                end : function () {
+                                                    layer.close(index);
+                                                }
+                                            });
+                                        } else {
+                                            layer.msg('登录失败!', {
+                                                time: 20000, //20s后自动关闭
+                                                btn: ['好的']
+                                            });
+                                        }
+                                    }
+                                });
+
+                            }
+                        });
+                    } else {
+                        var ren = $("#ren").text();
+                        var jieguo = $("#jieguo").text();
+                        if (ren == 0 || jieguo == 0) {
+                            layer.msg('请选择投保项!', {
+                                time: 20000, //20s后自动关闭
+                                btn: ['好的']
+                            });
+                            return;
+                        }
+                        var yiwai = $("#yiwai option:selected").text();
+                        var yiliao = $("#yiliao option:selected").text();
+                        var zhuyuan = $("#zhuyuan option:selected").text();
+                        var jiuhuiche = $("#jiuhuiche option:selected").text();
+                        var feiji = $("#feiji option:selected").text();
+                        var huoche = $("#huoche option:selected").text();
+                        var lunchuan = $("#lunchuan option:selected").text();
+                        var qiche = $("#qiche option:selected").text();
+                        var max_people = $("#max_people").val();
+                        var zhiye = $("#zhiye").val().split(";");
+                        var max_people = $("#max_people").val();
+                        var date = $("#year").val() + "-" + $("#month").val() + "-" + $("#day").val();
+                        var item_id = $("#item_id").val();
+                        var obj = {
+                            "ren": ren,//每人每天多少元
+                            "jieguo": jieguo,//投保价格
+                            "max_people": max_people,//最大人数
+                            "yiwai": yiwai,
+                            "yiliao": yiliao,
+                            "zhuyuan": zhuyuan,
+                            "jiuhuiche": jiuhuiche,
+                            "feiji": feiji,
+                            "huoche": huoche,
+                            "lunchuan": lunchuan,
+                            "qiche": qiche,
+                            "zhiye": zhiye[1],
+                            "max_people": max_people,
+                            "starttime": date,
+                            "item_id": item_id
+                        };
+                        $("[name=json]").val(JSON.stringify(obj));
+                        $("#frm").submit();
+                    }
+                }
+            });
         });
         $("#zhiye").change(function () {
             operation();
         });
-        form.on('select(number)', function(data){
+        form.on('select(number)', function (data) {
             var level = $("#profession_level").val();
             if (level == null || level == "" || level == undefined) {
                 layer.msg('请选择职业!', {
@@ -454,7 +530,7 @@
     }
 
     //参数为保险基数
-   function levelOperation(baseNumber, level) {
+    function levelOperation(baseNumber, level) {
         var result = 0.0;
         //一级
         if (level == 1) {

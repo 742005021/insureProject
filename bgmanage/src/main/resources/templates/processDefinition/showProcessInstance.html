@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <style type="text/css">
+        a{
+            text-align: center;
+            text-decoration: none;
+            color: blue;
+        }
+        a:hover{
+            color:red;
+        }
+        table,th,tr,td{
+            border: 1px black solid;
+            border-collapse: collapse;;
+        }
+    </style>
+</head>
+<body>
+
+<table class="table table-bordered"  align="center" style="margin-top:60px;">
+    <tr style="color:red;">
+        <th align="center" colspan="9">审核中的任务</th>
+    </tr>
+    <Tr>
+        <th>受保人</th>
+        <Th>申请时间</Th>
+        <Th>查看流程图</Th>
+        <Th>查看任务</Th>
+        <Th>删除当前业务</Th>
+    </Tr>
+    <tr th:each="k,st:${list}">
+        <td th:text="${k.cr_name}"></td>
+        <td th:text="${k.cr_time}"></td>
+        <Td>
+            <a th:href="@{|/showActiveMap/${k.process_instance_id}|}">查看流程图</a>
+        </Td>
+        <Td>
+            <a th:href="@{|/showHistoryTask/${k.instanceId}|}">查看任务</a>
+        </Td>
+        <Td>
+            <A th:href="@{|/delProcessInstance/${k.instanceId}|} onclick="return confirm('你确定要删除吗?')">删除</A>
+        </Td>
+    </tr>
+
+
+</table>
+</body>
+</html>
