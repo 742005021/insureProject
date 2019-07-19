@@ -1,8 +1,6 @@
 package org.java.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,4 +27,26 @@ public interface LoadResourcesMapper {
 
     @Select("select * from profession where job_id = #{job_id}")
     List<Map<String, Object>> loadProfession(@Param("job_id") Integer job_id);
+
+    @Select("select * from cust_account where username=#{uname} and password=#{pwd}")
+    Map<String, Object> secondLogin(@Param("uname") String uname, @Param("pwd") String pwd);
+
+    @Select("select * from custinfo where cust_id=#{cust_id}")
+    Map<String, Object> loadUserInfo(@Param("cust_id") String cust_id);
+
+    @Insert("insert into custinfo values(#{m.cust_id},#{m.cust_name},#{m.cust_sex},#{m.license_id},#{m.cust_licenseno},#{m.cust_bir},#{m.cust_email},#{m.cust_address},null,null)")
+    void addTou(@Param("m") Map<String, Object> map);
+
+    @Update("update custinfo set cust_name=#{m.cust_name},cust_sex=#{m.cust_sex},license_id=#{m.license_id},cust_licenseno=#{m.cust_licenseno},cust_bir=#{m.cust_bir},cust_email=#{m.cust_email},cust_address=#{m.cust_address} where  cust_name=#{m.cust_id}")
+    void updateTou(@Param("m") Map<String, Object> map);
+
+    @Insert("insert into insuredinfo values(UUID(),#{m.insured_name},#{m.insured_sex},#{m.license_id},#{m.license_no},#{m.birthday},#{m.cust_id},#{m.address})")
+    void addInsuredInfo(@Param("m") Map<String, Object> map);
+
+    @Insert("insert into policy_order values(#{m.order_id},#{m.yiNianDetermine},null,#{m.zhiye},#{m.max_people},#{m.starttime},2,null,#{m.jieguo},#{m.item_id})")
+    void generateOrders(@Param("m") Map<String, Object> map);
+
+    @Update("update policy_order set order_statu = #{order_status} where order_id = #{order_id}")
+    void nextOrder(@Param("order_status") Integer status, @Param("order_id") String order_id);
+
 }

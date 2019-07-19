@@ -18,7 +18,7 @@ spring:
     username: myinsuredb
     password: 123
   redis:
-    host: 192.168.242.129
+    host: 192.168.88.128
     port: 6379
     database: 0
     jedis:
