@@ -9,6 +9,8 @@ import org.java.dao.LoadResourcesMapper;
 import org.java.service.LoadResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +36,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
     @Autowired
     private RedisTemplate<Object,Object> objectTemplate;
 
-    @Autowired
-    private RedisTemplate<Object, Object> objectTemplate;
+
 
 
     @Override
@@ -79,6 +80,8 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Override
     public String secondLogin(String uname, String pwd) {
+        RedisSerializer redisSerializer = new StringRedisSerializer();
+        template.setKeySerializer(redisSerializer);
         Map<String, Object> map = mapper.secondLogin(uname, pwd);
         if (map != null) {
             ses.setAttribute("cust", map);

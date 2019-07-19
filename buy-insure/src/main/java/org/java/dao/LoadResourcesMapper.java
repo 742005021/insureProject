@@ -31,6 +31,9 @@ public interface LoadResourcesMapper {
     @Select("select * from cust_account where username=#{uname} and password=#{pwd}")
     Map<String, Object> secondLogin(@Param("uname") String uname, @Param("pwd") String pwd);
 
+    @Select("select * from cust_account where cust_id = #{custid}")
+    Map<String, Object> method(@Param("custid") String custid);
+
     @Select("select * from custinfo where cust_id=#{cust_id}")
     Map<String, Object> loadUserInfo(@Param("cust_id") String cust_id);
 
