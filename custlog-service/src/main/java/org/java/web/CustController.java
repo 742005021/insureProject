@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -52,15 +53,19 @@ public class CustController {
     }
 
 
-    @RequestMapping("index")
+    @RequestMapping(value = {"index","toindex"})
     public String index(HttpSession ses){
         RedisSerializer redisSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(redisSerializer);
-        Map<String,Object> map = (Map<String, Object>) objectTemplate.opsForHash().get("cust", "map");
-        String custid= (String) map.get("cust_id");
-        int score=service.getCustScore(custid);
-        map.put("score", score);
-        ses.setAttribute("cust", map);
+        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> cache = (Map<String, Object>) objectTemplate.opsForHash().get("cust", "map");
+        if (cache != null){
+            map.putAll(cache);
+            String custid= (String) cache.get("cust_id");
+            int score=service.getCustScore(custid);
+            map.put("score", score);
+            ses.setAttribute("cust", map);
+        }
         return "/index";
     }
 

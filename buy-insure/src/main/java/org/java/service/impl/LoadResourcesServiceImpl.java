@@ -1,5 +1,6 @@
 package org.java.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -90,6 +91,10 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
     @Override
     public Map<String, Object> loadUserInfo() {
         Map<String, Object> map = (Map<String, Object>) ses.getAttribute("cust");
+        if(map == null){
+            String custid = template.opsForValue().get("custid");
+            return mapper.loadUserInfo(custid);
+        }
         String custid = (String) map.get("cust_id");
         return mapper.loadUserInfo(custid);
     }
@@ -166,8 +171,18 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Transactional
     @Override
-    public void generateOrders(Map<String, Object> map) {
+    public Map<String, Object> generateOrders(String json) {
+        Map<String, Object> map = JSON.parseObject(json, Map.class);
+
+        map.put("order_id", UUID.randomUUID().toString());
+        if (ses.getAttribute("cust") == null){
+            Map<String, Object> user = mapper.method(template.opsForValue().get("custid"));
+            map.put("yiNianDetermine", user.get("cust_id"));
+        } else {
+            map.put("yiNianDetermine", ((Map<String, Object>)ses.getAttribute("cust")).get("cust_id"));
+        }
         mapper.generateOrders(map);
+        return map;
     }
 
     @Transactional

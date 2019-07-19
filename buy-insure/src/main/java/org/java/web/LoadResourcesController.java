@@ -1,9 +1,11 @@
 package org.java.web;
 
 import com.alibaba.fastjson.JSON;
+import org.java.dao.LoadResourcesMapper;
 import org.java.dao.TestMapper;
 import org.java.service.LoadResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
@@ -38,7 +40,10 @@ public class LoadResourcesController {
     private TestMapper mapper;
 
     @Autowired
-    private ServletContext context;
+    private RedisTemplate<String, String> template;
+
+    @Autowired
+    private LoadResourcesMapper loadResourcesMapper;
     //加载保险类型
     /*@RequestMapping("/loadInsureType")
     @ResponseBody
@@ -162,13 +167,8 @@ public class LoadResourcesController {
 
     @RequestMapping("/toBook")
     public String toBook(String json, HttpServletRequest req, HttpSession ses) {
-        Map<String, Object> map = JSON.parseObject(json, Map.class);
-
-        map.put("order_id", UUID.randomUUID().toString());
-        map.put("yiNianDetermine", ((Map<String, Object>)ses.getAttribute("cust")).get("cust_id"));
         // 生成订单
-        service.generateOrders(map);
-
+        Map<String, Object> map = service.generateOrders(json);
         req.setAttribute("map", map);
         return "/book";
     }
@@ -194,6 +194,8 @@ public class LoadResourcesController {
     @RequestMapping("/bookData")
     public String bookData(@RequestParam Map<String, Object> map, HttpServletRequest req) {
         Map<String, Object> data = service.dataProcessing(map);
+        System.err.println("map:" + map);
+        System.err.println("data:" + data);
         req.setAttribute("data", data);
         return "/book_detail";
     }
@@ -203,6 +205,12 @@ public class LoadResourcesController {
     public void payment(@PathVariable("order_id") String order_id, @PathVariable("money") double money, HttpServletRequest req, HttpServletResponse res)throws Exception{
         service.nextOrder(order_id);
         service.ali(res, req, order_id, money, "一年意外险支付");
+
+    }
+    @RequestMapping("create/{data}")
+    public String create(@PathVariable("data") Map<String,Object> map){
+        System.err.println(map);
+        return "/book_detail";
     }
 
 }

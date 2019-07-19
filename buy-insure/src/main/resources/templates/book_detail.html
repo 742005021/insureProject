@@ -15,7 +15,12 @@
         <h1>一年意外险</h1>
         <div class="con_detail">
             <h2>产品信息</h2>
+            <form th:action="@{|/create/|}" method="post">
+                <input type="submit" value="111">
+            </form>
+
             <h3>投保人信息</h3>
+
             <ul>
                 <li>姓&nbsp;&nbsp;名：[[${data.tou.cust_name}]]</li>
                 <li>性&nbsp;&nbsp;别：[[${data.tou.cust_sex}]]</li>
