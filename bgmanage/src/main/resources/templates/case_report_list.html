@@ -16,10 +16,10 @@
         <div class="form-group form-inline">
             <p class="col-sm-2">
                 <select class="form-control full" name="statu" id="statu">
-                    <option value="0">待审核</option>
-                    <option value="3">审核中</option>
-                    <option value="1">已立案</option>
-                    <option value="2">立案失败</option>
+                    <option value="0" th:attr="selected=${statu==0?true:false}">待审核</option>
+                    <option value="3" th:attr="selected=${statu==3?true:false}">审核中</option>
+                    <option value="1" th:attr="selected=${statu==1?true:false}">已立案</option>
+                    <option value="2" th:attr="selected=${statu==2?true:false}">立案失败</option>
                 </select>
             </p>
         </div>

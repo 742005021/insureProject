@@ -1,9 +1,6 @@
 package org.java.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,10 +17,10 @@ public interface Peoplesurvey_TaskMapper {
     public int insert(@Param("m") Map<String,Object> map);
 
     @Insert("INSERT peoplesurvey_task VALUES("+
-            "#{task_id},null,#{emp_id},null,null,"+
+            "#{task_id},#{explains},#{emp_id},null,null,"+
             "null,null,null,0 )"
     )
-    public int insert2(@Param("task_id") String task_id,@Param("emp_id") int emp_id);
+    public int insert2(@Param("task_id") String task_id,@Param("emp_id") int emp_id,@Param("explains") String explains);
 
     @Select("SELECT * FROM peoplesurvey_task")
     public Map<String,Object> getAll();
@@ -32,4 +29,11 @@ public interface Peoplesurvey_TaskMapper {
             "AND emp_id=#{emp_id} "+
             "AND statu=#{statu} ")
     List<Map<String,Object>> getTasks(@Param("emp_id") Integer emp_id, @Param("statu") Integer statu);
+
+    @Select("SELECT * FROM peoplesurvey_task WHERE task_id=#{task_id}")
+    Map<String,Object> getTaskById(@Param("task_id") String task_id);
+
+    @Update("DELETE FROM peoplesurvey_task set accident_type=#{m.accident_type},disability_level=#{m.disability_level},file=#{m.file},is_ture=#{m.isture},massage=#{m.massage},statu=1 " +
+            "WHERE task_id = #{m.task_id}")
+    int update(@Param("m") Map<String,Object> map);
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>现场勘查结果</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/report_detailed.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style>
+        #body .full{
+            width:100%;
+        }
+    </style>
+</head>
+<body id="body">
+    <h1 style="text-align: center">现场勘查结果</h1>
+    <div th:replace="case_report_detailed :: report_detailed"></div>
+
+    <form class="form-horizontal" action="/submitSite_task" method="post" id="form" enctype="multipart/form-data">
+        <input type="hidden" name="task_id" th:value="${task?.task_id}"/>
+
+        <div class="form-group form-inline" >
+            <label for="accident_type" class="col-sm-2 control-label">确认意外类型</label>
+            <p class="col-sm-3">
+                <select class="form-control full" name="accident_type" id="accident_type">
+                    <option value="物理性损伤" title="如机械性的碰撞、摔砸、打压以及咬伤、烫伤、烧伤、冻伤、电击、光辐射等">物理性损伤</option>
+                    <option value="化学性损伤" title="酸、碱、煤气毒剂等">化学性损伤</option>
+                </select>
+            </p>
+
+            <label for="address" class="col-sm-2 control-label">实际意外现场</label>
+            <p class="col-sm-3">
+                <input type="text" class="form-control full" id="address" name="address">
+            </p>
+        </div>
+
+        <div class="form-group form-inline" >
+            <label for="file" class="col-sm-2 control-label">现场拍照</label>
+            <p class="col-sm-3">
+                <input type="file" class="form-control full" id="file" name="file">
+            </p>
+
+            <label for="is_ture" class="col-sm-2 control-label">情况是否属实</label>
+            <p class="col-sm-3">
+                <select class="form-control full" id="is_ture" name="is_ture">
+                    <option value="" selected>请选择</option>
+                    <option value="true">情况属实</option>
+                    <option value="false">不属实</option>
+                </select>
+            </p>
+        </div>
+
+        <div class="form-group form-inline" >
+            <label for="massage" class="col-sm-2 control-label" title="情况不属实的说明">错误信息</label>
+            <p class="col-sm-8" title="情况不属实的说明">
+                <textarea class="form-control full" id="massage" name="massage" disabled></textarea>
+            </p>
+        </div>
+
+        <div class="form-group form-inline">
+            <p class="col-sm-offset-2 col-sm-3">
+                <input class="btn btn-info btn-block" type="button" onclick="history.back()" value="返回">
+            </p>
+            <p class="col-sm-offset-2 col-sm-3">
+                <input class="btn btn-info btn-block" type="button" id="btn" value="提交">
+            </p>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $("#is_ture").change(function () {
+            $('#massage').attr("disabled",$(this).val()!="false");
+        })
+
+        $("#btn").click(function(){
+            var a=$("#address").val()=="";
+            var b=$("#file").val()=="";
+            var c=$("#is_ture").val();
+            if(a||b||c==""){
+                alert("请完善勘查信息!");
+                return;
+            }
+            if(c=="false"&&$("#massage").val()==""){
+                alert("请填写错误信息，说明不属实的情况！");
+                return;
+            }
+            $("#form").submit();
+        })
+    </script>
+</body>
+</html>

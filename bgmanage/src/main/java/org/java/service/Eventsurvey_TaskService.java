@@ -5,4 +5,8 @@ import java.util.Map;
 
 public interface Eventsurvey_TaskService {
     List<Map<String,Object>> getTasks(Integer emp_id, Integer statu);
+
+    Map<String,Object> getTaskById(String task_id);
+
+    int update(Map<String,Object> map);
 }
