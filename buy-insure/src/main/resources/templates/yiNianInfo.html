@@ -23,20 +23,7 @@
 <input type="hidden" id="base_money" th:value="${map.base_money}"/>
 <input type="hidden" id="item_id" th:value="${item_id}"/>
 <div class="wrapper">
-    <div class="header_nav">
-        <div class="main_width">
-            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
-            <a href="#" class="my_policy fr">我的保单</a>
-            <div class="menuBox">
-                <ul class="menu">
-                    <li class="active"><a href="#">首页</a></li>
-                    <li class="special"><a href="#">保险产品</a></li>
-                    <li><a href="#">理财中心</a></li>
-                    <li><a href="#">关于我们</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div th:include="other/header :: header"></div>
     <center>
         <div class="container health_notify" style="width: 1200px;">
             <h1>一年期意外险</h1>
@@ -227,44 +214,7 @@
     <br/>
     <br/>
     <br/>
-    <div class="copyright">
-        <div class="main_width footer">
-            <div class="footer_nav">
-                <p>
-                    <a href="#">关于京东金融</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东小金库</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东钱包</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东白条</a>
-                    <span class="divider">|</span>
-                    <a href="#">联系我们</a>
-                    <span class="divider">|</span>
-                    <a href="#">免责声明</a>
-                </p>
-                <p>Copyright © 2004-2016 京东JD.com 版权所有<span class="divider">|</span>投资有风险，购买需谨慎</p>
-            </div>
-            <div class="footer_contact">
-                <div class="f_contact_time">
-                    联系我们<span>（09:00-22:00）</span>
-                </div>
-                <div class="f_contact_content">
-                    <div class="f_cc_left">
-                        <span class="f_cc_item">个人业务：400-098-8511</span>
-                        <span class="f_cc_item">企业业务：400-088-8816</span>
-                    </div>
-                    <div class="f_cc_mid">
-                        <a href="#" class="f_cc_link item_JIMI">咨询JIMI</a>
-                        <a href="#" class="f_cc_link item_kefu">在线客服</a>
-                    </div>
-                    <div class="f_cc_right">
-                        <a href="#" class="f_cc_link item_mail">客服邮箱</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:include="other/footer :: footer"></div>
 </div>
 <form th:action="@{'/toBook'}" method="post" style="display: none" id="frm">
     <input type="text" name="json"/>

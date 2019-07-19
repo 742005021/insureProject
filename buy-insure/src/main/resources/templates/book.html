@@ -11,35 +11,7 @@
 <body>
 <div class="wrapper">
     <!--------------------------------------header_user begin------------------------------------->
-    <div class="header_user">
-        <div class="main_width">
-            <span class="tel">客服电话：400-663-6600（周一至周六 9:00-18:00）</span>
-            <span class="fr">
-                <span class="my_insurance"><a href="#">我的保险</a></span>
-                <span class="Backlog"><a href="#">未完成订单</a></span>
-                <span class="message"><a href="#">消息</a></span>
-                <span class="register"><a href="#">注册</a></span>
-                <span class="fg"><a href="#">|</a></span>
-                <span><a href="#">登录</a></span>
-            </span>
-        </div>
-    </div>
-    <!---------------------------------------header_user end-------------------------------------->
-    <!---------------------------------------header_nav begin------------------------------------->
-    <div class="header_nav">
-        <div class="main_width">
-            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
-            <a href="#" class="my_policy fr">我的保单</a>
-            <div class="menuBox">
-                <ul class="menu">
-                    <li class="active"><a href="#">首页</a></li>
-                    <li class="special"><a href="list2（分类2）.html">保险产品</a></li>
-                    <li><a href="#">理财中心</a></li>
-                    <li><a href="#">关于我们</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div th:include="other/header :: header"></div>
     <!----------------------------------------header_nav end-------------------------------------->
     <form th:action="@{'/bookData'}" method="post" id="frm" class="layui-form">
         <input type="hidden" th:value="${map.order_id}" name="order_id"/>
@@ -221,6 +193,7 @@
 
         </div>
     </form>
+    <div th:include="other/footer :: footer"></div>
 </div>
 <script th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
 <script th:src="@{'/js/jquery.easydropdown.js'}"></script>
