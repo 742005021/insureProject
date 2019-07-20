@@ -46,10 +46,13 @@ public interface LoadResourcesMapper {
     @Insert("insert into insuredinfo values(UUID(),#{m.insured_name},#{m.insured_sex},#{m.license_id},#{m.license_no},#{m.birthday},#{m.cust_id},#{m.address})")
     void addInsuredInfo(@Param("m") Map<String, Object> map);
 
-    @Insert("insert into policy_order values(#{m.order_id},#{m.yiNianDetermine},null,#{m.zhiye},#{m.max_people},#{m.starttime},2,null,#{m.jieguo},#{m.item_id})")
+    @Insert("insert into policy_order values(#{m.order_id},#{m.yiNianDetermine},null,#{m.zhiye},#{m.max_people},#{m.starttime},3,null,#{m.jieguo},#{m.item_id})")
     void generateOrders(@Param("m") Map<String, Object> map);
 
     @Update("update policy_order set order_statu = #{order_status} where order_id = #{order_id}")
     void nextOrder(@Param("order_status") Integer status, @Param("order_id") String order_id);
+
+    @Insert("insert into policy values(#{m.policy_id},#{m.cust_id},#{m.insure_stime},#{m.insure_etime},#{m.price},#{m.policyorder})")
+    void addOrder(@Param("m") Map<String, Object> param);
 
 }

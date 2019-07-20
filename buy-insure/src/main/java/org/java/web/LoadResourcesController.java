@@ -96,8 +96,6 @@ public class LoadResourcesController {
         File path = new File(ResourceUtils.getURL("classpath:").getPath());
         if (!path.exists()) path = new File("");
         File file = new File(path.getAbsolutePath(), "static/file/zhiyefenlei2014.xlsx");
-        //String filePath = context.getRealPath("file/zhiyefenlei2014.xlsx");
-        //File file = new File(filePath);
         res.setContentType("application/ms-download");
         String newName = URLEncoder.encode(file.getName(), "utf-8");
         res.setHeader("Content-disposition", "attachment;fileName=" + newName);
@@ -135,10 +133,6 @@ public class LoadResourcesController {
     public String yiNianDetermine(@PathVariable("item_id") Integer item_id, HttpServletRequest req) throws Exception {
         Map<String, Object> map = service.searchInsureInfo(item_id);
         req.setAttribute("map", map);
-        /*System.out.println(map);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date parse = format.parse("2019-7-16");
-        System.out.println(format.format(parse)+"@@@@@@@@@@@@@@@@");*/
         Calendar now1 = Calendar.getInstance();
         int month = now1.get(Calendar.MONTH) + 1;
         req.setAttribute("year", now1.get(Calendar.YEAR));
@@ -194,16 +188,14 @@ public class LoadResourcesController {
     @RequestMapping("/bookData")
     public String bookData(@RequestParam Map<String, Object> map, HttpServletRequest req) {
         Map<String, Object> data = service.dataProcessing(map);
-        System.err.println("map:" + map);
-        System.err.println("data:" + data);
         req.setAttribute("data", data);
         return "/book_detail";
     }
 
-    //付款加订单下一步
-    @RequestMapping("/payment/{order_id}/{money}")
-    public void payment(@PathVariable("order_id") String order_id, @PathVariable("money") double money, HttpServletRequest req, HttpServletResponse res)throws Exception{
-        service.nextOrder(order_id);
+    //付款加订单下一步和生成保单
+    @RequestMapping("/payment/{order_id}/{money}/{starttime}")
+    public void payment(@PathVariable("order_id") String order_id, @PathVariable("money") double money, @PathVariable("starttime") String starttime, HttpServletRequest req, HttpServletResponse res)throws Exception{
+        service.nextOrder(order_id, money, starttime);
         service.ali(res, req, order_id, money, "一年意外险支付");
 
     }

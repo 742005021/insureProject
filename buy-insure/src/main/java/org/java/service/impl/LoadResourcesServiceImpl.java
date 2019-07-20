@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -165,6 +167,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
         result.put("tou", tou);
         result.put("peoples", peoples);
         result.put("order_id", map.get("order_id"));
+        result.put("starttime", map.get("starttime"));
         result.put("phone", ((Map<String, Object>) ses.getAttribute("cust")).get("phone"));
         return result;
     }
@@ -178,6 +181,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
         if (ses.getAttribute("cust") == null){
             Map<String, Object> user = mapper.method(template.opsForValue().get("custid"));
             map.put("yiNianDetermine", user.get("cust_id"));
+            ses.setAttribute("cust", user);
         } else {
             map.put("yiNianDetermine", ((Map<String, Object>)ses.getAttribute("cust")).get("cust_id"));
         }
@@ -187,8 +191,32 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Transactional
     @Override
-    public void nextOrder(String order_id) {
-        mapper.nextOrder(3, order_id);
+    public void nextOrder(String order_id, double money, String starttime) {
+        //订单下一步
+        mapper.nextOrder(6, order_id);
+        //生成保单
+        Map<String, Object> cust = (Map<String, Object>) ses.getAttribute("cust");
+        //需要的参数
+        Map<String, Object> param = new HashMap<>();
+        param.put("policy_id", order_id);
+        param.put("cust_id", cust.get("cust_id"));
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date insure_stime = format.parse(starttime);
+            c.setTime(insure_stime);
+            c.add(Calendar.MONTH, 12);
+            String insure_etime = format.format(c.getTime());
+            param.put("insure_stime", starttime);
+            param.put("insure_etime", insure_etime);
+            param.put("price", money);
+            //生成保单
+            mapper.addOrder(param);
+            //添加关系
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

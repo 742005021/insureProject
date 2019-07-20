@@ -16,6 +16,7 @@
     <form th:action="@{'/bookData'}" method="post" id="frm" class="layui-form">
         <input type="hidden" th:value="${map.order_id}" name="order_id"/>
         <input type="hidden" th:value="${map.jieguo}" name="money"/>
+        <input type="hidden" th:value="${map.starttime}" name="starttime"/>
         <div class="container main_width">
             <div class="book_box">
                 <h1>填写保单</h1>

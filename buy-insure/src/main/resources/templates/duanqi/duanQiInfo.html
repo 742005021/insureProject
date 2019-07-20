@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>一年意外保险(报价)</title>
+    <link rel="stylesheet" th:href="@{'/css/common.css'}">
+    <link rel="stylesheet" th:href="@{'/css/book.css'}">
+    <link rel="stylesheet" th:href="@{'/css/login.css'}">
+    <link rel="stylesheet" th:href="@{'/layui/css/layui.css'}">
+    <style>
+        td {
+            font-size: 16px;
+        }
+
+        .mySelect {
+            width: 150px;
+            height: 25px;
+
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="base_money" th:value="${map.base_money}"/>
+<input type="hidden" id="item_id" th:value="${item_id}"/>
+<div class="wrapper">
+    <div th:include="other/header :: header"></div>
+    <center>
+        <div class="container health_notify" style="width: 1200px;">
+            <h1>短期意外险</h1>
+            <hr/>
+            <div class="layui-card" style="width: 1200px;">
+                <div class="layui-card-body">
+                    <table width="70%">
+                        <tr>
+                            <td align="right">
+                                保险起期:
+                            </td>
+                            <td align="left">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <select name="year" class="mySelect">
+                                    <option th:each="i:${#numbers.sequence(map.date.nowYear,map.date.desYear)}">[[${i}]]</option>
+                                </select>年
+                                <select name="month" class="mySelect">
+                                    <option th:each="i:${#numbers.sequence(map.date.nowMonth,map.date.desMonth)}">[[${i}]]</option>
+                                </select>月
+                                <select name="day">
+                                    <option th:each="i:${#numbers.sequence(map.date.nowDay,map.date.desDay)}">[[${i}]]</option>
+                                </select>日
+                                &nbsp;&nbsp;<span style="color: #353434">有效期180天</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <br/><br/>
+                                人数:
+                            </td>
+                            <td align="left">
+                                <br/><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <select id="max_people" class="mySelect">
+                                    <option th:each="i:${#numbers.sequence(1,map.max_people)}" th:value="${i}">
+                                        [[${i}]]人
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="right">
+                                <br/>
+                                <input id="submitBtn" type="button" value="投保"
+                                       style="width: 100px; height: 40px; color: #ffffff;background-color: #ff6633; border-radius: 10px; border-color: #ff6633;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--表格-->
+        <div class="layui-form" style="width: 1200px;">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="400">
+                    <col width="400">
+                    <col width="800">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="2">一般意外</td>
+                    <td>意外身故、伤残</td>
+                    <td>
+                        <select id="yiwai" lay-filter="number">
+                            <option value="1" selected>5万元</option>
+                            <option value="2">10万元</option>
+                            <option value="4">20万元</option>
+                            <option value="6">30万元</option>
+                            <option value="8">40万元</option>
+                            <option value="10">50万元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>意外医疗</td>
+                    <td>
+                        <select id="yiliao" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="0.03">2000元</option>
+                            <option value="0.05">5000元</option>
+                            <option value="0.07">1万元</option>
+                            <option value="0.13">2万元</option>
+                            <option value="0.3">5万元</option>
+                            <option value="0.59">10万元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">津贴及车费</td>
+                    <td>住院误工津贴</td>
+                    <td>
+                        <select id="zhuyuan" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="0.01">20元/天</option>
+                            <option value="0.03">50元/天</option>
+                            <option value="0.06">100元/天</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>救护车费用报销</td>
+                    <td>
+                        <select id="jiuhuiche" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="0.02">2000元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4">交通意外</td>
+                    <td>飞机意外身故、伤残</td>
+                    <td>
+                        <select id="feiji" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="0.02">50万元</option>
+                            <option value="0.04">100万元</option>
+                            <option value="0.09">200万元</option>
+                            <option value="0.13">300万元</option>
+                            <option value="0.22">500万元</option>
+                            <option value="0.35">800万元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>火车意外身故、伤残</td>
+                    <td>
+                        <select id="huoche" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="1.6">10万</option>
+                            <option value="3.2">20万</option>
+                            <option value="4.8">30万</option>
+                            <option value="8">50万</option>
+                            <option value="16">100万</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>轮船意外身故、伤残</td>
+                    <td>
+                        <select id="lunchuan" lay-filter="number">
+                            <option value="-1;-1">不投保</option>
+                            <option value="0.01;n">10万</option>
+                            <option value="4.8;y">20万</option>
+                            <option value="0.02;n">30万</option>
+                            <option value="0.03;n">50万</option>
+                            <option value="0.07;n">100万</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>汽车意外身故、伤残</td>
+                    <td>
+                        <select id="qiche" lay-filter="number">
+                            <option value="-1;-1">不投保</option>
+                            <option value="0.01;n">5万元</option>
+                            <option value="4;y">10万元</option>
+                            <option value="0.02;n">20万元</option>
+                            <option value="0.03;n">30万元</option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </center>
+    <div style="width: 210px;background-color: #ff6633;height: 100px;margin-left: 1055px; color: #ffffff; font-size: 19px; border-radius: 10px;">
+        <br/>
+        <center>
+            <span style="font-size: 12px;" id="ren">0.12</span>/人天&nbsp;起
+            <hr/>
+            <span id="jieguo">42.8</span>元
+        </center>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div th:include="other/footer :: footer"></div>
+</div>
+<form th:action="@{'/toBook'}" method="post" style="display: none" id="frm">
+    <input type="text" name="json"/>
+</form>
+<!-- 登录弹层 -->
+<script type="text/html" id="login">
+    <br/> <br/>
+    <div style="margin-left: 170px;">
+        <form name="loginForm" id="loginForm">
+            <h2>登录大特保网</h2>
+            <div class="user_box">
+                <span class="icon"></span>
+                <input type="text" class="userName" name="username" placeholder="用户名">
+            </div>
+            <div class="pwd_box">
+                <span class="icon"></span>
+                <input type="password" class="userPwd" name="password" placeholder="密码">
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/javascript" th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
+<script type="text/javascript" th:src="@{'/layui/layui.js'}"></script>
+<script type="text/javascript" th:src="@{'/myScript/static_table.js'}"></script>
+<script type="text/javascript">
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form,
+            layer = layui.layer;
+
+
+
+    });
+</script>
+</body>
+</html>
