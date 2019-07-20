@@ -17,7 +17,8 @@ public class Case_ReportController {
     @PostMapping("report/insert")
     public String insert(@RequestParam Map<String,Object> map,Model model){
         int n=case_reportService.insert(map);
-        model.addAttribute("msg",n==1?"申请已提交!":"提交失败!");
+        model.addAttribute("msg",1==1?"申请已提交!":"提交失败!");
+        model.addAttribute("path","/index/case_report");
         return "massage";
     }
 

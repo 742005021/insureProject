@@ -31,4 +31,9 @@ public interface Case_ReportMapper {
 
     @Update("update case_report set statu = #{statu} where cr_id=#{cr_id} ")
     int update_Statu(@Param("cr_id") String cr_id,@Param("statu") int statu);
+
+    @Select("SELECT * FROM case_report r " +
+            "LEFT JOIN case_entrust e ON r.cr_id=e.report_id " +
+            "WHERE e.entrust_id = #{task_id}")
+    Map<String,Object> getReport_ByEntrustId(@Param("task_id") String task_id);
 }

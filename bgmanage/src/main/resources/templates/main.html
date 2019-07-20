@@ -11,7 +11,7 @@
     <input type="hidden" value="" id="webSocketUser"/>
     <div class="layui-layout layui-layout-admin"  >
         <div class="layui-header layui-bg-black">
-            <div class="layui-logo" >
+            <div class="layui-logo">
                 大特保管理中心
             </div>
             <!-- 头部区域（可配合layui已有的水平导航） -->
@@ -26,10 +26,10 @@
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <ul class="layui-nav layui-nav-tree" lay-filter="test">
                     <li class="layui-nav-item">
-                    <a href="javascript:;">
-                       <i class="layui-icon layui-icon-survey" style="font-size: 20px; color: white;">立案管理</i>
-                    </a>
-                    <dl class="layui-nav-child">
+                        <a href="javascript:;">
+                           <i class="layui-icon layui-icon-survey" style="font-size: 20px; color: white;">立案管理</i>
+                        </a>
+                        <dl class="layui-nav-child">
                             <dd>
                                 <a href="#" data-url="/index/case_report" data-title="报案申请"
                                    data-id="11" class="site-demo-active" data-type="tabAdd">报案申请</a>
@@ -39,16 +39,8 @@
                                    data-id="12" class="site-demo-active" data-type="tabAdd">申请列表</a>
                             </dd>
                             <dd>
-                                <a href="#" data-url="" data-title="勘查结果"
-                                   data-id="13" class="site-demo-active" data-type="tabAdd">勘查结果</a>
-                            </dd>
-                            <dd>
-                                <a href="#" data-url="" data-title="案情总审"
-                                   data-id="14" class="site-demo-active" data-type="tabAdd">案情总审</a>
-                            </dd>
-                            <dd>
-                                <a href="#" data-url="" data-title="草稿箱"
-                                   data-id="15" class="site-demo-active" data-type="tabAdd">草稿箱</a>
+                                <a href="#" data-url="/verify/list?statu=0" data-title="案情总审"
+                                   data-id="13" class="site-demo-active" data-type="tabAdd">案情总审</a>
                             </dd>
                         </dl>
                     </li>
@@ -74,23 +66,48 @@
 
                     <li class="layui-nav-item">
                         <a href="javascript:;">
+                            <i class="layui-icon layui-icon-rmb" style="font-size: 20px; color: white;">赔付中心</i>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="#" data-url="" data-title="未处理案件"
+                                   data-id="31" class="site-demo-active" data-type="tabAdd">未处理案件</a>
+                            </dd>
+                            <dd>
+                                <a href="#" data-url="" data-title="处理中案件"
+                                   data-id="32" class="site-demo-active" data-type="tabAdd">处理中案件</a>
+                            </dd>
+                            <dd>
+                                <a href="#" data-url="" data-title="我的案件"
+                                   data-id="33" class="site-demo-active" data-type="tabAdd">我的案件</a>
+                            </dd>
+                            <dd>
+                                <a href="#" data-url="" data-title="已赔付案件"
+                                   data-id="34" class="site-demo-active" data-type="tabAdd">已赔付案件</a>
+                            </dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
                             <i class="layui-icon layui-icon-template-1" style="font-size: 20px; color: white;">流程管理</i>
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
                                 <a href="#" data-url="/processDefinition/deploy" data-title="部署流程定义"
-                                   data-id="31" class="site-demo-active" data-type="tabAdd">部署流程定义</a>
+                                   data-id="41" class="site-demo-active" data-type="tabAdd">部署流程定义</a>
                             </dd>
                             <dd>
                                 <a href="#" data-url="/showProcessDefinition" data-title="查看流程定义"
-                                   data-id="32" class="site-demo-active" data-type="tabAdd">查看流程定义</a>
+                                   data-id="42" class="site-demo-active" data-type="tabAdd">查看流程定义</a>
                             </dd>
                             <dd>
                                 <a href="#" data-url="/getAll" data-title="查看所有报案单"
-                                   data-id="33" class="site-demo-active" data-type="tabAdd">查看所有报案单</a>
+                                   data-id="43" class="site-demo-active" data-type="tabAdd">查看所有报案单</a>
                             </dd>
                         </dl>
                     </li>
+
                 </ul>
             </div>
         </div>
