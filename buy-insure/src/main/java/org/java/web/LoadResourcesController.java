@@ -188,109 +188,22 @@ public class LoadResourcesController {
     public String bookData(@RequestParam Map<String, Object> map, HttpServletRequest req) {
         Map<String, Object> data = service.dataProcessing(map);
         req.setAttribute("data", data);
-        System.err.println(data);
-        createPolicy(data);
+        service.createPolicy(data);
         return "/book_detail";
     }
 
     //付款加订单下一步和生成保单
-    @RequestMapping("/payment/{order_id}/{money}/{starttime}")
-    public void payment(@PathVariable("order_id") String order_id, @PathVariable("money") double money, @PathVariable("starttime") String starttime, HttpServletRequest req, HttpServletResponse res)throws Exception{
-        service.nextOrder(order_id, money, starttime);
+    @RequestMapping("/payment/{order_id}/{money}/{starttime}/{insuredIds}")
+    public void payment(@PathVariable("order_id") String order_id,
+                        @PathVariable("money") double money,
+                        @PathVariable("starttime") String starttime,
+                        @PathVariable("insuredIds") String insuredIds,
+                        HttpServletRequest req, HttpServletResponse res)throws Exception{
+        service.nextOrder(order_id, money, starttime, insuredIds);
         service.ali(res, req, order_id, money, "一年意外险支付");
 
     }
 
 
-    public void createPolicy(Map<String,Object> map){
-
-        /**
-         * {peoples=[{license_no=ewqeqw, birthday=1991-5-4, insured_sex=男, address=qwwq, insured_name=ewq, licnese_id=1, cust_id=501}],
-         * money=43.8, phone=17343232980,
-         * tou={cust_sex=男, cust_licenseno=45454654875454445, cust_bir=2000-09-02, license_id=1, cust_email=1445414011@qq.com, cust_address=武汉, cust_name=杨鹏飞, cust_id=501}, order_id=bd4a2ae3-1f4e-4738-99b6-f1141141cfd9}
-         */
-
-        String modelPath = "policy.pdf";
-        //生成文件新路径
-        String newFilePath = map.get("order_id").toString()+".pdf";
-
-        PdfReader pdfReader = null;
-        FileOutputStream out = null;
-        ByteArrayOutputStream bos = null;
-        PdfStamper stamper = null;
-
-        try{
-            //输出流
-            out = new FileOutputStream(newFilePath);
-            //读取模板
-            pdfReader = new PdfReader(modelPath);
-            bos = new ByteArrayOutputStream();
-            stamper = new PdfStamper(pdfReader,bos);
-            //获得表单
-            AcroFields form = stamper.getAcroFields();
-
-            //获得表单中的所有表单key
-            Set<String> keys = form.getFields().keySet();
-
-          List<Map<String ,Object>> peoples= (List<Map<String, Object>>) map.get("peoples");
-
-          Map<String,Object> people=peoples.get(0);
-          Map<String,Object> tou = (Map<String, Object>) map.get("tou");
-
-           form.setField("policyid", map.get("order_id").toString().substring(0, 10));
-            form.setField("custname", tou.get("cust_name").toString());
-            form.setField("custltype", "身份证");
-            form.setField("custlno", tou.get("cust_licenseno").toString());
-            form.setField("phone", map.get("phone").toString());
-            form.setField("price", map.get("money").toString());
-            form.setField("count", peoples.size()+"");
-            form.setField("insuredname", people.get("insured_name").toString());
-            form.setField("ship", "亲属");
-            form.setField("insuredltype", "身份证");
-            form.setField("insuredlno", people.get("license_no").toString());
-            form.setField("job", "一级职业");
-            form.setField("people", "法定");
-            form.setField("insuredlno", people.get("license_no").toString());
-            form.setField("starttime", "2019-7-14");
-            form.setField("endtime", "2020-7-14");
-
-            form.setField("date", "2019-7-9");
-
-            //设置好后，pdf不能编辑
-            stamper.setFormFlattening(true);
-
-            Document document = new Document();
-
-            PdfCopy pdfCopy = new PdfCopy(document,out);
-
-            document.open();
-
-            PdfImportedPage importedPage = pdfCopy.getImportedPage(pdfReader,1);
-
-            pdfCopy.addPage(importedPage);
-
-            document.close();
-
-            InputStream in = new FileInputStream(newFilePath);
-            ByteArrayOutputStream o = new ByteArrayOutputStream();
-            byte[] bytes = new byte[1024];
-
-            int len;
-
-            while((len=in.read(bytes))!=-1){
-                o.write(bytes,0,len);
-            }
-
-
-                o.close();
-
-
-
-        }catch (Exception e){
-         e.printStackTrace();
-        }
-
-
-    }
 
 }

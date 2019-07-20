@@ -33,7 +33,9 @@ public interface LoadResourcesService {
     Map<String, Object> generateOrders(String json);
 
     //订单下一步
-    void nextOrder(String order_id, double money,String starttime);
+    void nextOrder(String order_id, double money,String starttime, String insuredIds);
 
     void ali(HttpServletResponse res, HttpServletRequest req, String order_id, double money, String order_name) throws IOException, AlipayApiException;
+
+    void createPolicy(Map<String,Object> map);
 }
