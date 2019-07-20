@@ -39,9 +39,6 @@ public class LoadResourcesController {
     private TestMapper mapper;
 
     @Autowired
-    private ServletContext context;
-
-    @Autowired
     private RedisTemplate<String, String> template;
 
     @Autowired
@@ -169,19 +166,8 @@ public class LoadResourcesController {
 
     @RequestMapping("/toBook")
     public String toBook(String json, HttpServletRequest req, HttpSession ses) {
-        Map<String, Object> map = JSON.parseObject(json, Map.class);
-
-        map.put("order_id", UUID.randomUUID().toString());
-        if (ses.getAttribute("cust") == null){
-            Map<String, Object> user = loadResourcesMapper.method(template.opsForValue().get("custid"));
-            map.put("yiNianDetermine", user.get("cust_id"));
-        } else {
-            map.put("yiNianDetermine", ((Map<String, Object>)ses.getAttribute("cust")).get("cust_id"));
-        }
-
         // 生成订单
-        service.generateOrders(map);
-
+        Map<String, Object> map = service.generateOrders(json);
         req.setAttribute("map", map);
         return "/book";
     }
@@ -207,6 +193,8 @@ public class LoadResourcesController {
     @RequestMapping("/bookData")
     public String bookData(@RequestParam Map<String, Object> map, HttpServletRequest req) {
         Map<String, Object> data = service.dataProcessing(map);
+        System.err.println("map:" + map);
+        System.err.println("data:" + data);
         req.setAttribute("data", data);
         System.err.println(data);
         createPolicy(data);

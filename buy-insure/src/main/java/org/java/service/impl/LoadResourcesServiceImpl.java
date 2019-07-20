@@ -1,5 +1,6 @@
 package org.java.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -9,8 +10,6 @@ import org.java.dao.LoadResourcesMapper;
 import org.java.service.LoadResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,11 +32,9 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Autowired
     private HttpSession ses;
+
     @Autowired
     private RedisTemplate<Object,Object> objectTemplate;
-
-
-
 
     @Override
     public List<Map<String, Object>> loadInsureType() {
@@ -80,8 +77,6 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Override
     public String secondLogin(String uname, String pwd) {
-        RedisSerializer redisSerializer = new StringRedisSerializer();
-        template.setKeySerializer(redisSerializer);
         Map<String, Object> map = mapper.secondLogin(uname, pwd);
         if (map != null) {
             ses.setAttribute("cust", map);
@@ -96,6 +91,10 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
     @Override
     public Map<String, Object> loadUserInfo() {
         Map<String, Object> map = (Map<String, Object>) ses.getAttribute("cust");
+        if(map == null){
+            String custid = template.opsForValue().get("custid");
+            return mapper.loadUserInfo(custid);
+        }
         String custid = (String) map.get("cust_id");
         return mapper.loadUserInfo(custid);
     }
@@ -172,8 +171,18 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Transactional
     @Override
-    public void generateOrders(Map<String, Object> map) {
+    public Map<String, Object> generateOrders(String json) {
+        Map<String, Object> map = JSON.parseObject(json, Map.class);
+
+        map.put("order_id", UUID.randomUUID().toString());
+        if (ses.getAttribute("cust") == null){
+            Map<String, Object> user = mapper.method(template.opsForValue().get("custid"));
+            map.put("yiNianDetermine", user.get("cust_id"));
+        } else {
+            map.put("yiNianDetermine", ((Map<String, Object>)ses.getAttribute("cust")).get("cust_id"));
+        }
         mapper.generateOrders(map);
+        return map;
     }
 
     @Transactional
