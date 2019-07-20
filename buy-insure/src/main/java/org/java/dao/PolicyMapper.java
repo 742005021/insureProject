@@ -7,13 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Blob;
 
-@Mapper
 @Component
-public interface TestMapper {
+@Mapper
+public interface PolicyMapper {
 
-    @Update("update insurance_item set item_file = #{item_file} where item_id = 6")
-    void update(@Param("item_file") Blob blob);
-
-
-
+    @Update("update policy set policyorder=#{policyorder} where policy_id=#{policyid}")
+    int addOrder(@Param("policyorder") Blob blob, @Param("policyid") String policyid);
 }

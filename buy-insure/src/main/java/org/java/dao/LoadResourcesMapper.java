@@ -52,4 +52,6 @@ public interface LoadResourcesMapper {
     @Update("update policy_order set order_statu = #{order_status} where order_id = #{order_id}")
     void nextOrder(@Param("order_status") Integer status, @Param("order_id") String order_id);
 
+
+
 }
