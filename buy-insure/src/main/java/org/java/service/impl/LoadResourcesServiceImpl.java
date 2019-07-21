@@ -189,10 +189,10 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
         map.put("order_id", UUID.randomUUID().toString());
         if (ses.getAttribute("cust") == null) {
             Map<String, Object> user = mapper.method(template.opsForValue().get("custid"));
-            map.put("yiNianDetermine", user.get("cust_id"));
+            map.put("cust_id", user.get("cust_id"));
             ses.setAttribute("cust", user);
         } else {
-            map.put("yiNianDetermine", ((Map<String, Object>) ses.getAttribute("cust")).get("cust_id"));
+            map.put("cust_id", ((Map<String, Object>) ses.getAttribute("cust")).get("cust_id"));
         }
         mapper.generateOrders(map);
         return map;

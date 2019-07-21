@@ -201,7 +201,6 @@ public class LoadResourcesController {
                         HttpServletRequest req, HttpServletResponse res)throws Exception{
         service.nextOrder(order_id, money, starttime, insuredIds);
         service.ali(res, req, order_id, money, "一年意外险支付");
-
     }
 
 

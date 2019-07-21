@@ -15,13 +15,11 @@
         .mySelect {
             width: 150px;
             height: 25px;
-
         }
     </style>
 </head>
 <body>
-<input type="hidden" id="base_money" th:value="${map.base_money}"/>
-<input type="hidden" id="item_id" th:value="${item_id}"/>
+<input type="hidden" id="item_id" th:value="${map.item_id}"/>
 <div class="wrapper">
     <div th:include="other/header :: header"></div>
     <center>
@@ -37,22 +35,27 @@
                             </td>
                             <td align="left">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <select name="year" class="mySelect">
-                                    <option th:each="i:${#numbers.sequence(map.date.nowYear,map.date.desYear)}">[[${i}]]</option>
-                                </select>年
-                                <select name="month" class="mySelect">
-                                    <option th:each="i:${#numbers.sequence(map.date.nowMonth,map.date.desMonth)}">[[${i}]]</option>
-                                </select>月
-                                <select name="day">
-                                    <option th:each="i:${#numbers.sequence(map.date.nowDay,map.date.desDay)}">[[${i}]]</option>
-                                </select>日
+                                <input type="date" id="date" class="mySelect"/>
                                 &nbsp;&nbsp;<span style="color: #353434">有效期180天</span>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">
                                 <br/><br/>
-                                人数:
+                                保险天数:
+                            </td>
+                            <td align="left">
+                                <br/><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <select name="day" class="mySelect">
+                                    <option th:each="i:${#numbers.sequence(1,180)}" th:value="${i}">[[${i}]]</option>
+                                </select>天
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <br/><br/>
+                                保险人数:
                             </td>
                             <td align="left">
                                 <br/><br/>
@@ -85,106 +88,142 @@
                 </colgroup>
                 <tbody>
                 <tr>
-                    <td rowspan="2">一般意外</td>
-                    <td>意外身故、伤残</td>
+                    <td rowspan="2">意外保障</td>
+                    <td>意外伤害身故和残疾</td>
                     <td>
                         <select id="yiwai" lay-filter="number">
-                            <option value="1" selected>5万元</option>
-                            <option value="2">10万元</option>
-                            <option value="4">20万元</option>
-                            <option value="6">30万元</option>
-                            <option value="8">40万元</option>
-                            <option value="10">50万元</option>
+                            <option value="1.83">5万元</option>
+                            <option value="2.0">10万元</option>
+                            <option value="2.67">20万元</option>
+                            <option value="3.67">30元</option>
+                            <option value="6.37">40万元</option>
+                            <option value="8.34">50万元</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>意外医疗</td>
+                    <td>意外伤害医疗</td>
                     <td>
                         <select id="yiliao" lay-filter="number">
-                            <option value="-1">不投保</option>
-                            <option value="0.03">2000元</option>
-                            <option value="0.05">5000元</option>
-                            <option value="0.07">1万元</option>
-                            <option value="0.13">2万元</option>
-                            <option value="0.3">5万元</option>
-                            <option value="0.59">10万元</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td rowspan="2">津贴及车费</td>
-                    <td>住院误工津贴</td>
-                    <td>
-                        <select id="zhuyuan" lay-filter="number">
-                            <option value="-1">不投保</option>
-                            <option value="0.01">20元/天</option>
-                            <option value="0.03">50元/天</option>
-                            <option value="0.06">100元/天</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>救护车费用报销</td>
-                    <td>
-                        <select id="jiuhuiche" lay-filter="number">
-                            <option value="-1">不投保</option>
-                            <option value="0.02">2000元</option>
+                            <option value="1.83">1万元</option>
+                            <option value="0.34">2万元</option>
+                            <option value="0.67">3万元</option>
+                            <option value="1.34">5万元</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td rowspan="4">交通意外</td>
-                    <td>飞机意外身故、伤残</td>
+                    <td>飞机意外伤害身故和残疾</td>
                     <td>
                         <select id="feiji" lay-filter="number">
                             <option value="-1">不投保</option>
-                            <option value="0.02">50万元</option>
-                            <option value="0.04">100万元</option>
-                            <option value="0.09">200万元</option>
-                            <option value="0.13">300万元</option>
-                            <option value="0.22">500万元</option>
-                            <option value="0.35">800万元</option>
+                            <option value="0.14">50万元</option>
+                            <option value="0.27">100万元</option>
+                            <option value="0.54">200万元</option>
+                            <option value="0.8">300万元</option>
+                            <option value="1.34">500万元</option>
+                            <option value="2.14">800万元</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>火车意外身故、伤残</td>
+                    <td>火车意外伤害身故和残疾</td>
                     <td>
                         <select id="huoche" lay-filter="number">
                             <option value="-1">不投保</option>
-                            <option value="1.6">10万</option>
-                            <option value="3.2">20万</option>
-                            <option value="4.8">30万</option>
-                            <option value="8">50万</option>
-                            <option value="16">100万</option>
+                            <option value="0.04">10万元</option>
+                            <option value="0.07">20万元</option>
+                            <option value="0.1">30万元</option>
+                            <option value="0.14">50万元</option>
+                            <option value="0.27">100万元</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>轮船意外身故、伤残</td>
+                    <td>轮船意外伤害身故和残疾</td>
                     <td>
                         <select id="lunchuan" lay-filter="number">
-                            <option value="-1;-1">不投保</option>
-                            <option value="0.01;n">10万</option>
-                            <option value="4.8;y">20万</option>
-                            <option value="0.02;n">30万</option>
-                            <option value="0.03;n">50万</option>
-                            <option value="0.07;n">100万</option>
+                            <option value="-1">不投保</option>
+                            <option value="0.04">10万元</option>
+                            <option value="0.1">20万元</option>
+                            <option value="0.14">30万元</option>
+                            <option value="0.2">50万元</option>
+                            <option value="0.44">100万元</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>汽车意外身故、伤残</td>
+                    <td>汽车意外伤害身故和残疾</td>
                     <td>
                         <select id="qiche" lay-filter="number">
-                            <option value="-1;-1">不投保</option>
-                            <option value="0.01;n">5万元</option>
-                            <option value="4;y">10万元</option>
-                            <option value="0.02;n">20万元</option>
-                            <option value="0.03;n">30万元</option>
+                            <option value="-1">不投保</option>
+                            <option value="0.04">5万元</option>
+                            <option value="0.1">10万元</option>
+                            <option value="0.14">20万元</option>
+                            <option value="0.2">30万元</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
+                    <td rowspan="5">附加保障</td>
+                    <td>高风险运动意外身故和残疾</td>
+                    <td>
+                        <select id="gaofengxian" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="2.67">5万元</option>
+                            <option value="5">10万元</option>
+                            <option value="10">20万元</option>
+                            <option value="15">30万元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>高风险运动意外医疗</td>
+                    <td>
+                        <select id="gaoyiwai" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="1.67">1万元</option>
+                            <option value="3.34">2万元</option>
+                            <option value="5">3万元</option>
+                            <option value="8.34">5万元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>意外住院津贴</td>
+                    <td>
+                        <select id="zhuyuan" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="1">10元/天</option>
+                            <option value="3">30元/天</option>
+                            <option value="5">50元/天</option>
+                            <option value="10">100元/天</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>猝死</td>
+                    <td>
+                        <select id="cusi" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="0.07">投保</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>救护车费用</td>
+                    <td>
+                        <select id="jiuhuche" lay-filter="number">
+                            <option value="-1">不投保</option>
+                            <option value="0.67">2000元</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>专享服务</td>
+                    <td>意外住院垫付/担保服务</td>
+                    <td>专享</td>
                 </tr>
                 </tbody>
             </table>
@@ -203,7 +242,7 @@
     <br/>
     <div th:include="other/footer :: footer"></div>
 </div>
-<form th:action="@{'/toBook'}" method="post" style="display: none" id="frm">
+<form th:action="@{'/toDuanQiBook'}" method="post" style="display: none" id="frm">
     <input type="text" name="json"/>
 </form>
 <!-- 登录弹层 -->
@@ -230,10 +269,178 @@
     layui.use(['form', 'layer'], function () {
         var form = layui.form,
             layer = layui.layer;
+        $("[name=day]").find("option").eq(2).prop("selected",true);
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+        $('#date').val(today);
+        operation();
+        form.on('select(number)', function (data) {
+            operation();
+        });
+        $("[name=day]").change(function () {
+            operation();
+        });
+        $("#max_people").change(function () {
+            operation();
+        });
+        $("#submitBtn").click(function () {
+            $.ajax({
+                url: "/searchCacheUserData",
+                type: "post",
+                success: function (result) {
+                    if (result == "no") {
+                        layer.open({
+                            type: 1
+                            , title: false //不显示标题栏
+                            , closeBtn: true
+                            , area: ['670px', '300px']
+                            , shade: 0.8
+                            , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                            , btn: ['登录', '关闭']
+                            , btnAlign: 'c'
+                            , moveType: 1 //拖拽模式，0或者1
+                            , content: $("#login").html()
+                            , yes: function (index, layero) {
+                                var uname = $("[name=username]").val();
+                                var pwd = $("[name=password]").val();
+                                $.ajax({
+                                    url: "/secondLogin",
+                                    data: {
+                                        "uname": uname,
+                                        "pwd": pwd
+                                    },
+                                    type: "post",
+                                    success: function (result) {
+                                        if(result == "yes"){
+                                            layer.msg('登录成功!', {
+                                                time: 20000, //20s后自动关闭
+                                                btn: ['好的'],
+                                                end : function () {
+                                                    layer.close(index);
+                                                }
+                                            });
+                                        } else {
+                                            layer.msg('登录失败!', {
+                                                time: 20000, //20s后自动关闭
+                                                btn: ['好的']
+                                            });
+                                        }
+                                    }
+                                });
 
-
-
+                            }
+                        });
+                    } else {
+                        $("#frm").submit();
+                    }
+                }
+            });
+        });
     });
+    //计算保险
+    function operation() {
+        var yiwai = parseInt($("#yiwai").val());
+        var yiliao = parseInt($("#yiliao").val());
+        var feiji = parseInt($("#feiji").val());
+        var huoche = parseInt($("#huoche").val());
+        var lunchuan = parseInt($("#lunchuan").val());
+        var qiche = parseInt($("#qiche").val());
+        var gaofengxia = parseInt($("#gaofengxian").val());
+        var gaoyiwai = parseInt($("#gaoyiwai").val());
+        var zhuyuan = parseInt($("#zhuyuan").val());
+        var cusi = parseInt($("#cusi").val());
+        var jiuhuche = parseInt($("#jiuhuche").val());
+
+        //============================================
+        var yiwaiText = $("#yiwai option:selected").text();
+        var yiliaoText = $("#yiliao option:selected").text();
+        var feijiText = $("#feiji option:selected").text();
+        var huocheText = $("#huoche option:selected").text();
+        var lunchuanText = $("#lunchuan option:selected").text();
+        var qicheText = $("#qiche option:selected").text();
+        var gaofengxiaText = $("#gaofengxian option:selected").text();
+        var gaoyiwaiText = $("#gaoyiwai option:selected").text();
+        var zhuyuanText = $("#zhuyuan option:selected").text();
+        var cusiText = $("#cusi option:selected").text();
+        var jiuhucheText = $("#jiuhuche option:selected").text();
+
+        var item_id = parseInt($("#item_id").val());
+
+
+        var day = parseInt($("[name=day]").val());
+        var starttime = $("#date").val();
+        var max_people = parseInt($("#max_people").val());
+        //先计算yiwai  和  yiliao
+        var jieguo = 0;
+        if(yiwai == 1.83){
+            if(yiliao == 1.83){
+                jieguo = 1.83;
+            } else {
+                jieguo = 1.83 + yiliao;
+            }
+        } else {
+            if(yiliao == 1.83){
+                jieguo = 1.83 + yiwai;
+            } else {
+                jieguo = 1.83 + yiwai + yiliao;
+            }
+        }
+        if(feiji != -1){
+            jieguo = (jieguo + feiji);
+        }
+        if(huoche != -1){
+            jieguo = (jieguo + huoche);
+        }
+        if(lunchuan != -1){
+            jieguo = (jieguo + lunchuan);
+        }
+        if(qiche != -1){
+            jieguo = (jieguo + qiche);
+        }
+        if(gaofengxia != -1){
+            jieguo = (jieguo + gaofengxia);
+        }
+        if(gaoyiwai != -1){
+            jieguo = (jieguo + gaoyiwai);
+        }
+        if(zhuyuan != -1){
+            jieguo = (jieguo + zhuyuan);
+        }
+        if(cusi != -1){
+            jieguo = (jieguo + cusi);
+        }
+        if(jiuhuche != -1){
+            jieguo = (jieguo + jiuhuche);
+        }
+
+        var money = jieguo * day;
+        money = Math.floor(money * 100) / 100;
+        $("#ren").text(jieguo);
+        $("#jieguo").text(money);
+        var obj = {
+            "ren" : jieguo,
+            "max_people" : max_people,
+            "starttime" : starttime,
+            "day" : day,
+            "jieguo" : money,
+            "item_id" : item_id,
+            "yiwaiText" : yiwaiText,
+            "yiliaoText" : yiliaoText,
+            "feijiText" : feijiText,
+            "huocheText" : huocheText,
+            "lunchuanText" : lunchuanText,
+            "qicheText" : qicheText,
+            "gaofengxiaText" : gaofengxiaText,
+            "gaoyiwaiText" : gaoyiwaiText,
+            "zhuyuanText" : zhuyuanText,
+            "cusiText" : cusiText,
+            "jiuhucheText" : jiuhucheText
+        }
+        var json = JSON.stringify(obj);
+        $("[name=json]").val(json);
+    }
 </script>
 </body>
 </html>

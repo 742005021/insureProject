@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>保单确认</title>
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" th:href="@{'/css/common.css'}">
+    <link rel="stylesheet" th:href="@{'/css/book.css'}">
 </head>
 <body>
 <div class="wrapper">
@@ -12,9 +12,10 @@
     <div th:include="other/header :: header"></div>
     <!----------------------------------------header_nav end-------------------------------------->
     <div class="main_width container">
-        <h1>一年意外险</h1>
+        <h1>短期意外险</h1>
         <div class="con_detail">
             <h2>产品信息</h2>
+
             <h3>投保人信息</h3>
 
             <ul>
@@ -67,7 +68,7 @@
                     </span>
                 </p>
             </div>
-            <div class="payment"><a th:href="@{|/payment/${data.order_id}/${data.money}/${data.starttime}/${data.insuredIds}|}" id="subBtn">立即付款</a></div>
+            <div class="payment"><a th:href="@{|/duanQiPayment/${data.order_id}/${data.money}/${data.starttime}/${data.insuredIds}/${data.day}|}" id="subBtn">立即付款</a></div>
         </div>
     </div>
     <!--footer begin-->
