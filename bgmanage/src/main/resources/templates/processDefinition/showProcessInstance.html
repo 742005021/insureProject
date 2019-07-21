@@ -20,33 +20,33 @@
     </style>
 </head>
 <body>
+    <table class="table table-bordered" style="margin-top:60px;align-items: center;">
+        <tr style="color:red;">
+            <th align="center" colspan="9">审核中的任务</th>
+        </tr>
+        <Tr id="t1">
+            <th>申请人</th>
+            <th>受保人</th>
+            <Th>申请时间</Th>
+            <Th>查看流程图</Th>
+            <Th>查看任务</Th>
+            <Th>删除当前业务</Th>
+        </Tr>
 
-<table class="table table-bordered"  align="center" style="margin-top:60px;">
-    <tr style="color:red;">
-        <th align="center" colspan="9">审核中的任务</th>
-    </tr>
-    <Tr>
-        <th>受保人</th>
-        <Th>申请时间</Th>
-        <Th>查看流程图</Th>
-        <Th>查看任务</Th>
-        <Th>删除当前业务</Th>
-    </Tr>
-    <tr th:each="k,st:${list}">
-        <td th:text="${k.cr_name}"></td>
-        <td th:text="${k.cr_time}"></td>
-        <Td>
-            <a th:href="@{|/showActiveMap/${k.process_instance_id}|}">查看流程图</a>
-        </Td>
-        <Td>
-            <a th:href="@{|/showHistoryTask/${k.instanceId}|}">查看任务</a>
-        </Td>
-        <Td>
-            <A th:href="@{|/delProcessInstance/${k.instanceId}|} onclick="return confirm('你确定要删除吗?')">删除</A>
-        </Td>
-    </tr>
-
-
-</table>
+        <tr th:each="r,st:${list}" align="center">
+            <td th:text="${r.cr_name}"></td>
+            <td th:text="${r.insured_name}"></td>
+            <td th:text="${r.cr_time}"></td>
+            <Td>
+                <a th:href="@{|/showActiveMap/${r.instanceId}|}">查看流程图</a>
+            </Td>
+            <td>
+                <A th:href="@{|/showHistoryTask/${r.instanceId}|}">查看任务</A>
+            </td>
+            <Td>
+                <A th:href="@{|/delProcessInstance/${r.instanceId}|}" onclick="return confirm('你确定要删除吗?')">删除</A>
+            </Td>
+        </tr>
+    </table>
 </body>
 </html>
