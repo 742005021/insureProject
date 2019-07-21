@@ -341,17 +341,17 @@
     });
     //计算保险
     function operation() {
-        var yiwai = parseInt($("#yiwai").val());
-        var yiliao = parseInt($("#yiliao").val());
-        var feiji = parseInt($("#feiji").val());
-        var huoche = parseInt($("#huoche").val());
-        var lunchuan = parseInt($("#lunchuan").val());
-        var qiche = parseInt($("#qiche").val());
-        var gaofengxia = parseInt($("#gaofengxian").val());
-        var gaoyiwai = parseInt($("#gaoyiwai").val());
-        var zhuyuan = parseInt($("#zhuyuan").val());
-        var cusi = parseInt($("#cusi").val());
-        var jiuhuche = parseInt($("#jiuhuche").val());
+        var yiwai = parseFloat($("#yiwai").val());
+        var yiliao = parseFloat($("#yiliao").val());
+        var feiji = parseFloat($("#feiji").val());
+        var huoche = parseFloat($("#huoche").val());
+        var lunchuan = parseFloat($("#lunchuan").val());
+        var qiche = parseFloat($("#qiche").val());
+        var gaofengxia = parseFloat($("#gaofengxian").val());
+        var gaoyiwai = parseFloat($("#gaoyiwai").val());
+        var zhuyuan = parseFloat($("#zhuyuan").val());
+        var cusi = parseFloat($("#cusi").val());
+        var jiuhuche = parseFloat($("#jiuhuche").val());
 
         //============================================
         var yiwaiText = $("#yiwai option:selected").text();
@@ -410,11 +410,12 @@
         }
         if(cusi != -1){
             jieguo = (jieguo + cusi);
+            alert(cusi);
         }
         if(jiuhuche != -1){
             jieguo = (jieguo + jiuhuche);
         }
-
+        jieguo = Math.floor(jieguo * 100) / 100;
         var money = jieguo * day;
         money = Math.floor(money * 100) / 100;
         $("#ren").text(jieguo);
