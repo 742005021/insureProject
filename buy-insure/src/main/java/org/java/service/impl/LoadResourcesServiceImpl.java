@@ -235,7 +235,6 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
             file.delete();
             //是否使用积分
             String[] scoreStatus = ccid.split("@");
-            System.out.println(ccid);
             int score = ((int) money / 100) * 20;
             if(scoreStatus[1].equals("no")){
                 //没有使用积分

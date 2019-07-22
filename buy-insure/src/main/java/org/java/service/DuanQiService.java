@@ -8,6 +8,6 @@ public interface DuanQiService {
 
     Map<String, Object> dataProcessing(Map<String, Object> map);
 
-    void nextOrder(String order_id, double money,String starttime, String insuredIds, Integer day);
+    void nextOrder(String order_id, double money,String starttime, String insuredIds, Integer day, String ccid);
 
 }

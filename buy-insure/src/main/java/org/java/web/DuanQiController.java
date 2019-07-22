@@ -56,14 +56,15 @@ public class DuanQiController {
         return "/duanqi/duanQiBook_detail";
     }
 
-    @RequestMapping("/duanQiPayment/{order_id}/{money}/{starttime}/{insuredIds}/{day}")
+    @RequestMapping("/duanQiPayment/{order_id}/{money}/{starttime}/{insuredIds}/{day}/{ccid}")
     public void payment(@PathVariable("order_id") String order_id,
                         @PathVariable("money") double money,
                         @PathVariable("starttime") String starttime,
                         @PathVariable("insuredIds") String insuredIds,
                         @PathVariable("day") Integer day,
+                        @PathVariable("ccid") String ccid,
                         HttpServletRequest req, HttpServletResponse res)throws Exception{
-        service.nextOrder(order_id, money, starttime, insuredIds, day);
+        service.nextOrder(order_id, money, starttime, insuredIds, day, ccid);
         loadResourcesService.ali(res, req, order_id, money, "短期意外险支付");
     }
 

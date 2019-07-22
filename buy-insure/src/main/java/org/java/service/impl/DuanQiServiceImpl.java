@@ -118,7 +118,7 @@ public class DuanQiServiceImpl implements DuanQiService {
 
     @Transactional
     @Override
-    public void nextOrder(String order_id, double money, String starttime, String insuredIds, Integer day) {
+    public void nextOrder(String order_id, double money, String starttime, String insuredIds, Integer day, String ccid) {
         //订单下一步
         otherMapper.nextOrder(6, order_id);
         //生成保单
@@ -151,6 +151,23 @@ public class DuanQiServiceImpl implements DuanQiService {
             Blob blob = new SerialBlob(bytes);
             otherMapper.addOrder2(blob, order_id);
             file.delete();
+            //是否使用积分
+            String[] scoreStatus = ccid.split("@");
+            int score = ((int) money / 100) * 20;
+            if(scoreStatus[1].equals("no")){
+                //没有使用积分
+                if(money >= 100){
+                    //送积分
+                    String cust_id = (String) ((Map<String, Object>) ses.getAttribute("cust")).get("cust_id");
+                    otherMapper.score(score, cust_id);
+                }
+            } else {
+                //使用了积分
+                //把优惠券状态改为2
+                int cid = Integer.parseInt(scoreStatus[0]);
+                otherMapper.updateStatus(cid);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
