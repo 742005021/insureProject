@@ -65,7 +65,7 @@ public class ProcessDefinitionController {
     public String delProcecssDefinition(@PathVariable("deployId") String deployId){
         System.out.println(deployId);
         repositoryService.deleteDeployment(deployId,true);
-        return "redirect:processDefinition/showProcessDefinition";
+        return "redirect:/processDefinition/showProcessDefinition";
     }
 
     /**

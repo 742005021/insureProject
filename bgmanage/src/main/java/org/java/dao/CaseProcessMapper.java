@@ -26,4 +26,6 @@ public interface CaseProcessMapper {
     //查询所有流程实例
     @Select("select * from case_report")
     public Map<String,Object> getAll();
+
+
 }

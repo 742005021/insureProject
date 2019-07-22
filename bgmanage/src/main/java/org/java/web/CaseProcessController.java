@@ -2,6 +2,7 @@ package org.java.web;
 
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.activiti.engine.runtime.ProcessInstanceQuery;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -43,6 +45,9 @@ public class CaseProcessController {
 
         return "";
     }
+
+
+    //高亮显示流程图
     @GetMapping("showActiveMap/{instanceId}")
     public String showActiveMap(@PathVariable("instanceId") String instanceId,Model model){
 
@@ -74,16 +79,32 @@ public class CaseProcessController {
         //将部署id,png文件的名称，存储在model中
         model.addAttribute("deploymentId", deploymentId);
         model.addAttribute("png",png);
-
+        model.addAttribute("tstyle","border-radius:12px;position:absolute;left:"+(act.getX()+274)+"px;top:"+(act.getY()-10)+"px;width:"+(act.getWidth())+"px;height:"+(act.getHeight())+"px;border:3px red solid;");
 
         return "/processDefinition/showActiveMap";
     }
 
-    //查询所有流程实例
-    @GetMapping("getAll")
+    //查询所有正在审核中的报案单
+    @GetMapping("/getAll")
     public String getAll(Model model){
-        Map<String,Object> map= caseService.getAll();
-        model.addAttribute("list",map);
+        List<Map<String,Object>> list=caseService.showProcessInstance();
+        model.addAttribute("list",list);
         return "/processDefinition/showProcessInstance";
+    }
+
+    //根据流程实例ID删除报案单
+    @GetMapping("delProcessInstance/{instanceId}")
+    public String delProcessInstance(@PathVariable("instanceId") String instanceId){
+        runtimeService.deleteProcessInstance(instanceId,"instanceId");
+        return "redirect:/getAll";
+    }
+
+    //返回某一个流程实例，所经历的所有任务阶段
+    @GetMapping("showHistoryTask/{instanceId}")
+    public String showHistroyTask(@PathVariable("instanceId") String instanceId,Model model){
+        List<HistoricTaskInstance> list=caseService.showHistoryTask(instanceId);
+        model.addAttribute("list",list);
+        return "/processDefinition/showHistoryTask";
+
     }
 }
