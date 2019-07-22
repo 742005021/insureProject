@@ -200,7 +200,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
 
     @Transactional
     @Override
-    public void nextOrder(String order_id, double money, String starttime, String insuredIds) {
+    public void nextOrder(String order_id, double money, String starttime, String insuredIds, String ccid) {
         //订单下一步
         mapper.nextOrder(6, order_id);
         //生成保单
@@ -233,6 +233,23 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
             Blob blob = new SerialBlob(bytes);
             mapper.addOrder2(blob, order_id);
             file.delete();
+            //是否使用积分
+            String[] scoreStatus = ccid.split("@");
+            System.out.println(ccid);
+            int score = ((int) money / 100) * 20;
+            if(scoreStatus[1].equals("no")){
+                //没有使用积分
+                if(money >= 100){
+                    //送积分
+                    String cust_id = (String) ((Map<String, Object>) ses.getAttribute("cust")).get("cust_id");
+                    mapper.score(score, cust_id);
+                }
+            } else {
+                //使用了积分
+                //把优惠券状态改为2
+                int cid = Integer.parseInt(scoreStatus[0]);
+                mapper.updateStatus(cid);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -327,6 +344,20 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public Map<String, Object> searchVoucher(String cust_id) {
+        List<Map<String, Object>> data = mapper.searchVoucher(cust_id);
+        Map<String, Object> m = new HashMap<>();
+        if (data == null || data.size() == 0){
+            m.put("code", 0);
+            m.put("data", null);
+        } else {
+            m.put("code", 1);
+            m.put("data", data);
+        }
+        return m;
     }
 
 }

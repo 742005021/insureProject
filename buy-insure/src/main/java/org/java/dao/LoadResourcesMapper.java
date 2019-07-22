@@ -62,4 +62,13 @@ public interface LoadResourcesMapper {
     @Insert("insert into policy_insured_relationship values(default, #{order_id},#{insured_id})")
     void addInfo(@Param("order_id") String order_id, @Param("insured_id") String insured_id);
 
+    @Select("select cust_coupon.ccid, cust_coupon.cust_id,cust_coupon.statu,coupon.* from cust_coupon,coupon where cust_id=#{cust_id} and statu=1 and cust_coupon.id=coupon.id")
+    List<Map<String,Object>> searchVoucher(@Param("cust_id") String cust_id);
+
+    @Update("update custinfo set cust_score = cust_score + #{score} where cust_id = #{cust_id}")
+    void score(@Param("score") Integer score, @Param("cust_id") String cust_id);
+
+    @Update("update cust_coupon set statu = 2 where ccid = #{ccid}")
+    void updateStatus(@Param("ccid") Integer ccid);
+
 }

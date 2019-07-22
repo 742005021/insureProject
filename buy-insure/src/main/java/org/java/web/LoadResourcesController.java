@@ -193,16 +193,24 @@ public class LoadResourcesController {
     }
 
     //付款加订单下一步和生成保单
-    @RequestMapping("/payment/{order_id}/{money}/{starttime}/{insuredIds}")
+    @RequestMapping("/payment/{order_id}/{money}/{starttime}/{insuredIds}/{ccid}")
     public void payment(@PathVariable("order_id") String order_id,
                         @PathVariable("money") double money,
                         @PathVariable("starttime") String starttime,
                         @PathVariable("insuredIds") String insuredIds,
+                        @PathVariable("ccid") String ccid,
                         HttpServletRequest req, HttpServletResponse res)throws Exception{
-        service.nextOrder(order_id, money, starttime, insuredIds);
+        service.nextOrder(order_id, money, starttime, insuredIds, ccid);
         service.ali(res, req, order_id, money, "一年意外险支付");
     }
 
+    @RequestMapping("/searchVoucher")
+    @ResponseBody
+    public Map<String, Object> searchVoucher(HttpSession ses){
+        Map<String, Object> m = (Map<String, Object>) ses.getAttribute("cust");
+        String cust_id = (String) m.get("cust_id");
+        return service.searchVoucher(cust_id);
+    }
 
 
 }
