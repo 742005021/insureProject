@@ -12,4 +12,6 @@ public interface Case_ReportService {
     public Map<String,Object> getReport_ById(String cr_id);
 
     Map<String,Object> getReport_ByEntrustId(String task_id);
+
+    int policy_check(String policy_no);
 }

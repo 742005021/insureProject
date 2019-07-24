@@ -35,4 +35,10 @@ public class Case_ReportController {
         return "case_report_detailed";
     }
 
+    @PostMapping("report_policy_check/{policy_no}")
+    @ResponseBody
+    public Object policy_check(@PathVariable("policy_no") String policy_no){
+        return case_reportService.policy_check(policy_no);
+    }
+
 }

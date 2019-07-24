@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style>
+        #body .full{
+            width:100%;
+        }
+    </style>
+</head>
+<body id="body">
+
+    <div th:if="${statu == 0}">
+        <h1 style="text-align: center">未处理案件</h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>受保人</th>
+                <th>立案时间</th>
+                <th>状态</th>
+                <th>受理案件</th>
+            </tr>
+            <tr th:each="c,st:${list}">
+                <td>[[${c.insured_name}]]</td>
+                <td>[[${c.time}]]</td>
+                <td>未处理</td>
+                <td><a th:href="@{|/cases/letme?id=${c.id}|}">我要受理</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:if="${statu == 1}">
+        <h1 style="text-align: center">处理中案件</h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>受保人</th>
+                <th>立案时间</th>
+                <th>状态</th>
+                <th>负责人</th>
+            </tr>
+            <tr th:each="c,st:${list}">
+                <td>[[${c.insured_name}]]</td>
+                <td>[[${c.time}]]</td>
+                <td>处理中</td>
+                <td>[[${c.emp_username}]]</td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:if="${statu == 2}">
+        <h1 style="text-align: center">已赔付案件</h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>受保人</th>
+                <th>立案时间</th>
+                <th>状态</th>
+                <th>负责人</th>
+            </tr>
+            <tr th:each="c,st:${list}">
+                <td>[[${c.insured_name}]]</td>
+                <td>[[${c.time}]]</td>
+                <td>处理中</td>
+                <td>[[${c.emp_username}]]</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

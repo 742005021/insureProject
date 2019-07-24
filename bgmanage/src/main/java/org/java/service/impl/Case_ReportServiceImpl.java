@@ -49,4 +49,9 @@ public class Case_ReportServiceImpl implements Case_ReportService {
     public Map<String, Object> getReport_ByEntrustId(String task_id) {
         return mapper.getReport_ByEntrustId(task_id);
     }
+
+    @Override
+    public int policy_check(String policy_no) {
+        return mapper.policy_check(policy_no);
+    }
 }
