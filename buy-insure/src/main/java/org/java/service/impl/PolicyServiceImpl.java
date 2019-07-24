@@ -5,15 +5,13 @@ import org.java.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import java.sql.Blob;
 @Service
 public class PolicyServiceImpl implements PolicyService {
-
     @Autowired
     private PolicyMapper policyMapper;
     @Override
-    public List<Map<String, Object>> getPolicy(String custid, String statu) {
-        return policyMapper.getPolicy(custid, statu);
+    public int addOrder(Blob blob, String policyid) {
+        return policyMapper.addOrder(blob, policyid);
     }
 }

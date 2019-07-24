@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/center.css">
+</head>
+<body>
+
+<div th:fragment="header">
+
+    <div class="header_user">
+        <div class="main_width">
+            <div th:if="${session.cust!=null}">
+                <div class="main_width">
+                    <span class="tel">客服电话：400-663-6600（周一至周六 9:00-18:00）</span>
+                    <span class="fr">
+                <span class="my_insurance"><a href="http://localhost:8100/showPolicy">我的保险</a></span>
+                <span class="Backlog"><a href="http://localhost:8100/showPolicy">未完成订单</a></span>
+                <span class="message"><a href="#">消息</a></span>
+                <span class="fg"><a href="#">|</a></span>
+                 <span class="">欢迎您,[[${session.cust.username}]]</span>
+                  <span class="my_insurance"><a href="http://localhost:8100/logout">退出</a></span>
+                     <span class="fg"><a href="#">|</a></span>
+                    <span class="fr my_insurance"><a href="http://localhost:8100/showPolicy">个人中心</a></span>
+            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header_nav">
+        <div class="main_width">
+            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
+            <a href="#" class="my_policy fr">我的保单</a>
+            <div class="menuBox">
+                <ul class="menu">
+                    <li class="active"><a href="http://localhost:8100">首页</a></li>
+                    <li class="special"><a href="http://localhost:8899/list">保险产品</a></li>
+                    <li><a href="#">理财中心</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

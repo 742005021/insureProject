@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+    <style type="text/css">
+        a{
+            text-align: center;
+            text-decoration: none;
+            color: blue;
+        }
+        a:hover{
+            color:red;
+        }
+        table,th,tr,td{
+            border: 1px black solid;
+            border-collapse: collapse;;
+        }
+    </style>
+</head>
+<body>
+<a ></a>
+<table class="layui-table" lay-filter="test" style="margin-top:60px; align:center;">
+    <tr style="color:red;">
+        <th align="center" colspan="6">该业务所经历的任务阶段</th>
+    </tr>
+    <Tr>
+        <TH>序号</TH>
+        <TH>任务名称</TH>
+        <TH>所属流程实例ID</TH>
+        <TH>开始时间</TH>
+        <TH>结束时间</TH>
+    </Tr>
+    <tr th:each="l,st:${list}">
+        <th th:text="${st.count}"></th>
+        <th th:text="${l.name}"></th>
+        <th th:text="${l.processInstanceId}"></th>
+        <th th:text="${#dates.format(l.startTime,'yyyy-MM-dd HH:mm:ss')}"></th>
+        <th th:text="${#dates.format(l.endTime,'yyyy-MM-dd HH:mm:ss')}"></th>
+    </tr>
+</table>
+</body>
+</html>

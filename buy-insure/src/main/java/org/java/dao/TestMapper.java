@@ -14,4 +14,6 @@ public interface TestMapper {
     @Update("update insurance_item set item_file = #{item_file} where item_id = 6")
     void update(@Param("item_file") Blob blob);
 
+
+
 }

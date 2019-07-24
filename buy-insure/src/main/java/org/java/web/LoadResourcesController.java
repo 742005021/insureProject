@@ -1,13 +1,10 @@
 package org.java.web;
 
-import com.alipay.api.AlipayApiException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import org.apache.commons.io.FileUtils;
+import org.java.dao.LoadResourcesMapper;
 import org.java.dao.TestMapper;
 import org.java.service.LoadResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
@@ -16,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import com.alibaba.fastjson.JSON;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,8 +23,9 @@ import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Blob;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoadResourcesController {
@@ -41,7 +37,10 @@ public class LoadResourcesController {
     private TestMapper mapper;
 
     @Autowired
-    private ServletContext context;
+    private RedisTemplate<String, String> template;
+
+    @Autowired
+    private LoadResourcesMapper loadResourcesMapper;
     //加载保险类型
     /*@RequestMapping("/loadInsureType")
     @ResponseBody
@@ -94,8 +93,6 @@ public class LoadResourcesController {
         File path = new File(ResourceUtils.getURL("classpath:").getPath());
         if (!path.exists()) path = new File("");
         File file = new File(path.getAbsolutePath(), "static/file/zhiyefenlei2014.xlsx");
-        //String filePath = context.getRealPath("file/zhiyefenlei2014.xlsx");
-        //File file = new File(filePath);
         res.setContentType("application/ms-download");
         String newName = URLEncoder.encode(file.getName(), "utf-8");
         res.setHeader("Content-disposition", "attachment;fileName=" + newName);
@@ -133,10 +130,6 @@ public class LoadResourcesController {
     public String yiNianDetermine(@PathVariable("item_id") Integer item_id, HttpServletRequest req) throws Exception {
         Map<String, Object> map = service.searchInsureInfo(item_id);
         req.setAttribute("map", map);
-        /*System.out.println(map);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date parse = format.parse("2019-7-16");
-        System.out.println(format.format(parse)+"@@@@@@@@@@@@@@@@");*/
         Calendar now1 = Calendar.getInstance();
         int month = now1.get(Calendar.MONTH) + 1;
         req.setAttribute("year", now1.get(Calendar.YEAR));
@@ -165,12 +158,8 @@ public class LoadResourcesController {
 
     @RequestMapping("/toBook")
     public String toBook(String json, HttpServletRequest req, HttpSession ses) {
-        Map<String, Object> map = JSON.parseObject(json, Map.class);
-        map.put("order_id", UUID.randomUUID().toString());
-        map.put("yiNianDetermine", ((Map<String, Object>)ses.getAttribute("cust")).get("cust_id"));
         // 生成订单
-        service.generateOrders(map);
-
+        Map<String, Object> map = service.generateOrders(json);
         req.setAttribute("map", map);
         return "/book";
     }
@@ -197,14 +186,29 @@ public class LoadResourcesController {
     public String bookData(@RequestParam Map<String, Object> map, HttpServletRequest req) {
         Map<String, Object> data = service.dataProcessing(map);
         req.setAttribute("data", data);
+        service.createPolicy(data);
         return "/book_detail";
     }
 
-    //付款加订单下一步
-    @RequestMapping("/payment/{order_id}/{money}")
-    public void payment(@PathVariable("order_id") String order_id, @PathVariable("money") double money, HttpServletRequest req, HttpServletResponse res)throws Exception{
-        service.nextOrder(order_id);
+    //付款加订单下一步和生成保单
+    @RequestMapping("/payment/{order_id}/{money}/{starttime}/{insuredIds}/{ccid}")
+    public void payment(@PathVariable("order_id") String order_id,
+                        @PathVariable("money") double money,
+                        @PathVariable("starttime") String starttime,
+                        @PathVariable("insuredIds") String insuredIds,
+                        @PathVariable("ccid") String ccid,
+                        HttpServletRequest req, HttpServletResponse res)throws Exception{
+        service.nextOrder(order_id, money, starttime, insuredIds, ccid);
         service.ali(res, req, order_id, money, "一年意外险支付");
     }
+
+    @RequestMapping("/searchVoucher")
+    @ResponseBody
+    public Map<String, Object> searchVoucher(HttpSession ses){
+        Map<String, Object> m = (Map<String, Object>) ses.getAttribute("cust");
+        String cust_id = (String) m.get("cust_id");
+        return service.searchVoucher(cust_id);
+    }
+
 
 }

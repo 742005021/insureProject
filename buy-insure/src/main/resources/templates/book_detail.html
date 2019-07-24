@@ -5,45 +5,87 @@
     <title>保单确认</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" href="css/center.css">
+    <link rel="stylesheet" th:href="@{'/layui/css/layui.css'}">
+    <style>
+        .type1 {
+            position: relative;
+            float: left;
+            padding: 7px;
+            border-radius: 4px;
+            background-color: #cf91ff;
+            margin: 10px 10px;
+            cursor: pointer;
+        }
+
+        .ibox {
+            width: 232px;
+            height: 146px;
+            text-align: center;
+            border: 2px dashed #bf75f9;
+            overflow: hidden;
+        }
+
+        .ibox h3 {
+            height: 30px;
+            line-height: 30px;
+            font-size: 24px;
+            color: #850ebd;
+            margin-top: 20px;
+        }
+
+        .ibox .note {
+            height: 38px;
+            line-height: 38px;
+            padding-top: 4px;
+            color: #a054db;
+        }
+
+        .ibox .btns {
+            position: absolute;
+            left: 30px;
+            bottom: 20px;
+            z-index: 1;
+            width: 194px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 18px;
+            background-color: #FFFFFF;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .ibox span {
+            width: 102px;
+            float: left;
+            color: #666;
+        }
+
+        .dui {
+            margin-left: 102px;
+            color: #fff;
+            background-color: #850ebd;
+            padding-right: 4px;
+        }
+
+    </style>
 </head>
 <body>
 <div class="wrapper">
     <!--------------------------------------header_user begin------------------------------------->
-    <div class="header_user">
-        <div class="main_width">
-            <span class="tel">客服电话：400-663-6600（周一至周六 9:00-18:00）</span>
-            <span class="fr">
-                <span class="my_insurance"><a href="#">我的保险</a></span>
-                <span class="Backlog"><a href="#">未完成订单</a></span>
-                <span class="message"><a href="#">消息</a></span>
-                <span class="register"><a href="#">注册</a></span>
-                <span class="fg"><a href="#">|</a></span>
-                <span><a href="#">登录</a></span>
-            </span>
-        </div>
-    </div>
-    <!---------------------------------------header_user end-------------------------------------->
-    <!---------------------------------------header_nav begin------------------------------------->
-    <div class="header_nav">
-        <div class="main_width">
-            <h1><a href="#" class="logo fl">大特保保险官网-互联网保险服务平台</a></h1>
-            <a href="#" class="my_policy fr">我的保单</a>
-            <div class="menuBox">
-                <ul class="menu">
-                    <li class="active"><a href="#">首页</a></li>
-                    <li class="special"><a href="list2（分类2）.html">保险产品</a></li>
-                    <li><a href="#">理财中心</a></li>
-                    <li><a href="#">关于我们</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div th:include="other/header :: header"></div>
     <!----------------------------------------header_nav end-------------------------------------->
     <div class="main_width container">
-        <h1>一年意外险</h1>
+        <div align="center" style="width: 100%; height: 80px;border: 1px white solid;margin-top: -70px;">
+            <h1 style="float: left; margin-left: 80px;border: 1px white solid;margin-top: 70px;">一年意外险</h1>
+            <div style="border: 1px white solid; width: 90px;margin-left: -380px; margin-top: 115px;"><input
+                    type="button" value="使用优惠券" class="layui-btn layui-btn-xs layui-btn-warm" id="useVoucher"/></div>
+        </div>
+        <div style="clear: both;"></div>
         <div class="con_detail">
             <h2>产品信息</h2>
             <h3>投保人信息</h3>
+
             <ul>
                 <li>姓&nbsp;&nbsp;名：[[${data.tou.cust_name}]]</li>
                 <li>性&nbsp;&nbsp;别：[[${data.tou.cust_sex}]]</li>
@@ -90,62 +132,204 @@
                     保险金额：
                     <span class="wprice">
                         <span>￥</span>
-                        <em>[[${data.money}]]</em>
+                        <em id="moneyEM">[[${data.money}]]</em>
                     </span>
                 </p>
             </div>
-            <div class="payment"><a th:href="@{|/payment/${data.order_id}/${data.money}|}" id="subBtn">立即付款</a></div>
+            <!-- @{|/payment/${data.order_id}/${data.money}/${data.starttime}/${data.insuredIds} -->
+            <input type="hidden" id="order_id" th:value="${data.order_id}"/>
+            <input type="hidden" id="money" th:value="${data.money}"/>
+            <input type="hidden" id="stmoney" th:value="${data.money}"/>
+            <input type="hidden" id="starttime" th:value="${data.starttime}"/>
+            <input type="hidden" id="insuredIds" th:value="${data.insuredIds}"/>
+            <input type="hidden" id="ccid"/>
+            <div class="payment"><a href="#" id="subBtn">立即付款</a></div>
         </div>
     </div>
     <!--footer begin-->
-    <div class="copyright">
-        <div class="main_width footer">
-            <div class="footer_nav">
-                <p>
-                    <a href="#">关于京东金融</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东小金库</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东钱包</a>
-                    <span class="divider">|</span>
-                    <a href="#">关于京东白条</a>
-                    <span class="divider">|</span>
-                    <a href="#">联系我们</a>
-                    <span class="divider">|</span>
-                    <a href="#">免责声明</a>
-                </p>
-                <p>Copyright © 2004-2016 京东JD.com 版权所有<span class="divider">|</span>投资有风险，购买需谨慎</p>
-            </div>
-            <div class="footer_contact">
-                <div class="f_contact_time">
-                    联系我们<span>（09:00-22:00）</span>
-                </div>
-                <div class="f_contact_content">
-                    <div class="f_cc_left">
-                        <span class="f_cc_item">个人业务：400-098-8511</span>
-                        <span class="f_cc_item">企业业务：400-088-8816</span>
-                    </div>
-                    <div class="f_cc_mid">
-                        <a href="#" class="f_cc_link item_JIMI">咨询JIMI</a>
-                        <a href="#" class="f_cc_link item_kefu">在线客服</a>
-                    </div>
-                    <div class="f_cc_right">
-                        <a href="#" class="f_cc_link item_mail">客服邮箱</a>
-                    </div>
+    <div th:include="other/footer :: footer"></div>
+</div>
+<script th:src="@{'/js/jquery-1.12.3.min.js'}"></script>
+<script type="text/javascript" th:src="@{'/layui/layui.js'}"></script>
+<script type="text/html" id="use">
+    <br/>
+    <div style="margin-left: 50px;">
+        {{# if(d.code === 1){ }}
+        <div class="layui-form" style="width: 100%; height: 100%;">
+            <div class="coupon_center">
+                <div class="loading"></div>
+                <div class="coupon_unused">
+                    <ul class="list" id="voucherList">
+                        {{# layui.each(d.data, function(index, c){ }}
+                        <li class="type1">
+                            <div class="ibox">
+                                <h3>{{c.title}}</h3>
+                                <p class="note">{{c.content}}</p>
+                                <div class="btns">
+                                    <span class="fen">{{c.cost}}积分</span>
+                                    <p class="dui" style="background-color: #FFB800;"><input type='radio' value='{{c.ccid}};{{c.id}}'
+                                                          title='使用' name='quan'/></p>
+                                </div>
+                            </div>
+                        </li>
+                        {{# }); }}
+                    </ul>
                 </div>
             </div>
         </div>
+        {{# } }}
+        {{# if(d.code === 0){ }}
+        <h3>暂无可用优惠券</h3>
+        {{# } }}
     </div>
-    <!--footer end-->
-    <div class="sideBar">
-        <a href="#" class="slider_block app"><i></i></a>
-        <a href="#" class="slider_block jimi"><i></i></a>
-        <a href="#" class="slider_block feedback"><i></i></a>
-        <a href="javascript:" class="slider_block backtop" id="backtop"><i></i></a>
-    </div>
-</div>
-<script>
+</script>
 
+<script>
+    layui.use(['form', 'layer', 'laytpl'], function () {
+        var layer = layui.layer,
+            form = layui.form,
+            laytpl = layui.laytpl;
+        $("#subBtn").click(function () {
+            var order_id = $("#order_id").val();
+            var money = $("#money").val();
+            var starttime = $("#starttime").val();
+            var insuredIds = $("#insuredIds").val();
+            var ccid = $("#ccid").val();
+
+            if(ccid == null || ccid == ""){
+                //未使用优惠券
+                ccid =  "no@no";
+                var target = "/payment/" + order_id + "/" + money + "/" + starttime + "/" + insuredIds + "/" + ccid;
+                location = target;
+            } else {
+                //使用了优惠券
+                ccid = ccid + "@yes";
+                layer.msg('使用优惠券后,不可获得积分!', {
+                    time: 20000, //20s后自动关闭
+                    btn: ['好的'],
+                    end: function () {
+                        // /payment/${data.order_id}/${data.money}/${data.starttime}/${data.insuredIds}
+                        var target = "/payment/" + order_id + "/" + money + "/" + starttime + "/" + insuredIds + "/" + ccid;
+                        location = target;
+                    }
+                });
+            }
+
+        });
+
+        $("#useVoucher").click(function () {
+            var b = false;
+            if ($("#stmoney").val() < 80) {
+                b = true;
+                layer.msg('80元内的投保金额无法使用优惠券!', {
+                    time: 20000, //20s后自动关闭
+                    btn: ['好的']
+                });
+            }
+            if (b) {
+                return;
+            }
+
+            $.ajax({
+                url: "/searchVoucher",
+                type: "post",
+                dataType: "json",
+                success: function (result) {
+                    var getTpl = document.getElementById("use").innerHTML;
+                    laytpl(getTpl).render(result, function (html) {
+                        layer.open({
+                            type: 1
+                            , title: false //不显示标题栏
+                            , closeBtn: false
+                            , area: ['90%', '100%']
+                            , shade: 0.8
+                            , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                            , btn: ['使用', '关闭']
+                            , btnAlign: 'c'
+                            , moveType: 1 //拖拽模式，0或者1
+                            , content: html
+                            , yes: function (index, layero) {
+                                var val = $('input[name="quan"]:checked').val();
+                                var vals = val.split(";");
+
+                                var ccid = parseInt(vals[0]);
+                                var id = parseInt(vals[1]);
+
+                                var money = $("#stmoney").val();
+                                if (id == 1) {
+                                    layer.msg('您选择了<span style="color: #FFB800;">5元通用优惠券</span>是否使用该券?', {
+                                        time: 20000, //20s后自动关闭
+                                        btn: ['确定', '取消'],
+                                        yes: function (index1, layero) {
+                                            money -= 5;
+                                            $("#money").val(money);
+
+                                            $("#moneyEM").text(money);
+
+                                            $("#ccid").val(ccid);
+                                            layer.close(index1);
+                                            layer.close(index);
+                                        }, btn2: function (cls, layero) {
+                                            layer.close(index);
+                                        }
+                                    });
+                                } else if (id == 2) {
+                                    if (money < 100) {
+                                        layer.msg('投保金额需要满100元才能使用该券!', {
+                                            time: 20000, //20s后自动关闭
+                                            btn: ['好的']
+                                        });
+                                    } else {
+                                        layer.msg('您选择了<span style="color: #FFB800;">20元通用优惠券</span>是否使用该券?', {
+                                            time: 20000, //20s后自动关闭
+                                            btn: ['确定', '取消'],
+                                            yes: function (index1, layero) {
+                                                money -= 20;
+                                                $("#money").val(money);
+                                                $("#ccid").val(ccid);
+                                                $("#moneyEM").text(money);
+                                                layer.close(index1);
+                                                layer.close(index);
+                                            }, btn2: function (cls, layero) {
+                                                layer.close(index);
+                                            }
+                                        });
+                                    }
+                                } else if (id == 3) {
+                                    if (money < 300) {
+                                        layer.msg('投保金额需要满300元才能使用该券!', {
+                                            time: 20000, //20s后自动关闭
+                                            btn: ['好的']
+                                        });
+                                    } else {
+                                        layer.msg('您选择了<span style="color: #FFB800;">60元通用优惠券</span>是否使用该券?', {
+                                            time: 20000, //20s后自动关闭
+                                            btn: ['确定', '取消'],
+                                            yes: function (index1, layero) {
+                                                money -= 60;
+                                                $("#money").val(money);
+                                                $("#ccid").val(ccid);
+                                                $("#moneyEM").text(money);
+                                                layer.close(index1);
+                                                layer.close(index);
+                                            }, btn2: function (cls, layero) {
+                                                layer.close(index);
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    form.render();
+                }
+            });
+        });
+    });
+
+    function use(v) {
+        alert(v);
+    }
 </script>
 </body>
 </html>

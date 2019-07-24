@@ -13,5 +13,6 @@ public interface CustService {
     int getCustScore( String custid);
 
     int updateScore(String custid,  int score);
+    Map<String,Object> getcustinfo(String custid);
 
 }

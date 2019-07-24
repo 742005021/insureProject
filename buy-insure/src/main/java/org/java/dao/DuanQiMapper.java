@@ -5,5 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Mapper
-public interface AddWarrantyMapper {
+public interface DuanQiMapper {
+
 }
