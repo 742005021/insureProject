@@ -15,6 +15,7 @@
             font-size: 16px;
         }
     </style>
+
 </head>
 <body>
 <div class="wrapper">
@@ -27,7 +28,7 @@
 
     <!----------------------------------------header_nav end-------------------------------------->
     <!--container-->
-    <div class="container">
+    <div class="container" style="height: 1000px;">
         <!--2016/5/25修改-->
        <div th:include="custop/left :: left"></div>
         <div class="main_width fix mycenter_box" style="margin-right:50px">
@@ -88,6 +89,8 @@
                                 </li>
                                 <li class="myOpreat">
                                     <a th:href="@{|http://localhost:8899/buy/searchItem/${p.item_id}/${p.item_target}|}">查看详情</a>
+                                    <a th:href="@{|/showPersonPolicy/${p.policy_id}|}" target="_blank">查看保单</a>
+                                    <a th:href="@{|/exitpolicy/${p.policy_id}|}" class="exit">申请退保</a>
                                 </li>
                             </ul>
                             </div>
@@ -216,10 +219,11 @@
             </div>
         </div>
     <!--footer-->
-        <div  th:include="custop/footer :: footer"></div>
+
 
 
     </div>
+    <div  th:include="custop/footer :: footer"></div>
 </div>
 <script src="../js/jquery-1.12.3.min.js"></script>
 <script>
@@ -230,7 +234,9 @@
             $(".mycenter_right").find("div.mypolicy_con").eq(index).show().siblings("div.mypolicy_con").hide();
         });
 
+
     });
+
 </script>
 </body>
 </html>

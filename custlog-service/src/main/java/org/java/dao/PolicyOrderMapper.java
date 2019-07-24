@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Mapper
 @Component
-public interface PolicyMapper {
+public interface PolicyOrderMapper {
 
 
     @Select("select c.item_name,a.price,b.order_statu,a.insure_stime stime,insure_etime etime,a.policy_id,c.item_target,c.item_id,\n" +
@@ -23,4 +23,8 @@ public interface PolicyMapper {
             " where a.policy_id=b.order_id and b.item_id=c.item_id \n" +
             "and a.cust_id=#{custid} and b.order_statu like #{statu} ")
     List<Map<String,Object>> getPolicy(@Param("custid") String custid, @Param("statu") String statu);
+
+
+    @Select("select * from policy where policy_id =#{policyid}")
+    Map<String,Object> getPolicyOrder(@Param("policyid")String policyid);
 }

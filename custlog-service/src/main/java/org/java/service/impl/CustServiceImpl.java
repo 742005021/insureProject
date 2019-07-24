@@ -46,4 +46,9 @@ public class CustServiceImpl implements CustService {
         return mapper.updateScore(custid, score);
     }
 
+    @Override
+    public Map<String, Object> getcustinfo(String custid) {
+        return mapper.getcustinfo(custid);
+    }
+
 }

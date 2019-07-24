@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/center.css">
+    <link rel="stylesheet" href="../css/easydropdown.css">
+    <style>
+        .subBtn{
+            width:280px;
+            height: 40px;
+            font:18px/40px "黑体","Microsoft YaHei";
+            color: #fff;
+            background: #ff9600;
+            display: inline-block;
+            margin: 40px 0 20px 323px;
+            text-align: center;
+            outline:none;
+            border:none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper" width="100%" height="100%">
+
+    <div th:include="custop/header :: header"></div>
+    <br><br><br><br><br><br><br>
+    <p style="font-size: 16px;text-align: center;">您的退保申请已提交,我们会在2-5个工作日内给您答复,请注意您的个人消息</p>
+
+    <p>  <input type="submit" class="subBtn" id="back" value="返回"></p>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+<div th:include="custop/footer :: footer"></div>
+<script src="../js/jquery-1.12.3.min.js"></script>
+<script>
+
+    $("#back").click(function () {
+        location="/index";
+    })
+</script>
+</body>
+</html>

@@ -2,6 +2,7 @@ package org.java.web;
 
 import org.java.service.CouponService;
 import org.java.service.CustService;
+import org.java.service.MessageService;
 import org.java.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class ScoreController {
     @Autowired
     private CouponService couponService;
 
+    @Autowired
+    private MessageService messageService;
+
     @RequestMapping("buyCoupon/{score}/{remark}")
     public String buyCoupon(@PathVariable("score")int score, @PathVariable("remark")String remark, HttpSession ses){
 
@@ -49,17 +53,38 @@ public class ScoreController {
 
      scoreService.addInfo(m);
 
-     int cid=0;
+     Map<String,Object> msgMap=new HashMap<>();
+     String title="";
+     String content="";
 
+     int cid=0;
      if (score==-500){
+         title="兑换5元优惠券成功";
+         content="恭喜您成功兑换5元优惠券,您可以在您的个人中心查看";
          cid=1;
      }else if (score==-2000){
+         title="兑换20元优惠券成功";
+         content="恭喜您成功兑换20元优惠券,您可以在您的个人中心查看";
          cid=2;
      }else if (score==-7500){
+         title="兑换60元优惠券成功";
+         content="恭喜您成功兑换60元优惠券,您可以在您的个人中心查看";
          cid=3;
      }
 
-     couponService.addCustCoupon(custid, cid);
+        msgMap.put("custid", custid);
+        msgMap.put("title", title);
+        msgMap.put("content", content);
+        msgMap.put("date", new Date());
+
+        Runnable runnable = () -> messageService.addMessage(msgMap);
+        new Thread(runnable).start();
+
+
+
+
+
+      couponService.addCustCoupon(custid, cid);
         return "redirect:/showScore";
     }
 

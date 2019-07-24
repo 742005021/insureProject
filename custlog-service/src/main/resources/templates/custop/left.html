@@ -27,7 +27,7 @@
                 <ul>
                     <li id="family"><a th:href="@{|/showAllLm/${session.cust.cust_id}|}">常用联系人</a></li>
                     <li id="safe"><a href="/tosafety" >账户及密码</a></li>
-                    <li id="msg"> <a href="/tomessage" >消息中心</a></li>
+                    <li id="msg"> <a th:href="@{|/showMessage/${session.cust.cust_id}|}">消息中心</a></li>
                 </ul>
             </div>
         </li>
