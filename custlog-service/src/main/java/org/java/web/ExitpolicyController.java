@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -55,6 +56,7 @@ public class ExitpolicyController {
         map.put("custid", custid);
         map.put("cardimg", cust_img);
         map.put("policypdf", policy_pdf);
+        map.put("date", new Date());
 
 
       int n=  exitpolicyService.createExitpolicy(map);
