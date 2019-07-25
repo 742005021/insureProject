@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/report_detailed.css}"/>
+    <link rel="stylesheet" th:href="@{/css/cases_detailed.css}"/>
 </head>
 <body>
     <h1 style="text-align: center">理赔申请详细信息</h1>
@@ -37,11 +37,7 @@
             <td class="title">现状</td>
             <td th:text="${case_report?.situation}"></td>
         </tr>
-        <tr>
-            <td class="title">事故经过</td>
-            <td th:text="${case_report?.things}" colspan="7"></td>
 
-        </tr>
         <tr>
 
             <td class="title">申请人姓名</td>
@@ -56,7 +52,9 @@
             <td class="title">保单号</td>
             <td th:text="${case_report?.cr_policy_id}" colspan="3"></td>
             <td class="title">领保方式</td>
-            <td th:text="${case_report?.payment}" colspan="3"></td>
+            <td th:if="${case_report?.payment == '1'}" colspan="3">银行转账</td>
+            <td th:if="${case_report?.payment == '2'}" colspan="3">委托</td>
+            <td th:if="${case_report?.payment == '3'}" colspan="3">自领</td>
         </tr>
 
         <tr>

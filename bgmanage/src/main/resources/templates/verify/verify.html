@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style>
+        #body .full{
+            width:100%;
+        }
+
+        .title{
+            background-color: lavender;
+            text-align: right;
+        }
+    </style>
+</head>
+<body id="body">
+    <h1 style="text-align: center">保单信息</h1>
+    <div>这里是保单信息</div>
+
+    <h1 style="text-align:center">理赔申请信息</h1>
+    <div th:replace="case_report_detailed :: report_detailed"></div>
+
+    <h1 style="text-align:center">勘查结果</h1>
+    <div th:replace="survey/result :: survey_result"></div>
+
+    <form class="form-horizontal" id="form" th:action="@{/submit_Verify}" method="post">
+        <input type="hidden" name="report_id" th:value="${case_report.cr_id}"/>
+        <div class="form-group form-inline">
+            <label for="is_pass" class="col-sm-offset-1 col-sm-1 control-label">是否通过</label>
+            <p class="col-sm-2">
+                <select class="form-control full" id="is_pass" name="is_pass">
+                    <option value="" selected>请选择审核结果</option>
+                    <option value="true" >是</option>
+                    <option value="false">否</option>
+                </select>
+            </p>
+        </div>
+
+        <div class="form-group form-inline">
+            <label for="massage" class="col-sm-offset-1 col-sm-1 control-label">不通过的原因</label>
+            <p class="col-sm-8">
+                <textarea id="massage" class="form-control full" name="massage" disabled></textarea>
+            </p>
+        </div>
+
+        <div class="form-group form-inline">
+            <p class="col-sm-offset-2 col-sm-3">
+                <input type="button" class="btn btn-info btn-block" onclick="history.back()" value="返回"/>
+            </p>
+            <p class="col-sm-offset-2 col-sm-3">
+                <input type="button" class="btn btn-info btn-block" id="btn" value="提交" disabled/>
+            </p>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+        $("#is_pass").change(function () {
+            $("#btn").attr("disabled",$(this).val()=="");
+            $("#massage").attr("disabled",$(this).val()!="false");
+        })
+
+        $("#btn").click(function(){
+            var choise =$("#is_pass").val()=="true"?"通过":"不通过";
+            if (confirm("您的审核结果是:"+choise+"\n确定提交吗？")) {
+                $("#form").submit();
+            }
+        })
+    </script>
+</body>
+</html>

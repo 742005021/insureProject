@@ -51,4 +51,24 @@ public class Case_EntrusServiceImpl implements Case_EntrusService {
         }
         return n;
     }
+
+    @Override
+    public boolean checkTaskStatu(String task_id) {
+        boolean b=false;
+        //三个任务中必有一个任务
+        Object eStatu = eventsurvey_taskMapper.getStatu(task_id);
+        if(eStatu!=null && (Integer)eStatu==0){//如果有值且状态为0，则返回fase
+            return b;
+        }
+        Object pStatu = peoplesurvey_taskMapper.getStatu(task_id);
+        if(pStatu!=null && (Integer)pStatu==0){
+            return b;
+        }
+        Object sStatu = sitesurvey_taskMapper.getStatu(task_id);
+        if(sStatu!=null && (Integer)pStatu==0){
+            return b;
+        }
+        //当每个任务状态都为1时返回true
+        return true;
+    }
 }

@@ -4,6 +4,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.logging.log4j.core.util.UuidUtil;
 import org.java.dao.Case_ReportMapper;
+import org.java.service.Case_ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class Case_ReportService implements org.java.service.Case_ReportService {
+public class Case_ReportServiceImpl implements Case_ReportService {
 
     @Autowired
     private RuntimeService runtimeService;
@@ -42,5 +43,15 @@ public class Case_ReportService implements org.java.service.Case_ReportService {
     @Override
     public Map<String, Object> getReport_ById(String cr_id) {
         return mapper.getReport_ById(cr_id);
+    }
+
+    @Override
+    public Map<String, Object> getReport_ByEntrustId(String task_id) {
+        return mapper.getReport_ByEntrustId(task_id);
+    }
+
+    @Override
+    public int policy_check(String policy_no) {
+        return mapper.policy_check(policy_no);
     }
 }

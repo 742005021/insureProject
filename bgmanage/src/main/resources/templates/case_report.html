@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>理赔申请</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
     <style>
         #body .full{
             width:100%;
@@ -14,8 +15,8 @@
 
     <div class="container" style="padding:0px;">
 
-        <form class="form-horizontal" action="/report/insert" method="post">
-            <div class="form-group form-inline" >
+        <form class="form-horizontal" action="/report/insert" method="post" id="form">
+            <div class="form-group form-inline">
                 <label for="insured_name" class="col-sm-1 control-label">被保人姓名</label>
                 <p class="col-sm-2">
                     <input type="text" class="form-control full" id="insured_name" name="insured_name">
@@ -23,7 +24,10 @@
 
                 <label for="insured_sex" class="col-sm-1 control-label">性别</label>
                 <p class="col-sm-2">
-                    <input type="text" class="form-control full" id="insured_sex" name="insured_sex">
+                    <select class="form-control full" id="insured_sex" name="insured_sex">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
                 </p>
 
                 <label for="insured_age" class="col-sm-1 control-label">年龄</label>
@@ -84,8 +88,8 @@
                 <label for="is_death" class="col-sm-1 control-label">是否身故</label>
                 <p class="col-sm-2">
                     <select class="form-control full" id="is_death">
-                        <option value="true" name="is_death" >是</option>
-                        <option value="false" name="is_death" selected>否</option>
+                        <option value="true">是</option>
+                        <option value="false" selected>否</option>
                     </select>
                 </p>
 
@@ -111,7 +115,12 @@
 
                 <label for="cr_relationship" class="col-sm-1 control-label">与被保人关系</label>
                 <p class="col-sm-3">
-                    <input type="text" id="cr_relationship" name="cr_relationship" class="form-control full" />
+                    <select id="cr_relationship" name="cr_relationship" class="form-control full">
+                        <option value="" selected>请选择</option>
+                        <option value="本人">本人</option>
+                        <option value="朋友">朋友</option>
+                        <option value="家属">家属</option>
+                    </select>
                 </p>
 
                 <label for="cr_phone" class="col-sm-1 control-label">联系电话</label>
@@ -164,13 +173,81 @@
                     <input type="text" id="post_code" name="post_code" class="form-control full"/>
                 </p>
             </div>
-
-            <div class="form-group form-inline">
-                <p class="col-sm-offset-1 col-sm-11">
-                    <input class="btn btn-info btn-block" type="submit" value="提交">
-                </p>
-            </div>
         </form>
+
+        <div class="form-group form-inline">
+            <p class="col-sm-offset-1 col-sm-11">
+                <button class="btn btn-info btn-block" id="btn">提交</button>
+            </p>
+        </div>
     </div>
+
+    <script type="text/javascript">
+        //是否死亡
+        $("#is_death").change(function(){
+            if($(this).val()=="true"){
+                $('#autopsy').attr("disabled",false);
+            }else{
+                $('#autopsy').val("false");
+                $('#autopsy').attr("disabled",true);
+                $('#deathcertificate').attr("disabled",true);
+            }
+        });
+
+        //是否检验死亡
+        $("#autopsy").change(function(){
+            $('#deathcertificate').attr("disabled",$(this).val()=="false");
+        })
+
+        $("#btn").click(function(){
+            if(check()){
+                $("#btn").attr("disabled",true);
+                $.ajax({
+                    url:"/report_policy_check/"+$("#cr_policy_id").val(),
+                    type:"post",
+                    dataType:"json",
+                    success:function(data){
+                        if(data*1){
+                            $("#form").submit();//提交
+                        }else{
+                            alert("表单信息不存在!\n请检查您输入的保单号!");
+                            $("#btn").attr("disabled",false);
+                        }
+                    }
+                });
+            }else{
+                alert("请将表单填写完整!");
+            }
+        })
+
+        function check(){
+            var b=true;
+            //检查文本输出框
+            $("#form input[type=text]").each(function(i,e){
+                console.log(i);
+                if($(e).val()=="")
+                    return b=false;
+            });
+            if(!b){
+                return b;
+            }
+
+            b=$("#things").val()!="";
+            if(!b) return b;
+
+            if($('#autopsy').val()=="true" && !$('#deathcertificate').prop("disabled") ){
+                if($("#deathcertificate").val()==""){
+                    alert("请提交死亡证明文件!");
+                    $("#deathcertificate").focus();
+                    return false;
+                }
+            }
+
+            b=$("#cr_relationship").val()!="";
+            if(!b) return b;
+
+            return true;
+        }
+    </script>
 </body>
 </html>

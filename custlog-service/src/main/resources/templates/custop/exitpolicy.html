@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>退保</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/center.css">
+    <link rel="stylesheet" href="../css/easydropdown.css">
+<style>
+    .container{
+        margin-top: 10px;
+        padding-bottom: 55px;
+        background-color: #fff;
+    }
+    .book_box{
+        width:926px;
+        height:auto;
+        overflow: hidden;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        border:1px solid #e3e3e3;
+    }
+    .book_box h1{
+        font:30px/40px "Microsoft YaHei";
+        color: #515151;
+        text-align: center;
+        padding: 30px 0;
+    }
+    .book_box .procedures{
+        height:auto;
+        overflow: hidden;
+        text-align: center;
+        /*color: #fff;*/
+        margin-bottom: 10px;
+    }
+    .book_box .verificationBox h2{
+        font:bold 18px/26px "Microsoft YaHei";
+        color: #515151;
+        padding: 7px 0 7px 14px;
+        margin-left: 34px;
+        margin-right: 34px;
+        background: #f0f0f0;
+    }
+    .book_box .verificationBox .resetMess{
+        display: inline-block;
+        height:24px;
+        border:1px solid #ff9600;
+        border-radius: 5px;
+        font: 10px/24px "Microsoft YaHei";
+        color: #ff9600;
+        padding-left: 23px;
+        padding-right: 7px;
+        background: #fff url("../images/book/s01.jpg") no-repeat 7px center;
+        float: right;
+        margin-right: 9px;
+    }
+    .verificationBox form{
+        margin-left: 46px;
+        height:auto;
+        padding-bottom: 28px;
+    }
+    .verificationBox form p{
+        height:28px;
+        font:16px/28px "Microsoft YaHei";
+        color: #515151;
+        margin-top: 20px;
+        position: relative;
+    }
+    .verificationBox form p label{
+        line-height:28px;
+        width:102px;
+        display: inline-block;
+        float: left;
+    }
+    .verificationBox form p .input{
+        height:26px;
+        border:1px solid #c4c4c4;
+        width:280px;
+        border-radius: 5px;
+        position: relative;
+        display: inline-block;
+        padding-left: 5px;
+    }
+    .verificationBox form p .center{
+        text-align: center;
+    }
+    .verificationBox form p.birth_date select{
+        width:68px;
+    }
+    .verificationBox form p.birth_date span{
+        font-size: 12px;
+        margin:0 6px;
+    }
+    .subBtn{
+        width:280px;
+        height: 40px;
+        font:18px/40px "黑体","Microsoft YaHei";
+        color: #fff;
+        background: #ff9600;
+        display: inline-block;
+        margin: 40px 0 20px 323px;
+        text-align: center;
+        outline:none;
+        border:none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div th:include="custop/header :: header"></div>
+    <div class="book_box">
+    <div class="verificationBox">
+        <h2>填写退保申请
+            <span>(确保信息真实)</span>
+            <a href="#" id="res" class="resetMess">清空以下输入信息</a>
+        </h2>
+        <form action="/commitpolicy" method="post" enctype="multipart/form-data">
+            <p>
+                <label for="recognizeeName">姓&emsp;&emsp;名</label>
+                <input type="text" class="input" name="custname" placeholder="请填写真实姓名" id="recognizeeName">
+            </p>
+
+            <p>
+                <label>证&emsp;&emsp;件</label>
+                <select name="papers" id="" class="dropdown papers">
+                    <option value="1">身份证</option>
+                    <option value="2">护照</option>
+                    <option value="3">军官证</option>
+                    <option value="4">未成年无证件，请填生日</option>
+                </select>
+            </p>
+            <p>
+                <label for="">证件号码</label>
+                <input type="text" name="custcardno" class="input" placeholder="投保人证件号">
+            </p>
+            <p>
+                <label for="">银行卡号</label>
+                <input type="text" class="input" name="custno" placeholder="用于领取退保费" id="recognizeeName">
+            </p>
+            <p>
+                <label for="">身份证照</label>
+                <input type="file" class="input" name="cardimg" placeholder="用于验证信息">
+            </p>
+            <p>
+                <label for="">保单文件</label>
+                <input type="file" class="input" name="policypdf" placeholder="用于验证信息">
+                <input th:value="${policyid}" name="policyid" type="hidden">
+            </p>
+            <p>
+
+            </p>
+            <input type="submit" class="subBtn" value="继续">
+        </form>
+    </div>
+
+
+
+
+    </div>
+    <div th:include="custop/footer :: footer"></div>
+</div>
+<script src="../js/jquery-1.12.3.min.js"></script>
+<script>
+    $("#res").click(function () {
+        $("form")[0].reset();
+    })
+
+</script>
+
+</body>
+</html>

@@ -29,4 +29,7 @@ public interface CustMapper {
 
     @Update("update custinfo set cust_score =#{score} where cust_id=#{custid}")
     int updateScore(@Param("custid")String custid,@Param("score") int score);
+
+    @Select("select * from custinfo where cust_id=#{custid}")
+    Map<String,Object> getcustinfo(@Param("custid") String custid);
 }
