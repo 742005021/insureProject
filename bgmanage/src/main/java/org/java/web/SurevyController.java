@@ -1,9 +1,6 @@
 package org.java.web;
 
-import org.java.service.Case_ReportService;
-import org.java.service.Eventsurvey_TaskService;
-import org.java.service.Peoplesurvey_TaskService;
-import org.java.service.Sitesurvey_TaskService;
+import org.java.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +26,12 @@ public class SurevyController {
 
     @Autowired
     private Case_ReportService case_reportService;
+
+    @Autowired
+    private Case_EntrusService case_entrusService;
+
+    @Autowired
+    private Survey_ResultService survey_resultService;
 
     @RequestMapping("event_tasks")
     public String toEvent_Tasks(@RequestParam int statu,HttpSession ses, Model model){
@@ -86,20 +89,40 @@ public class SurevyController {
 
     @PostMapping("submitEvent_task")
     public String submitEvent_task(@RequestParam Map<String,Object> map){
-        System.out.println(map);
-        sitesurvey_taskService.update(map);
+        if(map.get("massage")==null){
+            map.put("massage","");
+        }
+        int n=eventsurvey_taskService.update(map);
+        String task_id=map.get("task_id").toString();
+        if(n==1 && case_entrusService.checkTaskStatu(task_id)){//检查三项勘查任务是否都完成
+            survey_resultService.insert(task_id);   //根据任务编号，添加勘查结果
+        }
         return "redirect:/event_tasks?statu=0";
     }
 
     @PostMapping("submitPeople_task")
     public String submitPeople_task(@RequestParam Map<String,Object> map){
-        System.out.println(map);
+        if(map.get("massage")==null){
+            map.put("massage","");
+        }
+        int n=peoplesurvey_taskService.update(map);
+        String task_id=map.get("task_id").toString();
+        if(n==1 && case_entrusService.checkTaskStatu(task_id)){//检查三项勘查任务是否都完成
+            survey_resultService.insert(task_id);   //根据任务编号，添加勘查结果
+        }
         return "redirect:/people_tasks?statu=0";
     }
 
     @PostMapping("submitSite_task")
     public String submitSite_task(@RequestParam Map<String,Object> map){
-        System.out.println(map);
+        if(map.get("massage")==null){
+            map.put("massage","");
+        }
+        int n=sitesurvey_taskService.update(map);
+        String task_id=map.get("task_id").toString();
+        if(n==1 && case_entrusService.checkTaskStatu(task_id)){//检查三项勘查任务是否都完成
+            survey_resultService.insert(task_id);   //根据任务编号，添加勘查结果
+        }
         return "redirect:/site_tasks?statu=0";
     }
 }

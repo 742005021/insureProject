@@ -39,10 +39,16 @@
             <td th:if="${t.statu == 1}">已完成</td>
             <td><a th:href="@{|/report_detailed/${t.report_id}|}">详情</a></td>
 
-            <td th:switch="${type}">
+            <td th:if="${statu == 0 }" th:switch="${type}">
                 <a th:case="1" th:href="@{|/event_task/${t.report_id}/${t.entrust_id}|}">完成勘查</a>
                 <a th:case="2" th:href="@{|/people_task/${t.report_id}/${t.entrust_id}|}">完成勘查</a>
                 <a th:case="3" th:href="@{|/site_task/${t.report_id}/${t.entrust_id}|}">完成勘查</a>
+            </td>
+
+            <td th:if="${statu == 1 }" th:switch="${type}">
+                <a th:case="1" href="#">查看结果</a>
+                <a th:case="2" href="#">查看结果</a>
+                <a th:case="3" href="#">查看结果</a>
             </td>
         </tr>
     </table>

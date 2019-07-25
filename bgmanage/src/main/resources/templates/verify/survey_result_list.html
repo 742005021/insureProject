@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>勘查结果</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style>
+        #body .full{
+            width:100%;
+        }
+    </style>
+</head>
+<body id="body">
+
+    <form class="form-horizontal" th:action="@{|${path}|}" method="post" id="form">
+        <div class="form-group form-inline">
+            <p class="col-sm-2">
+                <select class="form-control full" name="statu" id="statu">
+                    <option value="0" th:attr="selected=${statu==0?true:false}">待审核</option>
+                    <option value="1" th:attr="selected=${statu==1?true:false}">已审核</option>
+                </select>
+            </p>
+        </div>
+    <form>
+    <table class="table table-bordered">
+        <tr>
+            <th>申请人</th>
+            <th>联系电话</th>
+            <th>受保人</th>
+            <th>保单号</th>
+            <th>申请时间</th>
+            <th>保单信息</th>
+            <th>申请信息</th>
+            <th>勘查结果</th>
+            <th th:if="${statu==0}">审核</th>
+        </tr>
+        <tr th:each="s,st:${list}">
+            <td th:text="${s.cr_name}"></td>
+            <td th:text="${s.cr_phone}"></td>
+            <td th:text="${s.insured_name}"></td>
+            <td th:text="${s.cr_policy_id}"></td>
+            <td th:text="${s.cr_time}"></td>
+            <td>查看</td>
+            <td><a th:href="@{|/report_detailed/${s.cr_id}|}">查看</a></td>
+            <td><a th:href="@{|/surevy_Result/${s.entrust_id}|}">查看</a></td>
+            <td th:if="${statu==0}"><a th:href="@{|/to_Verify/${s.entrust_id}|}">审核</a></td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        $("#statu").change(function () {
+            $("#form").submit();
+        })
+    </script>
+</body>
+</html>

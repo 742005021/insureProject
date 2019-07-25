@@ -30,12 +30,12 @@ public class Case_EntrusController {
     @PostMapping("Case_Entrus/submit")
     public String submit(@RequestParam Map<String,Object> map, Model model){
         int n=case_entrusService.insert(map);
+        model.addAttribute("path","/report/list?statu=0");
         if (n==1){
             model.addAttribute("msg","委托完成！");
         }else{
             model.addAttribute("msg","委托失败！");
         }
-
         return "massage";
     }
 }
