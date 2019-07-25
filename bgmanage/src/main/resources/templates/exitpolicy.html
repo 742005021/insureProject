@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>处理退保申请</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style>
+        #body .full{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+<h2 class="title" style="text-align: center">处理用户退保申请</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>申请人</th>
+        <th>保单号</th>
+        <th>用户身份证号</th>
+        <th>用户银行卡号</th>
+        <th>用户身份证照</th>
+        <th>申请时间</th>
+        <th>状态</th>
+        <th>保单详情</th>
+        <th>操作</th>
+    </tr>
+
+    <tr th:each="e,st:${list}">
+         <td th:text="${e.custname}"></td>
+        <td th:text="${e.policyid}"></td>
+        <td th:text="${e.custno}"></td>
+        <td th:text="${e.custcardno}"></td>
+        <td ><a href="#">查看证件照</a></td>
+        <td th:text="${e.createtime}"></td>
+        <td >待审核</td>
+        <td ><a href="#">查看保单</a></td>
+        <td><a class="btn btn-xs btn-info" href="#">审核</a></td>
+
+    </tr>
+</table>
+</body>
+</html>
