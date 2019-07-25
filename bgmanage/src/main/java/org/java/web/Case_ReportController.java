@@ -17,7 +17,8 @@ public class Case_ReportController {
     @PostMapping("report/insert")
     public String insert(@RequestParam Map<String,Object> map,Model model){
         int n=case_reportService.insert(map);
-        model.addAttribute("msg",n==1?"申请已提交!":"提交失败!");
+        model.addAttribute("msg",1==1?"申请已提交!":"提交失败!");
+        model.addAttribute("path","/index/case_report");
         return "massage";
     }
 
@@ -32,6 +33,12 @@ public class Case_ReportController {
     public String report_detailed(@PathVariable("report_id") String report_id, Model model){
         model.addAttribute("case_report",case_reportService.getReport_ById(report_id));
         return "case_report_detailed";
+    }
+
+    @PostMapping("report_policy_check/{policy_no}")
+    @ResponseBody
+    public Object policy_check(@PathVariable("policy_no") String policy_no){
+        return case_reportService.policy_check(policy_no);
     }
 
 }

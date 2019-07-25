@@ -18,5 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/tofamily").setViewName("custop/family");
         registry.addRedirectViewController("/", "/index");
         //registry.addViewController("/tocoupon").setViewName("custop/coupon");
+//        registry.addViewController("/toexit").setViewName("custop/exitpolicy");
     }
 }

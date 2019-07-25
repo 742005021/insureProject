@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/cases_detailed.css}"/>
+</head>
+<body>
+    <h1 style="text-align: center">案件详细信息</h1>
+
+    <table class="table table-bordered" th:fragment="cases_detailed">
+        <tr>
+            <td class="title">被保人姓名</td>
+            <td th:text="${cases?.insured_name}"></td>
+            <td class="title">性别</td>
+            <td th:text="${cases?.insured_sex}"></td>
+            <td class="title">年龄</td>
+            <td th:text="${cases?.insured_age}"></td>
+            <td class="title">身份证号码</td>
+            <td th:text="${cases?.insured_crad_id}"></td>
+        </tr>
+        
+        <tr>
+            <td class="title">事故日期</td>
+            <td th:text="${cases?.accident_date}"></td>
+            <td class="title">原因</td>
+            <td th:text="${cases?.accident_cause}"></td>
+            <td class="title">地点</td>
+            <td th:text="${cases?.accident_address}"></td>
+            <td class="title">现状</td>
+            <td th:text="${cases?.situation}"></td>
+        </tr>
+
+        <tr>
+            <td class="title">保单号</td>
+            <td th:text="${cases?.policy_id}" colspan="3"></td>
+            <td class="title">伤残等级</td>
+            <td th:text="${cases?.disability_level}"></td>
+            <td class="title">死亡证明</td>
+            <td th:if="${cases?.deathcertificate ==''}">无</td>
+            <td th:if="${cases?.deathcertificate !=''}" th:text="${cases?.deathcertificate}"></td>
+        </tr>
+
+        <tr>
+            <td class="title">领保方式</td>
+            <td th:if="${cases?.payment == '1'}">银行转账</td>
+            <td th:if="${cases?.payment == '2'}">委托</td>
+            <td th:if="${cases?.payment == '3'}">自领</td>
+            <td class="title">开户银行</td>
+            <td th:text="${cases?.bank_name}"></td>
+            <td class="title">账号</td>
+            <td th:text="${cases?.bank_no}" colspan="3"></td>
+        </tr>
+
+        <tr>
+            <td class="title">立案时间</td>
+            <td th:text="${cases?.time}" colspan="7"></td>
+        </tr>
+    </table>
+</body>
+</html>

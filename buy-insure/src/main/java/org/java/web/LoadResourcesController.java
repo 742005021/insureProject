@@ -1,8 +1,5 @@
 package org.java.web;
 
-import com.alibaba.fastjson.JSON;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.pdf.*;
 import org.java.dao.LoadResourcesMapper;
 import org.java.dao.TestMapper;
 import org.java.service.LoadResourcesService;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,7 +23,9 @@ import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Blob;
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoadResourcesController {

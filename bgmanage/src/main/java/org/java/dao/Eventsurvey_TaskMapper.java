@@ -20,9 +20,6 @@ public interface Eventsurvey_TaskMapper {
             "null,null,null,0 )")
     public int insert2(@Param("task_id") String task_id,@Param("emp_id") int emp_id,@Param("explains") String explains);
 
-    @Select("SELECT * FROM eventsurvey_task")
-    public Map<String,Object> getAll();
-
     @Select("SELECT * FROM eventsurvey_task t,case_entrust e WHERE t.task_id=e.entrust_id " +
             "AND emp_id=#{emp_id} "+
             "AND statu=#{statu} ")
@@ -31,7 +28,11 @@ public interface Eventsurvey_TaskMapper {
     @Select("SELECT * FROM eventsurvey_task WHERE task_id=#{task_id}")
     Map<String,Object> getTaskById(@Param("task_id") String task_id);
 
-    @Update("DELETE FROM eventsurvey_task set accident_type=#{m.accident_type},event_things=#{m.event_things},file=#{m.file},is_ture=#{m.isture},massage=#{m.massage},statu=1 " +
+    @Update("UPDATE eventsurvey_task set accident_type=#{m.accident_type},event_things=#{m.event_things},file=#{m.file},is_true=#{m.is_true},massage=#{m.massage},statu=1 " +
             "WHERE task_id = #{m.task_id}")
     int update(@Param("m") Map<String,Object> map);
+
+    //根据任务编号查询状态
+    @Select("SELECT statu FROM eventsurvey_task WHERE task_id=#{task_id}")
+    Object getStatu(@Param("task_id") String task_id);
 }

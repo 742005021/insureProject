@@ -1,10 +1,14 @@
 <!DOCTYPE html >
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>结果信息</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
-    [[${msg}]]
+    <h1 style="text-align: center" th:text="${msg}"></h1>
+    <div th:if="${path != null}">
+        <a class="btn btn-info" th:href="@{|${path}|}">返回</a>
+    </div>
 </body>
 </html>

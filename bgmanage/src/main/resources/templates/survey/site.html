@@ -40,9 +40,9 @@
                 <input type="file" class="form-control full" id="file" name="file">
             </p>
 
-            <label for="is_ture" class="col-sm-2 control-label">情况是否属实</label>
+            <label for="is_true" class="col-sm-2 control-label">情况是否属实</label>
             <p class="col-sm-3">
-                <select class="form-control full" id="is_ture" name="is_ture">
+                <select class="form-control full" id="is_true" name="is_true">
                     <option value="" selected>请选择</option>
                     <option value="true">情况属实</option>
                     <option value="false">不属实</option>
@@ -68,14 +68,14 @@
     </form>
 
     <script type="text/javascript">
-        $("#is_ture").change(function () {
+        $("#is_true").change(function () {
             $('#massage').attr("disabled",$(this).val()!="false");
         })
 
         $("#btn").click(function(){
             var a=$("#address").val()=="";
             var b=$("#file").val()=="";
-            var c=$("#is_ture").val();
+            var c=$("#is_true").val();
             if(a||b||c==""){
                 alert("请完善勘查信息!");
                 return;
