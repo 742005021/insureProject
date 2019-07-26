@@ -16,4 +16,19 @@ public class Exit_PolicyServiceImpl implements Exit_policyService {
     public List<Map<String, Object>> getExitPolicy() {
         return exit_policyMapper.getExitPolicy();
     }
+
+    @Override
+    public Map<String, Object> getOnePolicy(int eid) {
+        return exit_policyMapper.getOnePolicy(eid);
+    }
+
+    @Override
+    public List<Map<String, Object>> getPersonPolicy(int statu) {
+        return exit_policyMapper.getPersonPolicy(statu);
+    }
+
+    @Override
+    public int updateStatu(int eid) {
+        return exit_policyMapper.updateStatu(eid);
+    }
 }

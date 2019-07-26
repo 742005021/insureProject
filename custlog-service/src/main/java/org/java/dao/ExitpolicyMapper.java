@@ -11,6 +11,6 @@ import java.util.Map;
 @Mapper
 public interface ExitpolicyMapper {
 
-    @Insert("insert exitpolicy values(null,#{map.policyid},#{map.custid},#{map.custname},#{map.custno},#{map.custcardno},#{map.cardimg},#{map.policyimg},0,#{map.date})")
+    @Insert("insert exitpolicy values(null,#{map.policyid},#{map.custid},#{map.custname},#{map.custno},#{map.custcardno},#{map.cardimg},#{map.policypdf},0,#{map.date})")
     int createExitpolicy(@Param("map") Map<String,Object> map);
 }

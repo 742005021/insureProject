@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <title>处理退保申请</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <Link rel="stylesheet" type="text/css"
+          href="/layui/css/layui.css" media="all" />
+
     <style>
         #body .full{
             width:100%;
+        }
+        a{
+            color: #01AAED;
         }
     </style>
 </head>
 <body>
 <h2 class="title" style="text-align: center">处理用户退保申请</h2>
+<br>
 <table class="table table-bordered">
     <tr>
         <th>申请人</th>
@@ -31,13 +37,74 @@
         <td th:text="${e.policyid}"></td>
         <td th:text="${e.custno}"></td>
         <td th:text="${e.custcardno}"></td>
-        <td ><a href="#">查看证件照</a></td>
+        <td ><a th:href="@{|/showimg/${e.eid}/png|}" target="_blank">查看证件照</a></td>
         <td th:text="${e.createtime}"></td>
-        <td >待审核</td>
-        <td ><a href="#">查看保单</a></td>
-        <td><a class="btn btn-xs btn-info" href="#">审核</a></td>
+        <td th:if="${e.exitstatu==0}">待审核</td>
+        <td th:if="${e.exitstatu==1}">经理审核</td>
+        <td th:if="${e.exitstatu==2}">财务审核</td>
+
+
+
+
+        <td ><a th:href="@{|/showimg/${e.eid}/pdf|}" target="_blank">查看保单</a></td>
+        <td><a class="btn btn-xs btn-info" href="#" name="claim">拾取任务</a>
+            <input type="hidden"  th:value="${e.eid}">
+        </td>
 
     </tr>
 </table>
+<script src="/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript"
+        src="/layui/layui.js" ></script>
+<script >
+
+    layui.use('layer',function () {
+        $(".btn").click(function () {
+            var tr=$(this).parent().parent();
+            var eid=$(this).next().val();
+
+            $.ajax({
+                url:'/updateStatu/'+eid,
+                type:"post",
+                success:function (data) {
+
+                    if (data=='true'){
+                        layer.open({
+                             title: '提示'
+                            ,content: '任务拾取成功'
+                            ,btn:['ok']
+                            ,btnAlign:'c'
+                            ,shade: [0.6, '#ccc']
+                            ,anim:1
+                            ,time:2000
+                        })
+                        tr.remove();
+                    }else{
+                        layer.open({
+                            title: '提示'
+                            ,content: '任务拾取失败'
+                            ,btn:['确定','取消']
+                            ,btnAlign:'c'
+                            ,shade: [0.6, '#ccc']
+                            ,anim:1
+
+                       })
+                    }
+                }
+            })
+
+
+
+
+        })
+
+    })
+
+
+
+
+
+
+</script>
 </body>
 </html>

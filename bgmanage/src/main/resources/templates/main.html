@@ -94,15 +94,19 @@
                             <i class="layui-icon layui-icon-edit" style="font-size: 20px; color: white;">退保管理</i>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd>
+                            <dd >
                                 <a href="#" data-url="/showExitPolicy" data-title="处理用户申请"
-                                   data-id="21" class="site-demo-active" data-type="tabAdd">处理用户申请</a>
-                            </dd>
-                            <dd>
-                                <a href="#" data-url="" data-title="个人任务"
-                                   data-id="22" class="site-demo-active" data-type="tabAdd">个人任务</a>
+                                   data-id="56" class="site-demo-active" data-type="tabAdd">处理用户申请</a>
                             </dd>
 
+                            <dd th:if="${session.emp_account?.type eq 7}">
+                            <a href="#" data-url="/showPersonPolicy/1" data-title="个人任务"
+                               data-id="57" class="site-demo-active" data-type="tabAdd">个人任务</a>
+                        </dd>
+                            <dd th:if="${session.emp_account?.type eq 9}">
+                                <a href="#" data-url="/showPersonPolicy/2" data-title="个人任务"
+                                   data-id="57" class="site-demo-active" data-type="tabAdd">个人任务</a>
+                            </dd>
                         </dl>
                     </li>
 

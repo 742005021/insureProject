@@ -90,7 +90,9 @@
                                 <li class="myOpreat">
                                     <a th:href="@{|http://localhost:8899/buy/searchItem/${p.item_id}/${p.item_target}|}">查看详情</a>
                                     <a th:href="@{|/showPersonPolicy/${p.policy_id}|}" target="_blank">查看保单</a>
+
                                     <a th:href="@{|/exitpolicy/${p.policy_id}|}" class="exit">申请退保</a>
+                                    <input type="hidden" name="statu" value="1">
                                 </li>
                             </ul>
                             </div>
@@ -233,6 +235,7 @@
             $(this).addClass("active").siblings().removeClass("active");
             $(".mycenter_right").find("div.mypolicy_con").eq(index).show().siblings("div.mypolicy_con").hide();
         });
+
 
 
     });
