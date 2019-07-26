@@ -12,4 +12,6 @@ public interface Cases_Service {
     int letme(Map<String,Object> map);
 
     int nextStep(Map<String,Object> map);
+
+    int complete(Map<String, Object> map);
 }

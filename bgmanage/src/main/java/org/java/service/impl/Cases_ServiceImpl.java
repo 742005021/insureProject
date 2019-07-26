@@ -5,6 +5,7 @@ import org.java.service.Cases_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,5 +35,8 @@ public class Cases_ServiceImpl implements Cases_Service {
         return casesMapper.nextStep(map);
     }
 
-
+    @Override
+    public int complete(Map<String, Object> map) {
+        return casesMapper.complete(map);
+    }
 }

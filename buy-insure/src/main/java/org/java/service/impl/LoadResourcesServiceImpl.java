@@ -194,6 +194,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
         } else {
             map.put("cust_id", ((Map<String, Object>) ses.getAttribute("cust")).get("cust_id"));
         }
+        map.put("json", map.toString());
         mapper.generateOrders(map);
         return map;
     }

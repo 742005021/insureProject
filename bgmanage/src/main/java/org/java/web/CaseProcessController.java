@@ -35,7 +35,7 @@ public class CaseProcessController {
 
         //把这个三参数，保存在model
         model.addAttribute("taskId",taskId);
-        model.addAttribute("orderId",caseId);
+        model.addAttribute("orderId",caseId) ;
         model.addAttribute("taskDefKey",taskDefKey);//标识 哪一个阶段 审核
 
         //根据采购单的id，找到该采购单的详细业务数据，显示在页面，方便工作人员审核
@@ -79,7 +79,7 @@ public class CaseProcessController {
         //将部署id,png文件的名称，存储在model中
         model.addAttribute("deploymentId", deploymentId);
         model.addAttribute("png",png);
-        model.addAttribute("tstyle","border-radius:12px;position:absolute;left:"+(act.getX()+274)+"px;top:"+(act.getY()-10)+"px;width:"+(act.getWidth())+"px;height:"+(act.getHeight())+"px;border:3px red solid;");
+        model.addAttribute("tstyle","border-radius:12px;position:absolute;left:"+(act.getX()-2)+"px;top:"+(act.getY())+"px;width:"+(act.getWidth())+"px;height:"+(act.getHeight()-10)+"px;border:3px red solid;");
 
         return "/processDefinition/showActiveMap";
     }
