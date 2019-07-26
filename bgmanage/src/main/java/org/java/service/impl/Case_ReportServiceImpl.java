@@ -54,4 +54,9 @@ public class Case_ReportServiceImpl implements Case_ReportService {
     public int policy_check(String policy_no) {
         return mapper.policy_check(policy_no);
     }
+
+    @Override
+    public Map<String, Object> getPolicyImg(String policy_id) {
+        return mapper.getPolicyImg(policy_id);
+    }
 }

@@ -14,4 +14,6 @@ public interface Case_ReportService {
     Map<String,Object> getReport_ByEntrustId(String task_id);
 
     int policy_check(String policy_no);
+
+    Map<String,Object> getPolicyImg(String policy_id);
 }
