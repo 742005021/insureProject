@@ -39,4 +39,7 @@ public interface Case_ReportMapper {
 
     @Select("select count(*) from policy where policy_id = #{policy_no}")
     int policy_check(@Param("policy_no") String policy_no);
+
+    @Select("SELECT policyorder pdf FROM policy WHERE policy_id= #{policy_id}")
+    Map<String,Object> getPolicyImg(@Param("policy_id") String policy_id);
 }

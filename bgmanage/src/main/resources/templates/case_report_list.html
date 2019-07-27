@@ -33,7 +33,8 @@
             <th>保单号</th>
             <th>申请时间</th>
             <th>状态</th>
-            <th>详情</th>
+            <th>查看保单</th>
+            <th>申请详情</th>
             <th th:if="${statu==0||statu==2}">操作</th>
         </tr>
 
@@ -50,6 +51,7 @@
                 <span th:case="2">立案失败</span>
             </td>
             <td><a th:href="@{|/report_detailed/${r.cr_id}|}">详情</a></td>
+            <td><a th:href="@{|/show_PolicyImg/${r.cr_policy_id}|}" target="_blank">查看保单</a></td>
             <td th:if="${statu==0}"><a th:href="@{|/toCase_Entrus/${r.cr_id}|}">委托任务</a></td>
             <td th:if="${statu==2}"><a href="#"
             >查看失败原因</a></td>
