@@ -89,13 +89,17 @@
                         </dl>
                     </li>
 
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item" th:if="${session.emp_account?.type eq 7 || session.emp_account?.type eq 9}">
                         <a href="javascript:;">
                             <i class="layui-icon layui-icon-edit" style="font-size: 20px; color: white;">退保管理</i>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd >
-                                <a href="#" data-url="/showExitPolicy" data-title="处理用户申请"
+                            <dd th:if="${session.emp_account?.type eq 7}" >
+                                <a href="#" data-url="/showExitPolicy/0" data-title="处理用户申请"
+                                   data-id="56" class="site-demo-active" data-type="tabAdd">处理用户申请</a>
+                            </dd>
+                            <dd th:if="${session.emp_account?.type eq 9}" >
+                                <a href="#" data-url="/showExitPolicy/2" data-title="处理用户申请"
                                    data-id="56" class="site-demo-active" data-type="tabAdd">处理用户申请</a>
                             </dd>
 
@@ -104,12 +108,11 @@
                                data-id="57" class="site-demo-active" data-type="tabAdd">个人任务</a>
                         </dd>
                             <dd th:if="${session.emp_account?.type eq 9}">
-                                <a href="#" data-url="/showPersonPolicy/2" data-title="个人任务"
+                                <a href="#" data-url="/showPersonPolicy/3" data-title="个人任务"
                                    data-id="57" class="site-demo-active" data-type="tabAdd">个人任务</a>
                             </dd>
                         </dl>
                     </li>
-
 
                     <li class="layui-nav-item">
                         <a href="javascript:;">

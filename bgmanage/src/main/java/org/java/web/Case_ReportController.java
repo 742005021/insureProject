@@ -4,12 +4,17 @@ import org.java.service.Case_ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialBlob;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Blob;
 import java.util.Map;
 
 @Controller
@@ -19,9 +24,15 @@ public class Case_ReportController {
     private Case_ReportService case_reportService;
 
     @PostMapping("report/insert")
-    public String insert(@RequestParam Map<String,Object> map,Model model){
+    public String insert(@RequestParam(value = "deathcertificate",required = false) MultipartFile deathcertificate,@RequestParam Map<String,Object> map, Model model) throws Exception {
+        if (deathcertificate!=null){
+            byte[] bytes = FileCopyUtils.copyToByteArray(deathcertificate.getInputStream());
+            Blob blob=new SerialBlob(bytes);
+            map.put("deathcertificate",blob);
+        }
+
         int n=case_reportService.insert(map);
-        model.addAttribute("msg",1==1?"申请已提交!":"提交失败!");
+        model.addAttribute("msg",n==1?"申请已提交!":"提交失败!");
         model.addAttribute("path","/index/case_report");
         return "massage";
     }
@@ -63,4 +74,22 @@ public class Case_ReportController {
         in.close();
     }
 
+    @RequestMapping("deathcertificate/{cr_id}")
+    public void show_deathcertificate(@PathVariable("cr_id") String cr_id,HttpServletResponse res)throws Exception{
+
+        Map<String,Object> map = case_reportService.getDeathcertificate(cr_id);
+
+        byte[] data=(byte[])map.get("file");
+
+        InputStream in = new ByteArrayInputStream(data);
+        int len = 0;
+        OutputStream out = res.getOutputStream();
+        byte[] b = new byte[8192];
+        while ((len = in.read(b, 0, 8192)) != -1) {
+            out.write(b, 0, len);
+        }
+
+        out.close();
+        in.close();
+    }
 }

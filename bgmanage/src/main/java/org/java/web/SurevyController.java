@@ -4,12 +4,16 @@ import org.java.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
+import java.sql.Blob;
 import java.util.Map;
 
 @Controller
@@ -76,19 +80,25 @@ public class SurevyController {
     @RequestMapping("people_task/{report_id}/{task_id}")
     public String toPeople_task(@PathVariable("report_id") String report_id,@PathVariable("task_id") String task_id, Model model){
         model.addAttribute("case_report",case_reportService.getReport_ById(report_id));
-        model.addAttribute("task",eventsurvey_taskService.getTaskById(task_id));
+        model.addAttribute("task",peoplesurvey_taskService.getTaskById(task_id));
         return "/survey/people";
     }
 
     @RequestMapping("site_task/{report_id}/{task_id}")
     public String toSite_task(@PathVariable("report_id") String report_id,@PathVariable("task_id") String task_id, Model model){
         model.addAttribute("case_report",case_reportService.getReport_ById(report_id));
-        model.addAttribute("task",eventsurvey_taskService.getTaskById(task_id));
+        model.addAttribute("task",sitesurvey_taskService.getTaskById(task_id));
         return "/survey/site";
     }
 
     @PostMapping("submitEvent_task")
-    public String submitEvent_task(@RequestParam Map<String,Object> map){
+    public String submitEvent_task(@RequestParam(value = "file",required = false) MultipartFile file,@RequestParam Map<String,Object> map)throws Exception{
+        if (file!=null){
+            byte[] bytes = FileCopyUtils.copyToByteArray(file.getInputStream());
+            Blob blob=new SerialBlob(bytes);
+            map.put("file",blob);
+        }
+
         if(map.get("massage")==null){
             map.put("massage","");
         }
@@ -101,7 +111,13 @@ public class SurevyController {
     }
 
     @PostMapping("submitPeople_task")
-    public String submitPeople_task(@RequestParam Map<String,Object> map){
+    public String submitPeople_task(@RequestParam(value = "file",required = false) MultipartFile file,@RequestParam Map<String,Object> map)throws Exception{
+        if (file!=null){
+            byte[] bytes = FileCopyUtils.copyToByteArray(file.getInputStream());
+            Blob blob=new SerialBlob(bytes);
+            map.put("file",blob);
+        }
+
         if(map.get("massage")==null){
             map.put("massage","");
         }
@@ -114,7 +130,13 @@ public class SurevyController {
     }
 
     @PostMapping("submitSite_task")
-    public String submitSite_task(@RequestParam Map<String,Object> map){
+    public String submitSite_task(@RequestParam(value = "file",required = false) MultipartFile file, @RequestParam Map<String, Object> map)throws Exception{
+        if (file!=null){
+            byte[] bytes = FileCopyUtils.copyToByteArray(file.getInputStream());
+            Blob blob=new SerialBlob(bytes);
+            map.put("file",blob);
+        }
+
         if(map.get("massage")==null){
             map.put("massage","");
         }

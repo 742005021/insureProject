@@ -53,6 +53,22 @@
         </tr>
     </table>
 
+    <nav aria-label="Page navigation"  th:fragment="nav">
+        <ul class="pagination" >
+            <li class="disabled">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="active"><a href="#">1</a></li>
+            <li class="disabled">
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
     <script type="text/javascript">
         $("#statu").change(function () {
             $("#form").submit();

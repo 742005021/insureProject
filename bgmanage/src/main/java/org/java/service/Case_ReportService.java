@@ -16,4 +16,6 @@ public interface Case_ReportService {
     int policy_check(String policy_no);
 
     Map<String,Object> getPolicyImg(String policy_id);
+
+    Map<String, Object> getDeathcertificate(String cr_id);
 }

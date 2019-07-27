@@ -64,7 +64,12 @@
         })
 
         $("#btn").click(function(){
-            var choise =$("#is_pass").val()=="true"?"通过":"不通过";
+            var b=$("#is_pass").val()=="true";
+            if(!b && $("#massage").val()==""){
+                alert("请填写不通过的原因!");
+                return ;
+            }
+            var choise =b?"通过":"不通过";
             if (confirm("您的审核结果是:"+choise+"\n确定提交吗？")) {
                 $("#form").submit();
             }

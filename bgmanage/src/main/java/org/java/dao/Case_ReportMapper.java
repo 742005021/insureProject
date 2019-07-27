@@ -23,10 +23,18 @@ public interface Case_ReportMapper {
     @Select("SELECT * FROM case_report")
     public Map<String,Object> getAll();
 
-    @Select("SELECT * FROM case_report WHERE statu = #{statu}")
+    @Select("SELECT cr_id,insured_name,accident_date,cr_name,cr_phone,cr_policy_id,cr_time,statu " +
+            "FROM case_report WHERE statu = #{statu}"
+    )
     List<Map<String,Object>> getList_ByStatu(@Param("statu") int statu);
 
-    @Select("SELECT * FROM case_report where cr_id=#{cr_id}")
+    @Select("SELECT  cr_id, insured_name,insured_sex,insured_crad_id,insured_age ,"+
+            " cr_enterprise,insured_profession,accident_date,accident_cause,accident_address ,"+
+            " situation,things,autopsy,cr_name,cr_phone ,"+
+            " cr_relationship,cr_policy_id,cr_time,notice_address,post_code ,"+
+            " payment,bank_name,bank_no,statu,process_instance_id "+
+            " FROM case_report where cr_id=#{cr_id}"
+    )
     Map<String,Object> getReport_ById(@Param("cr_id") String cr_id);
 
     @Update("update case_report set statu = #{statu} where cr_id=#{cr_id} ")
@@ -42,4 +50,7 @@ public interface Case_ReportMapper {
 
     @Select("SELECT policyorder pdf FROM policy WHERE policy_id= #{policy_id}")
     Map<String,Object> getPolicyImg(@Param("policy_id") String policy_id);
+
+    @Select("SELECT deathcertificate file FROM case_report WHERE cr_id= #{cr_id}")
+    Map<String, Object> getDeathcertificate(String cr_id);
 }

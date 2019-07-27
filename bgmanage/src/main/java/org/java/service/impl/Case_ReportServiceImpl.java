@@ -59,4 +59,9 @@ public class Case_ReportServiceImpl implements Case_ReportService {
     public Map<String, Object> getPolicyImg(String policy_id) {
         return mapper.getPolicyImg(policy_id);
     }
+
+    @Override
+    public Map<String, Object> getDeathcertificate(String cr_id) {
+        return mapper.getDeathcertificate(cr_id);
+    }
 }
