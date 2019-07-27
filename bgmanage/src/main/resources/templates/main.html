@@ -89,7 +89,7 @@
                         </dl>
                     </li>
 
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item" th:if="${session.emp_account?.type eq 7 || session.emp_account?.type eq 9}">
                         <a href="javascript:;">
                             <i class="layui-icon layui-icon-edit" style="font-size: 20px; color: white;">退保管理</i>
                         </a>
@@ -109,7 +109,6 @@
                             </dd>
                         </dl>
                     </li>
-
 
                     <li class="layui-nav-item">
                         <a href="javascript:;">

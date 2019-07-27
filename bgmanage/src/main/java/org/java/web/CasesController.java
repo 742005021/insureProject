@@ -39,9 +39,12 @@ public class CasesController {
             model.addAttribute("msg","暂未受理案件!");
             return "compensation/cases_me";
         }
-
+        //空值判断
         if(cases.get("deathcertificate")==null){
             cases.put("deathcertificate","");
+        }
+        if(cases.get("disability_level")==null){
+            cases.put("disability_level","");
         }
 
         int step=Integer.parseInt(cases.get("step").toString());

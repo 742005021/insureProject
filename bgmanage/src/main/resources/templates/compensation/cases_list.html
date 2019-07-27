@@ -20,13 +20,15 @@
                 <th>受保人</th>
                 <th>立案时间</th>
                 <th>状态</th>
-                <th>受理案件</th>
+                <th th:if="${session.emp_account?.type ne 4}">受理案件</th>
             </tr>
             <tr th:each="c,st:${list}">
                 <td>[[${c.insured_name}]]</td>
                 <td>[[${c.time}]]</td>
                 <td>未处理</td>
-                <td><a th:href="@{|/cases/letme?id=${c.id}|}">我要受理</a></td>
+                <td th:if="${session.emp_account?.type ne 4}">
+                    <a th:href="@{|/cases/letme?id=${c.id}|}">我要受理</a>
+                </td>
             </tr>
         </table>
     </div>
@@ -55,17 +57,20 @@
             <tr>
                 <th>受保人</th>
                 <th>立案时间</th>
+                <th>结案时间</th>
                 <th>状态</th>
                 <th>负责人</th>
             </tr>
             <tr th:each="c,st:${list}">
                 <td>[[${c.insured_name}]]</td>
                 <td>[[${c.time}]]</td>
-                <td>处理中</td>
+                <td>[[${c.endtime}]]</td>
+                <td>已赔付</td>
                 <td>[[${c.emp_username}]]</td>
             </tr>
         </table>
     </div>
 
+    <div th:replace="case_report_list :: nav"></div>
 </body>
 </html>

@@ -35,7 +35,18 @@ public class Survey_ResultServiceImpl implements Survey_ResultService {
 
     @Override
     public Map<String, Object> getResult(String task_id) {
-        return survey_resultMapper.getResult(task_id);
+        Map<String, Object> map = survey_resultMapper.getResult(task_id);
+        //空值判断
+        if (map.get("s_i")==null){
+            map.put("s_i","");
+        }
+        if (map.get("p_i")==null){
+            map.put("p_i","");
+        }
+        if (map.get("e_i")==null){
+            map.put("e_i","");
+        }
+        return map;
     }
 
     @Override

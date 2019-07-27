@@ -57,6 +57,6 @@ public interface CasesMapper {
     @Update("UPDATE cases SET step=#{m.step} WHERE id=${m.id}")
     int nextStep(@Param("m") Map<String,Object> map);
 
-    @Update("UPDATE cases SET statu=2,step=#{m.step} WHERE id=${m.id}")
+    @Update("UPDATE cases SET statu=2,step=#{m.step},endtime=NOW() WHERE id=${m.id}")
     int complete(@Param("m") Map<String, Object> map);
 }
