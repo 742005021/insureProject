@@ -14,7 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.activiti.engine.runtime.ProcessInstanceQuery;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -105,6 +110,22 @@ public class CaseProcessController {
         List<HistoricTaskInstance> list=caseService.showHistoryTask(instanceId);
         model.addAttribute("list",list);
         return "/processDefinition/showHistoryTask";
+    }
+
+    //查询历史流程
+    @GetMapping("historyTaskList")
+    public String historyTaskList(HttpSession session, Integer page, Integer limit, HttpServletRequest request) {
+        String user=(String) session.getAttribute("user");
+        System.err.println(user+"---------");
+        Map<String, Object> m = new HashMap<>();
+        System.err.println("11111"+caseService.historyTaskList(user,page,limit).size());
+        List<HistoricTaskInstance> data=caseService.historyTaskList(user,page,limit);
+        request.setAttribute("htr",data);
+//        m.put("count", data.size());
+//        m.put("data", data);
+//        m.put("code", 0);
+//        m.put("msg", "");
+        return "/processDefinition/showTaskList";
 
     }
 }
