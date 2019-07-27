@@ -18,4 +18,6 @@ public interface MessageMapper {
 
     @Insert("insert into message values(null,#{map.custid},#{map.title},#{map.content},#{map.date},default)")
     int addMessage(@Param("map")Map<String,Object> map);
+
+
 }

@@ -61,7 +61,7 @@
           <element id="library" level="project" name="Maven: org.mybatis.spring.boot:mybatis-spring-boot-autoconfigure:2.0.1" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.1" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.1" />
-          <element id="library" level="project" name="Maven: org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.1.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.cloud:spring-cloud-starter:2.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.cloud:spring-cloud-context:2.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-crypto:5.1.5.RELEASE" />

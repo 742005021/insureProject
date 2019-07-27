@@ -1,5 +1,7 @@
 package org.java.service;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -13,5 +15,11 @@ public interface Exit_policyService {
 
 
     int updateStatu( int eid);
+
+
+    int addAudit(Map<String, Object> map);
+    int addMessage(Map<String,Object> map);
+
+    int updateOrderDate(String orderid);
 
 }
