@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <style type="text/css">
+        a{
+            text-align: center;
+            text-decoration: none;
+            color: blue;
+        }
+        a:hover{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<table class="layui-table" lay-filter="test" style="margin-top:60px;">
+    <tr style="color:red;">
+        <th align="center" colspan="6">历史任务</th>
+    </tr>
+    <Tr>
+        <TH>序号</TH>
+        <TH>任务ID</TH>
+        <TH>流程实例ID</TH>
+        <TH>办理人</TH>
+        <TH>开始时间</TH>
+        <TH>结束时间</TH>
+    </Tr>
+    <Tr align="center" th:each="h,st:${htr}">
+        <Td>${st.count }</Td>
+        <Td>${h.name }</Td>
+        <Td>${h.processInstanceId }</Td>
+        <Td>${h.assignee }</Td>
+        <th th:text="${#dates.format(h.startTime,'yyyy-MM-dd HH:mm:ss')}"></th>
+        <th th:text="${#dates.format(h.endTime,'yyyy-MM-dd HH:mm:ss')}"></th>
+    </Tr>
+</table>
+<table class="layui-table" id="test" lay-filter="test"></table>
+
+</body>
+<!--<script type="text/html" id="toolbarDemo">-->
+    <!--<div>-->
+        <!--<p>历史任务</p>-->
+    <!--</div>-->
+<!--</script>-->
+
+<!--<script type="text/javascript">-->
+    <!--layui.use(['table','util'], function(){-->
+        <!--var table = layui.table;-->
+        <!--var util=layui.util;-->
+        <!--var tableIns=table.render({-->
+            <!--elem: '#test'-->
+            <!--,url:'[[@{/historyTaskList}]]'-->
+            <!--,toolbar : '#toolbarDemo'-->
+            <!--,id:'table'-->
+            <!--,limits : [3, 5, 10, 20, 50, 100]-->
+            <!--,title : '历史任务'-->
+            <!--,cols: [-->
+                <!--[-->
+                <!--{field:'id', title:'任务ID',align :"center",sort: true}-->
+                <!--,{field:'processInstanceId', title:'流程实例ID',sort : true,align :"center"}-->
+                <!--,{field:'assignee', title:'办理人',align : "center"}-->
+                <!--,{field : 'startTime',title : '开始时间',align : "center",templet:function(d){return layui.util.toDateString(d.startTime,'yyyy-MM-dd');}}-->
+                <!--,{field : 'endTime',title : '结束时间',align : "center",templet:function(d){return layui.util.toDateString(d.endTime,'yyyy-MM-dd');}}-->
+              <!--]-->
+            <!--],-->
+            <!--page:true-->
+        <!--});-->
+<!--});-->
+<!--</script>-->
+</html>

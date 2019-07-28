@@ -89,7 +89,7 @@
                         </dl>
                     </li>
 
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item" th:if="${session.emp_account?.type eq 7 || session.emp_account?.type eq 9}">
                         <a href="javascript:;">
                             <i class="layui-icon layui-icon-edit" style="font-size: 20px; color: white;">退保管理</i>
                         </a>
@@ -114,7 +114,6 @@
                         </dl>
                     </li>
 
-
                     <li class="layui-nav-item">
                         <a href="javascript:;">
                             <i class="layui-icon layui-icon-template-1" style="font-size: 20px; color: white;">流程管理</i>
@@ -131,6 +130,10 @@
                             <dd>
                                 <a href="#" data-url="/getAll" data-title="查看所有报案单"
                                    data-id="43" class="site-demo-active" data-type="tabAdd">查看所有报案单</a>
+                            </dd>
+                            <dd>
+                                <a href="#" data-url="/historyTaskList" data-title="查看历史任务"
+                                   data-id="44" class="site-demo-active" data-type="tabAdd">查看历史任务</a>
                             </dd>
                         </dl>
                     </li>

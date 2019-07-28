@@ -65,7 +65,7 @@ public class Case_EntrusServiceImpl implements Case_EntrusService {
             return b;
         }
         Object sStatu = sitesurvey_taskMapper.getStatu(task_id);
-        if(sStatu!=null && (Integer)pStatu==0){
+        if(sStatu!=null && (Integer)sStatu==0){
             return b;
         }
         //当每个任务状态都为1时返回true

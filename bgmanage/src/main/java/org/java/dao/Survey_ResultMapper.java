@@ -16,8 +16,9 @@ public interface Survey_ResultMapper {
             "WHERE entrust_id= #{task_id}")
     int insert(@Param("task_id") String task_id);
 
-    @Select("SELECT * FROM survey_result s,case_report c\n" +
-            "WHERE s.report_id=c.cr_id and s.statu= #{statu}")
+    @Select("SELECT insured_name,cr_name,cr_phone,cr_time,s.statu,policy_id,cr_id,cr_policy_id,entrust_id FROM survey_result s,case_report c \n" +
+            "WHERE s.report_id=c.cr_id AND s.statu= #{statu}")
+
     List<Map<String,Object>> getList(@Param("statu") Integer statu);
 
     @Select("SELECT s.task_id s_id,s.accident_type s_t,s.address s_a,s.file s_f,s.is_true s_i,s.massage s_m,\n" +

@@ -15,4 +15,5 @@ public interface CaseProcessService {
     public List<HistoricTaskInstance> showHistoryTask(String instanceId);//返回某一个流程实例，所经历的所有任务阶段
     public Map<String, Object> findCaseById(String taskId);//通过实例Id查询流程实例
     public Map<String,Object> getAll(); //查询所有流程实例
+    public List<HistoricTaskInstance> historyTaskList(String user,Integer index, Integer limit);	//查询历任务
 }

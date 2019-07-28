@@ -1,6 +1,8 @@
 package org.java.service.impl;
 
 import org.activiti.engine.HistoryService;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.history.HistoricTaskInstanceQuery;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,5 +94,21 @@ public class CaseProcessServiceImpl implements CaseProcessService {
 
     public Map<String, Object> getAll() {
         return caseProcessMapper.getAll();
+    }
+
+
+    //查询历史流程
+    public List<HistoricTaskInstance> historyTaskList(String user, Integer index, Integer limit) {
+        // 历史任务Servic
+
+        // 创建历史任务实例查询
+        HistoricTaskInstanceQuery query = historyService.createHistoricTaskInstanceQuery();
+        List<HistoricTaskInstance> list = query.taskAssignee(user).finished().list();// 查询已经完成的任务
+
+        System.out.println("111111:"+list);
+//        Map<String,Object> map=new HashMap<>();
+//        map.put("page", (index - 1) * limit);
+//        map.put("limit", limit);
+        return list;
     }
 }

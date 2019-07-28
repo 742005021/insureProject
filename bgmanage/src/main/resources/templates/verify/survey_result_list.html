@@ -41,12 +41,14 @@
             <td th:text="${s.insured_name}"></td>
             <td th:text="${s.cr_policy_id}"></td>
             <td th:text="${s.cr_time}"></td>
-            <td>查看</td>
-            <td><a th:href="@{|/report_detailed/${s.cr_id}|}">查看</a></td>
-            <td><a th:href="@{|/surevy_Result/${s.entrust_id}|}">查看</a></td>
+            <td><a th:href="@{|/show_PolicyImg/${s.policy_id}|}" target="_blank">查看保单</a></td>
+            <td><a th:href="@{|/report_detailed/${s.cr_id}|}">查看申请</a></td>
+            <td><a th:href="@{|/surevy_Result/${s.entrust_id}|}">勘查结果</a></td>
             <td th:if="${statu==0}"><a th:href="@{|/to_Verify/${s.entrust_id}|}">审核</a></td>
         </tr>
     </table>
+
+    <div th:replace="case_report_list :: nav"></div>
 
     <script type="text/javascript">
         $("#statu").change(function () {

@@ -14,26 +14,42 @@
 <body id="body">
     <h1 style="text-align:center">总勘查结果</h1>
     <div th:replace="case_report_detailed :: report_detailed"></div>
+
     <div th:fragment="survey_result" th:if="${result != null}">
         <table class="table table-bordered">
-            <tr><th colspan="6">现场勘查结果</th></tr>
-            <tr>
-                <td class="title">意外类型</td>
-                <td>[[${result.s_t}]]</td>
-                <td class="title">实际意外现场</td>
-                <td>[[${result.s_a}]]</td>
-            </tr>
-            <tr>
-                <td class="title">情况是否属实</td>
-                <td th:if="${result.s_i}">
-                    情况属实
-                </td>
-                <td th:if="!${result.s_i}" style="color:red;">
-                    情况不属实
-                </td>
-                <td class="title">错误信息</td>
-                <td>[[${result.s_m}]]</td>
-            </tr>
+
+            <!--现场勘查-->
+            <tbody th:if="${result.s_i =='' }">
+
+            </tbody>
+
+            <tbody th:if="${result.s_i !='' }">
+                <tr><th colspan="6">现场勘查结果</th></tr>
+                <tr>
+                    <td class="title">意外类型</td>
+                    <td>[[${result.s_t}]]</td>
+                    <td class="title">实际意外现场</td>
+                    <td>[[${result.s_a}]]</td>
+                </tr>
+                <tr th:if="${result.s_i !='' }">
+                    <td class="title">情况是否属实</td>
+                    <td th:if="${result.s_i}">
+                        情况属实
+                    </td>
+                    <td th:if="!${result.s_i}" style="color:red;">
+                        情况不属实
+                    </td>
+                    <td class="title">错误信息</td>
+                    <td>[[${result.s_m}]]</td>
+                </tr>
+            </tbody>
+
+            <!--人员勘查-->
+            <tbody th:if="${result.p_i =='' }">
+
+            </tbody>
+
+            <tbody th:if="${result.p_i !='' }">
 
             <tr><th colspan="6">人员勘查结果</th></tr>
             <tr>
@@ -42,7 +58,8 @@
                 <td class="title">受伤级别</td>
                 <td>[[${result.p_l}]]</td>
             </tr>
-            <tr>
+
+            <tr >
                 <td class="title">情况是否属实</td>
                 <td th:if="${result.p_i}">
                     情况属实
@@ -53,25 +70,35 @@
                 <td class="title">错误信息</td>
                 <td>[[${result.p_m}]]</td>
             </tr>
+            </tbody>
 
-            <tr><th colspan="6">事件勘查结果</th></tr>
-            <tr>
-                <td class="title">意外类型</td>
-                <td>[[${result.e_t}]]</td>
-                <td class="title">实际事故经过</td>
-                <td>[[${result.e_e}]]</td>
-            </tr>
-            <tr>
-                <td class="title">情况是否属实</td>
-                <td th:if="${result.e_i}">
-                    情况属实
-                </td>
-                <td th:if="!${result.e_i}" style="color:red;">
-                    情况不属实
-                </td>
-                <td class="title">错误信息</td>
-                <td>[[${result.e_m}]]</td>
-            </tr>
+            <!--事件勘查-->
+            <tbody th:if="${result.e_i =='' }">
+
+            </tbody>
+
+            <tbody th:if="${result.e_i !='' }">
+                <tr><th colspan="6">事件勘查结果</th></tr>
+                <tr>
+                    <td class="title">意外类型</td>
+                    <td>[[${result.e_t}]]</td>
+                    <td class="title">实际事故经过</td>
+                    <td>[[${result.e_e}]]</td>
+                </tr>
+
+                <tr>
+                    <td class="title">情况是否属实</td>
+                    <td th:if="${result.e_i}">
+                        情况属实
+                    </td>
+                    <td th:if="!${result.e_i}" style="color:red;">
+                        情况不属实
+                    </td>
+                    <td class="title">错误信息</td>
+                    <td>[[${result.e_m}]]</td>
+                </tr>
+            </tbody>
+
         </table>
     </div>
 

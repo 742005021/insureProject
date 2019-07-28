@@ -31,7 +31,7 @@ public interface Sitesurvey_TaskMapper {
     Map<String,Object> getTaskById(@Param("task_id") String task_id);
 
     @Update("UPDATE sitesurvey_task set accident_type=#{m.accident_type},address=#{m.address},file=#{m.file},is_true=#{m.is_true},massage=#{m.massage},statu=1 " +
-            "WHERE task_id = #{m.task_id}")
+            "WHERE task_id =#{m.task_id} ")
     int update(@Param("m") Map<String,Object> map);
 
     //根据任务编号查询状态
