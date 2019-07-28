@@ -8,4 +8,6 @@ public interface PolicyOrderService {
     List<Map<String,Object>> getPolicy(String custid,  String statu);
 
     Map<String,Object> getPolicyOrder(String policyid);
+
+    int exitPay(String policyid);
 }

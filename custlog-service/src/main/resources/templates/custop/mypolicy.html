@@ -146,7 +146,7 @@
                                         <p th:if="${p.order_statu==1}">待报价</p>
                                     </li>
                                     <li class="myOpreat">
-                                        <a href="#">删除</a>
+                                        <a th:href="@{|/exitpay/${p.policy_id}|}">删除</a>
                                         <a href="#">支付</a>
 
                                     </li>
@@ -236,7 +236,8 @@
             $(".mycenter_right").find("div.mypolicy_con").eq(index).show().siblings("div.mypolicy_con").hide();
         });
 
-
+     let a="123";
+     console.log(a);
 
     });
 
