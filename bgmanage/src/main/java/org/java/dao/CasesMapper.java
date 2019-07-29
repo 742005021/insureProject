@@ -77,4 +77,10 @@ public interface CasesMapper {
     //根据id取得状态
     @Select("SELECT statu FROM finance WHERE cases_id= #{cases_id}")
     Map<String,Object> getFinanceStatu(@Param("cases_id") int id);
+
+    //赔款后添加信息
+    @Insert("INSERT INTO message (custid,mtitle,mcontent,mdate) \n" +
+            "SELECT cust_id,#{title},#{content},NOW() FROM policy " +
+            "WHERE policy_id= (SELECT policy_id FROM cases WHERE id= #{id} )")
+    int addMessage(@Param("id") int id,@Param("title") String title,@Param("content") String content);
 }

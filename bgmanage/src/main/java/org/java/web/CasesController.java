@@ -75,6 +75,8 @@ public class CasesController {
             if(statu==1){//判断财务是否拨款
                 cases_service.nextStep(map);//进入下个步骤
                 cases_service.complete(map);
+                //给投保人发送理赔消息
+                cases_service.addMessage(id,"理赔完成!","您的保险已完成一次理赔!");
                 model.addAttribute("msg","案件已处理!");
                 return "compensation/cases_me";
             }else{

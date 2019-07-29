@@ -75,5 +75,10 @@ public class Cases_ServiceImpl implements Cases_Service {
         }
     }
 
+    @Override
+    public int addMessage(int id, String title, String content) {
+        return casesMapper.addMessage(id,title,content);
+    }
+
 
 }

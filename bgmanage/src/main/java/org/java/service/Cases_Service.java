@@ -24,4 +24,6 @@ public interface Cases_Service {
     int financeComplete(int id);
 
     int getFinanceStatu(int id);
+
+    int addMessage(int id,String title,String content);
 }
