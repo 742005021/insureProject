@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.*;
 import java.sql.Blob;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -151,7 +150,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
         for (int i = 1; i <= max_people; i++) {
             Map<String, Object> people = new HashMap<>();
             people.put("insured_name", map.get("insured_name" + i));
-            people.put("licnese_id", map.get("licnese_id" + i));
+            people.put("license_id", map.get("licnese_id" + i));
             people.put("license_no", map.get("license_no" + i));
             people.put("birthday", map.get("birthday" + i));
             people.put("insured_sex", map.get("insured_sex" + i));
@@ -221,7 +220,7 @@ public class LoadResourcesServiceImpl implements LoadResourcesService {
             param.put("insure_etime", insure_etime);
             param.put("price", money);
             //生成保单
-            mapper.addOrder(param);
+            int i1 = mapper.addOrder(param);
             //添加关系
             String[] insured_id = insuredIds.split(";");
             for (String i : insured_id) {

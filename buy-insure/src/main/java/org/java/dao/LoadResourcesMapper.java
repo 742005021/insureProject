@@ -39,10 +39,10 @@ public interface LoadResourcesMapper {
     Map<String, Object> loadUserInfo(@Param("cust_id") String cust_id);
 
     @Insert("insert into custinfo values(#{m.cust_id},#{m.cust_name},#{m.cust_sex},#{m.license_id},#{m.cust_licenseno},#{m.cust_bir},#{m.cust_email},#{m.cust_address},null,null)")
-    void addTou(@Param("m") Map<String, Object> map);
+    int addTou(@Param("m") Map<String, Object> map);
 
-    @Update("update custinfo set cust_name=#{m.cust_name},cust_sex=#{m.cust_sex},license_id=#{m.license_id},cust_licenseno=#{m.cust_licenseno},cust_bir=#{m.cust_bir},cust_email=#{m.cust_email},cust_address=#{m.cust_address} where  cust_name=#{m.cust_id}")
-    void updateTou(@Param("m") Map<String, Object> map);
+    @Update("update custinfo set cust_name=#{m.cust_name},cust_sex=#{m.cust_sex},license_id=#{m.license_id},cust_licenseno=#{m.cust_licenseno},cust_bir=#{m.cust_bir},cust_email=#{m.cust_email},cust_address=#{m.cust_address} where  cust_id=#{m.cust_id}")
+    int updateTou(@Param("m") Map<String, Object> map);
 
     @Insert("insert into insuredinfo values(#{m.insured_id},#{m.insured_name},#{m.insured_sex},#{m.license_id},#{m.license_no},#{m.birthday},#{m.cust_id},#{m.address})")
     void addInsuredInfo(@Param("m") Map<String, Object> map);
@@ -54,7 +54,7 @@ public interface LoadResourcesMapper {
     void nextOrder(@Param("order_status") Integer status, @Param("order_id") String order_id);
 
     @Insert("insert into policy values(#{m.policy_id},#{m.cust_id},#{m.insure_stime},#{m.insure_etime},#{m.price},#{m.policyorder})")
-    void addOrder(@Param("m") Map<String, Object> param);
+    int addOrder(@Param("m") Map<String, Object> param);
 
     @Update("update policy set policyorder=#{policyorder} where policy_id=#{policyid}")
     int addOrder2(@Param("policyorder") Blob blob, @Param("policyid") String policyid);

@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
@@ -29,6 +28,9 @@ public class Case_ReportController {
             byte[] bytes = FileCopyUtils.copyToByteArray(deathcertificate.getInputStream());
             Blob blob=new SerialBlob(bytes);
             map.put("deathcertificate",blob);
+        }
+        if(map.get("autopsy")==null){
+            map.put("auto", "false");
         }
 
         int n=case_reportService.insert(map);

@@ -134,7 +134,7 @@ public class LoadResourcesController {
         int month = now1.get(Calendar.MONTH) + 1;
         req.setAttribute("year", now1.get(Calendar.YEAR));
         req.setAttribute("month", month);
-        req.setAttribute("day", now1.get(Calendar.DAY_OF_MONTH) + 5);
+        req.setAttribute("day", now1.get(Calendar.DAY_OF_MONTH));
         if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
             req.setAttribute("endDay", 31);
         } else {
