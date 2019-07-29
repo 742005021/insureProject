@@ -80,12 +80,13 @@ public class DuanQiServiceImpl implements DuanQiService {
                 }
             }
         }
+        System.err.println(max_people+"::@@@@@@@@@@@@@@#@#@#@");
         //被保人信息
         List<Map<String, Object>> peoples = new ArrayList<>();
         for (int i = 1; i <= max_people; i++) {
             Map<String, Object> people = new HashMap<>();
             people.put("insured_name", map.get("insured_name" + i));
-            people.put("licnese_id", map.get("licnese_id" + i));
+            people.put("license_id", map.get("licnese_id" + i));
             people.put("license_no", map.get("license_no" + i));
             people.put("birthday", map.get("birthday" + i));
             people.put("insured_sex", map.get("insured_sex" + i));
@@ -96,6 +97,7 @@ public class DuanQiServiceImpl implements DuanQiService {
             insuredIds += insured_id + ";";
             peoples.add(people);
         }
+        System.out.println("size=======" + peoples.size());
         for (int i = 0; i < peoples.size(); i++) {
             otherMapper.addInsuredInfo(peoples.get(i));
         }

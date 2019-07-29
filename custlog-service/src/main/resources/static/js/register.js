@@ -42,12 +42,12 @@ $(function(){
         });
 
     });
-    // $("#loginBtn").click(function(){
-    //     if(rand!=$("#code").val()){
-    //         alert("验证码错误");
-    //         return false;
-    //     }
-    // })
+    $("#loginBtn").click(function(){
+        if(rand!=$("#code").val()){
+            alert("验证码错误");
+            return false;
+        }
+    })
 
 
 })
