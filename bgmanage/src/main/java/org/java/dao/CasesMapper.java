@@ -59,4 +59,22 @@ public interface CasesMapper {
 
     @Update("UPDATE cases SET statu=2,step=#{m.step},endtime=NOW() WHERE id=${m.id}")
     int complete(@Param("m") Map<String, Object> map);
+
+    /* 财务部分 */
+    //添加财务拨款信息
+    @Insert("INSERT INTO finance (cases_id,massage,statu) " +
+            "SELECT cases.id,#{m.massage},0 FROM cases WHERE cases.id=#{m.id} ")
+    int insertFinance(@Param("m") Map<String,Object> map);
+
+    //查看拨款信息列表
+    @Select("SELECT * FROM finance WHERE statu = #{statu}")
+    List<Map<String,Object>> getFinances(@Param("statu") int statu);
+
+    //拨款完成
+    @Update("UPDATE finance SET statu=1 WHERE cases_id=#{cases_id}")
+    int financeComplete(@Param("cases_id") int id);
+
+    //根据id取得状态
+    @Select("SELECT statu FROM finance WHERE cases_id= #{cases_id}")
+    Map<String,Object> getFinanceStatu(@Param("cases_id") int id);
 }

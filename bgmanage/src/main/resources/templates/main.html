@@ -138,6 +138,18 @@
                         </dl>
                     </li>
 
+                    <li class="layui-nav-item" th:if="${session.emp_account?.type eq 9}">
+                        <a href="javascript:;">
+                            <i class="layui-icon layui-icon-rmb" style="font-size: 20px; color: white;">财务中心</i>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="#" data-url="/finance/list?statu=0" data-title="理赔"
+                                   data-id="61" class="site-demo-active" data-type="tabAdd">理赔</a>
+                            </dd>
+                        </dl>
+                    </li>
+
                 </ul>
             </div>
         </div>

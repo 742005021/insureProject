@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+</head>
+<body>
+
+    <form class="form-horizontal" action="/finance/list" method="post" id="form">
+        <div class="form-group form-inline">
+            <p class="col-sm-2">
+                <select class="form-control full" name="statu" id="statu">
+                    <option value="0" th:attr="selected=${statu==0?true:false}">未拨款</option>
+                    <option value="1" th:attr="selected=${statu==1?true:false}">已拨款</option>
+                </select>
+            </p>
+        </div>
+    </form>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>理赔信息</th>
+            <th>拨款状态</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="f,st:${list}">
+            <td th:text="${f.massage}"></td>
+            <td th:if="${f.statu == 0}">未拨款</td>
+            <td th:if="${f.statu == 1}">已拨款</td>
+            <td th:if="${f.statu == 0}">
+                <input type="hidden" th:value="${f.cases_id}"/>
+                <a href="#" class="btn btn-info qr">确认拨款</a>
+            </td>
+        </tr>
+    </table>
+
+    <nav aria-label="Page navigation"  th:fragment="nav">
+        <ul class="pagination" >
+            <li class="disabled">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="active"><a href="#">1</a></li>
+            <li class="disabled">
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <script type="text/javascript">
+        $("#statu").change(function () {
+            $("#form").submit();
+        })
+
+        //确认拨款
+        $(".qr").click(function(){
+            var b=window.confirm("确认已拨款?");
+            var id = $(this).prev("input").val();
+            if(b){
+                location="/finance/submit/"+id;
+            }
+        })
+    </script>
+</body>
+</html>

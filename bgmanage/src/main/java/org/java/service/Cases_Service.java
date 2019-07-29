@@ -14,4 +14,14 @@ public interface Cases_Service {
     int nextStep(Map<String,Object> map);
 
     int complete(Map<String, Object> map);
+
+    int insertFinance(Map<String,Object> map);
+
+    int getMyCasesCount(Integer emp_id);
+
+    List<Map<String,Object>> getFinances(int statu);
+
+    int financeComplete(int id);
+
+    int getFinanceStatu(int id);
 }
