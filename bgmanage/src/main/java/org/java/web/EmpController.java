@@ -28,6 +28,7 @@ public class EmpController {
             return "/index";
         }
         ses.setAttribute("emp_account",map);
+        ses.setAttribute("user",map.get("emp_username"));
         return "redirect:index/main";
 //        return "/processDefinition/deploy";
     }

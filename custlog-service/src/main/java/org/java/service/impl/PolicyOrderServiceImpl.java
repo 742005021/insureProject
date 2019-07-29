@@ -21,4 +21,9 @@ public class PolicyOrderServiceImpl implements PolicyOrderService {
     public Map<String, Object> getPolicyOrder(String policyid) {
         return mapper.getPolicyOrder(policyid);
     }
+
+    @Override
+    public int exitPay(String policyid) {
+        return mapper.exitPay(policyid);
+    }
 }

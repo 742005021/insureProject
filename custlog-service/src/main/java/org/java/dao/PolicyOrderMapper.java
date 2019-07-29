@@ -3,6 +3,7 @@ package org.java.dao;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,4 +28,8 @@ public interface PolicyOrderMapper {
 
     @Select("select * from policy where policy_id =#{policyid}")
     Map<String,Object> getPolicyOrder(@Param("policyid")String policyid);
+
+
+    @Update("update policy_order set order_statu=7 where order_id=#{policyid}")
+    int exitPay(@Param("policyid")String policyid);
 }

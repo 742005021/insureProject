@@ -74,4 +74,15 @@ public class PolicyController {
         out.close();
         in.close();
     }
+
+
+
+    @RequestMapping("/exitpay/{policyid}")
+    public String exitPay(@PathVariable("policyid")String policyid){
+        policyOrderService.exitPay(policyid);
+        return "redirect:/showPolicy";
+
+    }
+
+
 }
