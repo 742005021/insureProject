@@ -39,4 +39,41 @@ public class Cases_ServiceImpl implements Cases_Service {
     public int complete(Map<String, Object> map) {
         return casesMapper.complete(map);
     }
+
+    @Override
+    public int insertFinance(Map<String, Object> map) {
+        return casesMapper.insertFinance(map);
+    }
+
+    @Override
+    public int getMyCasesCount(Integer emp_id) {
+        Object obj=casesMapper.getMyCasesCount(emp_id);
+        if(obj==null){
+            return -1;
+        }else{
+            return Integer.parseInt(obj.toString());
+        }
+    }
+
+    @Override
+    public List<Map<String, Object>> getFinances(int statu) {
+        return casesMapper.getFinances(statu);
+    }
+
+    @Override
+    public int financeComplete(int id) {
+        return casesMapper.financeComplete(id);
+    }
+
+    @Override
+    public int getFinanceStatu(int id) {
+        Map<String, Object> map = casesMapper.getFinanceStatu(id);
+        if(map.get("statu")==null){
+            return -1;
+        }else{
+            return Integer.parseInt(map.get("statu").toString());
+        }
+    }
+
+
 }
